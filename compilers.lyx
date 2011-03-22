@@ -1,0 +1,4715 @@
+#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{clrscode3e}
+\end_preamble
+\use_default_options true
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 1
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Compilers: notes for UIC qual
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+This work is licensed under a 
+\bar under
+
+\begin_inset CommandInset href
+LatexCommand href
+name "Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License"
+target "http://creativecommons.org/licenses/by-nc-sa/3.0"
+
+\end_inset
+
+
+\bar default
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+Gugo
+\end_layout
+
+\begin_layout Subsection*
+Disclaimer
+\end_layout
+
+\begin_layout Standard
+These notes have been prepared with the 
+\series bold
+only
+\series default
+ purpose to help me pass the Computer Science qualifiying exam at the University
+ of Illinois at Chicago.
+ They are distributed as they are (including errors, typos, omissions, etc.)
+ to help other students pass this exam (and possibly relieving them from
+ part of the pain associated with such a process).
+ I take 
+\series bold
+no responsibility
+\series default
+ for the material contained in these notes (which means that you can't sue
+ me if you don't pass the qual!) Moreover, this pdf version is distributed
+ together with the original LaTeX (and LyX) sources hoping that someone
+ else will improve and correct them.
+ I mean in absolute no way to violate copyrights and/or take credit stealing
+ the work of others.
+ The ideas contained in these pages are 
+\series bold
+not mine
+\series default
+ but I've just aggregated information scattered all over the internet.
+\end_layout
+
+\begin_layout Subsection*
+Strongly suggested book
+\end_layout
+
+\begin_layout Standard
+Before you even start reading this notes, do yourself a favor and go buy
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+Dragon Book
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
+\begin_inset Newline newline
+\end_inset
+
+(
+\begin_inset CommandInset href
+LatexCommand href
+name "http://dragonbook.stanford.edu/"
+target "http://dragonbook.stanford.edu/"
+
+\end_inset
+
+) It is the 
+\begin_inset Quotes eld
+\end_inset
+
+bible
+\begin_inset Quotes erd
+\end_inset
+
+ of compilation and covers all the topics you need to know to pass the qualifier
+ very deeply and extensively.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Overall compiler structure
+\end_layout
+
+\begin_layout Standard
+See diagrams on p.
+ 2-7, p.106 of the dragon book.
+\end_layout
+
+\begin_layout Standard
+Note how an 
+\emph on
+interpreter
+\emph default
+, instead of producing a target program as a translation, directly executes
+ the operations specified in the source program on inputs supplied by the
+ user.
+ The machine-language target program produced by a compiler is usually much
+ faster than an interpreter at mapping inputs to outputs.
+ (This is why, for instance, Java uses Just In Time compilation improve
+ its execution speed) An interpreter, however can usually give better error
+ diagnostics than a compiler, because it executes the source program statement
+ by statement.
+\end_layout
+
+\begin_layout Section
+Lexical analysis (Scanning)
+\end_layout
+
+\begin_layout Standard
+The main task of a lexical analyzer is to read the input characters of the
+ source program, group them into lexemes, and produce as output a sequence
+ of tokens for each lexeme in the source program.
+ The stream of token is then sent to the parser for syntax analysis.
+\end_layout
+
+\begin_layout Standard
+Commonly the parser calls the lexical analyzer and such a call causes the
+ lexer to read characters from its input until it can identify the next
+ lexeme and produce for it the next token, which is then returned to the
+ parser.
+ (see Fig.
+ 3.1, p.
+ 110)
+\end_layout
+
+\begin_layout Standard
+Since the lexer is the part of the compiler that reads the source text,
+ it may perform certain other tasks besides identification of lexemes.
+ One such task is stripping out whitespaces (blank, tab and newline) and
+ comments.
+ Another task is correlating error messages generated by the compiler with
+ the source program.
+ For instance, the lexical analyzer may keep track of the number of newline
+ characters seen, so it can associate a line number with each error message.
+ If the source program uses a macro-processor, the expansion of macros may
+ also be performed by the lexical analyzer.
+\end_layout
+
+\begin_layout Subsection
+Tokens
+\end_layout
+
+\begin_layout Standard
+In many programming languages, the following classes cover most or all of
+ the tokens:
+\end_layout
+
+\begin_layout Itemize
+One token for each keyword (
+\begin_inset Formula $\func{if},\func{else},\ldots$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Itemize
+Tokens for the operators, either individually or in a class (e.g.
+ 
+\begin_inset Formula $\func{comparison}$
+\end_inset
+
+ vs 
+\begin_inset Formula $=,<,\geq,\ldots$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Itemize
+One token representing all the identifiers (
+\begin_inset Formula $\func{id}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Itemize
+One or more token representing constants, such as numbers and literal strings
+ (
+\begin_inset Formula $\func{number},\func{literal},\ldots$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Itemize
+Tokens for each punctuation symbol, such as left and right parentheses,
+ comma and semicolon (
+\begin_inset Formula $\func{lp},\func{rp},\ldots$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+When more than one lexeme can mach a pattern, the lexical analyzer must
+ provide subsequent phases of the compiler additional information about
+ the particular lexeme that matched.
+ (e.g.
+ any number matches the 
+\begin_inset Formula $\func{number}$
+\end_inset
+
+ token but any number has a different 
+\begin_inset Formula $\func{value}$
+\end_inset
+
+ attribute) Thus, in many cases the lexical analyzer returns to the parser
+ not only a token name, but an attribute value that describes the lexeme
+ represented by the token.
+ The token name influences parsing decisions, while the attribute value
+ influences translation of tokens after the parse.
+\end_layout
+
+\begin_layout Standard
+We shall assume that tokens have at most one associated attribute, although
+ this attribute may have a structure that combines several pieces of information.
+ The most important example is the token 
+\begin_inset Formula $\func{id}$
+\end_inset
+
+, where we need to associate with the token a great deal of information
+ which is normally stored in the symbol table.
+ Thus, the appropriate attribute value for an identifier is a pointer to
+ the symbol table entry for that identifier.
+\end_layout
+
+\begin_layout Subsection
+Lexical errors
+\end_layout
+
+\begin_layout Standard
+It is hard for a lexical analyzer to tell, without the aid of other components,
+ that there is a source code error.
+ However, suppose a situation arises where the lexical analyzer is unable
+ to proceed because none of the patterns for tokens matches any prefix of
+ the remaining input.
+ 
+\end_layout
+
+\begin_layout Standard
+The simplest recovery strategy is 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+panic mode
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ recovery.
+ We delete successive characters from the remaining input, until the lexical
+ analyzer can find a well-formed token at the beginning of what input is
+ left.
+ Other possible error recovery actions are: delete one character from the
+ remaining input; insert a missing character into the remaining input; replace
+ a character with another character; transpose two adjacent characters.
+ Transformations like these can be tried in an attempt to repair the input.
+\end_layout
+
+\begin_layout Subsection
+Input buffering
+\end_layout
+
+\begin_layout Standard
+Specialized buffering techniques have been developed to reduce the amount
+ of overhead required to process a single input character.
+ An important scheme involves two (contiguous) buffers that are alternatively
+ reloaded.
+ Each buffer is of the same size 
+\begin_inset Formula $N$
+\end_inset
+
+, where 
+\begin_inset Formula $N$
+\end_inset
+
+ is usually the size of a disk block.
+ Using a system read command we can read 
+\begin_inset Formula $N$
+\end_inset
+
+characters into the buffer, rather than using one system call per character.
+ If fewer than 
+\begin_inset Formula $N$
+\end_inset
+
+ characters remain in the input file, then a special character, represented
+ by 
+\begin_inset Formula $\func{eof}$
+\end_inset
+
+ and different from any possible character in the source program, marks
+ the end of the source file.
+ Two pointers to the input buffer are maintained:
+\end_layout
+
+\begin_layout Itemize
+pointer 
+\family typewriter
+lexemeBegin
+\family default
+, marks the beginning of the current lexeme, whose extent we are trying
+ to determine;
+\end_layout
+
+\begin_layout Itemize
+pointer 
+\family typewriter
+forward
+\family default
+ scans ahead until a pattern match is found.
+\end_layout
+
+\begin_layout Standard
+When parsing starts both pointers are set to point to the first character
+ in the input buffer.
+ Once the next lexeme is determined, 
+\family typewriter
+forward
+\family default
+ is set to the character at the lexeme's right end and, after the lexeme
+ is recorded as an attribute value of a token returned to the parser, 
+\family typewriter
+lexemeBegin
+\family default
+ is set to the same value of 
+\family typewriter
+forward
+\family default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Advancing 
+\family typewriter
+forward
+\family default
+ requires that we first test whether we have reached the end of one of the
+ buffers, and if so, we must reload the other buffer from the input, and
+ move 
+\family typewriter
+forward
+\family default
+ to the beginning of the newly loaded buffer.
+ As long as we never need to look so far ahead of the actual lexeme that
+ the sum of the lexeme's length plus the distance we look ahead is greater
+ than 
+\begin_inset Formula $N$
+\end_inset
+
+ we should never overwrite the lexeme in its buffer before determining it.
+\end_layout
+
+\begin_layout Subsection
+DFAs
+\end_layout
+
+\begin_layout Standard
+See DFAs section in 
+\begin_inset Quotes eld
+\end_inset
+
+Theory of Computation
+\begin_inset Quotes erd
+\end_inset
+
+ notes!
+\end_layout
+
+\begin_layout Standard
+To build a lexical analyzer we first express patterns using 
+\emph on
+regular expressions
+\emph default
+, we then convert regular expressions to 
+\emph on
+transition diagrams
+\emph default
+ (DFAs) and finally implement a program that simulates input on the DFA
+ and decides to accept/reject the string.
+\end_layout
+
+\begin_layout Section
+Symbol tables management
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Symbol tables
+\emph default
+ are data structures that are used by the compilers to store information
+ about source-program constructs.
+ Such data structure should be designed to allow a compiler to find the
+ record for each construct quickly and to store or retrieve data from that
+ record quickly.
+ The information is collected incrementally by the analysis phases of a
+ compiler (front-end) and used by the synthesis phase (back-end) to generate
+ the target code.
+\end_layout
+
+\begin_layout Standard
+Entries in the symbol table contain information about an identifier such
+ as its lexeme, its type, its position in storage, and any other relevant
+ information.
+ In some cases, lexical analyzers can create symbol table entries as soon
+ as they see the characters that make up a lexeme.
+ More often, the lexical analyzer can only return to the parser a token
+ along with a pointer to the lexeme.
+ only the parser, however, can decide whether to use a previously created
+ symbol table entry or create a new one for the identifiers.
+\end_layout
+
+\begin_layout Standard
+Since symbol tables typically need to support multiple declarations of the
+ same identifier within a program we shall implement scopes by setting up
+ separate symbol tables for each scope (
+\emph on
+nested symbol tables
+\emph default
+).
+ A program block with declarations will have its own symbol table and with
+ an entry for each declaration in the block.
+ This approach also works for other constructs that set up scopes: for example,
+ a class would have its own table, with an entry for each field and method.
+\end_layout
+
+\begin_layout Section
+CFGs
+\end_layout
+
+\begin_layout Itemize
+See CFGs section in 
+\begin_inset Quotes eld
+\end_inset
+
+Theory of Computation
+\begin_inset Quotes erd
+\end_inset
+
+ notes!
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $S\overset{+}{\Rightarrow}\alpha$
+\end_inset
+
+, where 
+\begin_inset Formula $S$
+\end_inset
+
+ is the start symbol of the grammar 
+\begin_inset Formula $G$
+\end_inset
+
+, we say that 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is a 
+\emph on
+sentential form
+\emph default
+.
+\end_layout
+
+\begin_layout Itemize
+There is a many-to-one relationship between derivations and parse trees.
+ Every parse trees has associated with it a unique leftmost and rightmost
+ derivation.
+\end_layout
+
+\begin_layout Subsection
+Eliminating ambiguity
+\end_layout
+
+\begin_layout Standard
+Ambiguous grammars can be used sometimes together with a set of disambiguating
+ rules that 
+\begin_inset Quotes eld
+\end_inset
+
+throw away
+\begin_inset Quotes erd
+\end_inset
+
+ undesired parse trees leaving only one.
+ (e.g.
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+dangling else
+\begin_inset Quotes erd
+\end_inset
+
+ ambiguity can be solved with the rule 
+\begin_inset Quotes eld
+\end_inset
+
+match each else with the closest unmatched then
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Another important example of ambiguity elimination through rules is the
+ use of associativity and precedence to resolve conflicts in arithmetic
+ expressions.
+\end_layout
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Subsection
+Eliminating Left Recursion
+\end_layout
+
+\begin_layout Standard
+A grammar is 
+\emph on
+left-recursive
+\emph default
+ if it has a nonterminal 
+\begin_inset Formula $A$
+\end_inset
+
+ such that there is a derivation 
+\begin_inset Formula $A\overset{+}{\Rightarrow}A\alpha$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Top down parsing methods cannot handle left-recursive grammars, so a transformat
+ion is needed to eliminate left recursion.
+ The following procedure takes as input a grammar 
+\begin_inset Formula $G$
+\end_inset
+
+ with 
+\emph on
+no
+\emph default
+ cycles or 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+-productions and returns an equivalent grammar with no left recursion.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{codebox}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procname{
+\backslash
+proc{Eliminate-Left-Recursion}($G$)}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li arrange the nonterminals in some order $A_1,A_2,
+\backslash
+ldots,A_n$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+For $j=1$  
+\backslash
+To $i-1$ 
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li    replace each production of the form $A_i
+\backslash
+rightarrow A_j
+\backslash
+gamma$ by the
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+zi    productions 
+\end_layout
+
+\begin_layout Plain Layout
+
+       $A_i
+\backslash
+rightarrow 
+\backslash
+delta_1
+\backslash
+gamma|
+\backslash
+delta_2
+\backslash
+gamma|
+\backslash
+ldots|
+\backslash
+delta_k
+\backslash
+gamma$, where
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+zi    $A_j
+\backslash
+rightarrow 
+\backslash
+delta_1|
+\backslash
+delta_2|
+\backslash
+ldots|
+\backslash
+delta_k$ are all 
+\end_layout
+
+\begin_layout Plain Layout
+
+       current $A_j$-productions 
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li eliminate the immediate left recursion among the $A_j$-productions 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{codebox}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Left factoring
+\end_layout
+
+\begin_layout Standard
+Left factoring is a grammar transformation that is useful for producing
+ a grammar suitable for predictive (or top-down) parsing.
+ The following procedure takes as input a grammar 
+\begin_inset Formula $G$
+\end_inset
+
+ and returns an equivalent left-factored grammar.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{codebox}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procname{
+\backslash
+proc{Left-Factoring}($G$)}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+For each nonterminal  $A$ 
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li    find the longest common prefix $
+\backslash
+alpha$ common to two (or more) of its alternatives
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li   
+\backslash
+If $
+\backslash
+alpha 
+\backslash
+neq 
+\backslash
+epsilon$ 
+\backslash
+Then
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li     replace all
+\end_layout
+
+\begin_layout Plain Layout
+
+        $A
+\backslash
+rightarrow
+\backslash
+alpha
+\backslash
+beta_1|
+\backslash
+alpha
+\backslash
+beta_2|
+\backslash
+ldots|
+\backslash
+alpha
+\backslash
+beta_n|
+\backslash
+gamma$ with
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li     $A
+\backslash
+rightarrow
+\backslash
+alpha A'|
+\backslash
+gamma$ and $A'
+\backslash
+rightarrow
+\backslash
+beta_1|
+\backslash
+beta_2|
+\backslash
+ldots|
+\backslash
+beta_n$
+\end_layout
+
+\begin_layout Plain Layout
+
+      
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{codebox}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Non-CFG constructs
+\end_layout
+
+\begin_layout Standard
+A few syntactic constructs found in typical programming languages cannot
+ be specified using grammars alone.
+ Typical examples are:
+\end_layout
+
+\begin_layout Itemize
+the language that abstracts the problem of checking that identifiers are
+ declared before they are used in a program;
+\end_layout
+
+\begin_layout Itemize
+the language that abstracts the problem of checking that the number of formal
+ parameters in the declaration of a function agrees with the number of actual
+ parameters in a use of the function.
+\end_layout
+
+\begin_layout Standard
+These construct are checked in later phases of compilation and in particular
+ using semantic analyzer.
+ 
+\end_layout
+
+\begin_layout Section
+Parsing (Syntax analysis)
+\end_layout
+
+\begin_layout Subsection
+Recursive-Descent Parsing
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+recursive-decent
+\emph default
+ parsing program consists of a series of routines, one for each non terminal.
+ Execution begins with the procedure for the start symbol, which halts and
+ announces success if its procedure body scans the entire input string.
+ General recursive-descent parsing may require backtracking; that is, it
+ may require repeated scans over the input.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{Follow}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To compute 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}($X$)
+\end_layout
+
+\end_inset
+
+ for all grammar symbols 
+\begin_inset Formula $X$
+\end_inset
+
+, apply the following rules until no more terminals or 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ can be added to any 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}
+\end_layout
+
+\end_inset
+
+ set.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $X$
+\end_inset
+
+ is a terminal, then the 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}($X$)$={X}$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $X$
+\end_inset
+
+ is a nonterminal and 
+\begin_inset Formula $X\rightarrow Y_{1}Y_{2}\ldots Y_{k}$
+\end_inset
+
+ is a production for some 
+\begin_inset Formula $k\geq1$
+\end_inset
+
+, then place 
+\begin_inset Formula $a$
+\end_inset
+
+ in 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}($X$)
+\end_layout
+
+\end_inset
+
+ if for some 
+\begin_inset Formula $i$
+\end_inset
+
+, 
+\begin_inset Formula $a$
+\end_inset
+
+ is in 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}($Y_i$)
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is in all of 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}($Y_1$),
+\backslash
+ldots,
+\backslash
+proc{First}($Y_{i-1}$)
+\end_layout
+
+\end_inset
+
+; that is, 
+\begin_inset Formula $Y_{1}\ldots Y_{i-1}\overset{*}{\Rightarrow}\epsilon$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is in 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}($Y_j$)
+\end_layout
+
+\end_inset
+
+ for all 
+\begin_inset Formula $j=1,2,\ldots,k$
+\end_inset
+
+, then add 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ to 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}($X$)
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $X\rightarrow\epsilon$
+\end_inset
+
+ is a production, then add 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ to 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}($X$)
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{Follow}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To compute 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{Follow}($A$)
+\end_layout
+
+\end_inset
+
+ for all nonterminals 
+\begin_inset Formula $A$
+\end_inset
+
+, apply the following rules until nothing can be added to any 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{Follow}
+\end_layout
+
+\end_inset
+
+ set.
+\end_layout
+
+\begin_layout Enumerate
+Place $ in 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{Follow}($S$)
+\end_layout
+
+\end_inset
+
+, where 
+\begin_inset Formula $S$
+\end_inset
+
+ is the start symbol, and $ is the input right end marker.
+\end_layout
+
+\begin_layout Enumerate
+If there is a production 
+\begin_inset Formula $A\rightarrow\alpha B\beta$
+\end_inset
+
+, then everything in 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}($
+\backslash
+beta$)
+\end_layout
+
+\end_inset
+
+ except 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is in 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{Follow}($B$)
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If there is a production 
+\begin_inset Formula $A\rightarrow\alpha B$
+\end_inset
+
+ (or a production 
+\begin_inset Formula $A\rightarrow\alpha B\beta$
+\end_inset
+
+ where 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}($
+\backslash
+beta$)
+\end_layout
+
+\end_inset
+
+ contains 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+) then everything is 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{Follow}($A$)
+\end_layout
+
+\end_inset
+
+ is in 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{Follow}($B$)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Predictive Parsing - LL(1)
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Predictive parsers
+\emph default
+, that is, recursive-descent parsers needing no backtracking, can be constructed
+ for a class of grammars called LL(1).
+ The first 
+\begin_inset Quotes eld
+\end_inset
+
+L
+\begin_inset Quotes erd
+\end_inset
+
+ stands for scanning the input from left to right, the second 
+\begin_inset Quotes eld
+\end_inset
+
+L
+\begin_inset Quotes erd
+\end_inset
+
+ for producing a leftmost derivation, and the 
+\begin_inset Quotes eld
+\end_inset
+
+1
+\begin_inset Quotes erd
+\end_inset
+
+ for using one input symbol of lookahead at each step to make parsing action
+ decisions.
+\end_layout
+
+\begin_layout Standard
+A grammar 
+\begin_inset Formula $G$
+\end_inset
+
+ is LL(1) if and only if whenever 
+\begin_inset Formula $A\rightarrow\alpha|\beta$
+\end_inset
+
+ are two distinct productions of 
+\begin_inset Formula $G$
+\end_inset
+
+, the following conditions hold: 
+\end_layout
+
+\begin_layout Enumerate
+For no terminal 
+\begin_inset Formula $a$
+\end_inset
+
+ do both 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta$
+\end_inset
+
+ derive strings beginning with 
+\begin_inset Formula $a$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+At most one of a 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ or 
+\begin_inset Formula $\beta$
+\end_inset
+
+ can derive the empty string.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\beta\overset{*}{\Rightarrow}\epsilon$
+\end_inset
+
+, then 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ does not derive any string beginning with terminal in 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{Follow($A$)}
+\end_layout
+
+\end_inset
+
+.
+ Likewise, if 
+\begin_inset Formula $\alpha\overset{*}{\Rightarrow}\epsilon$
+\end_inset
+
+, then 
+\begin_inset Formula $\beta$
+\end_inset
+
+ does not derive any string beginning with terminal in 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{Follow($A$)}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The first two conditions are equivalent to the statement that 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}($
+\backslash
+alpha$)
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}($
+\backslash
+beta$)
+\end_layout
+
+\end_inset
+
+ are disjoint sets.
+ The third condition is equivalent to stating that, if 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is in 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}($
+\backslash
+beta$)
+\end_layout
+
+\end_inset
+
+ , then 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}($
+\backslash
+alpha$)
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{Follow}($A$)
+\end_layout
+
+\end_inset
+
+ are disjoint sets, and likewise if 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is in 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}($
+\backslash
+alpha$)
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Parsing table construction
+\end_layout
+
+\begin_layout Standard
+The following algorithm takes a LL(1) grammar 
+\begin_inset Formula $G$
+\end_inset
+
+ and returns the parsing table, 
+\begin_inset Formula $M[N,t]$
+\end_inset
+
+ where 
+\begin_inset Formula $N$
+\end_inset
+
+ is a nonterminal and 
+\begin_inset Formula $t$
+\end_inset
+
+ a terminal, necessary to build the parser.
+\end_layout
+
+\begin_layout Enumerate
+For each production 
+\begin_inset Formula $A\rightarrow\alpha$
+\end_inset
+
+ of the grammar, do the following:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+For each terminal 
+\begin_inset Formula $a$
+\end_inset
+
+ in 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}($A$)
+\end_layout
+
+\end_inset
+
+, add 
+\begin_inset Formula $A\rightarrow\alpha$
+\end_inset
+
+ to 
+\begin_inset Formula $M[A,a]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is in 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}($
+\backslash
+alpha$)
+\end_layout
+
+\end_inset
+
+, then for each terminal 
+\begin_inset Formula $b$
+\end_inset
+
+ in 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{Follow($A$)}
+\end_layout
+
+\end_inset
+
+, add 
+\begin_inset Formula $A\rightarrow\alpha$
+\end_inset
+
+ to 
+\begin_inset Formula $M[A,b]$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is in 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{First}($
+\backslash
+alpha$)
+\end_layout
+
+\end_inset
+
+ and $ is in 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+proc{Follow($A$)}
+\end_layout
+
+\end_inset
+
+, add 
+\begin_inset Formula $A\rightarrow\alpha$
+\end_inset
+
+ to 
+\begin_inset Formula $M[A,\text{\$}]$
+\end_inset
+
+ as well.
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Parser
+\end_layout
+
+\begin_layout Standard
+The following algorithm takes as input a string 
+\begin_inset Formula $w$
+\end_inset
+
+ and a parsing table 
+\begin_inset Formula $M$
+\end_inset
+
+ for grammar 
+\begin_inset Formula $G$
+\end_inset
+
+ and returns a leftmost derivation of 
+\begin_inset Formula $w$
+\end_inset
+
+, if 
+\begin_inset Formula $w\in L(G)$
+\end_inset
+
+, or an error, otherwise.
+\end_layout
+
+\begin_layout Standard
+Initially the parser is in a configuration with 
+\begin_inset Formula $w$
+\end_inset
+
+$ in the input buffer and 
+\begin_inset Formula $S$
+\end_inset
+
+$ on the stack.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{codebox}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procname{
+\backslash
+proc{Predictive-Parsing}($M,w$)}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li $ip 
+\backslash
+gets w[1]$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li $X 
+\backslash
+gets S$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+While $X 
+\backslash
+neq 
+\backslash
+text{
+\backslash
+$}$ 
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li   
+\backslash
+If $X 
+\backslash
+isequal ip$ 
+\backslash
+Then
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li      pop the stack and advance $ip$ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li   
+\backslash
+ElseIf $X$ is a terminal 
+\backslash
+Then
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li      
+\backslash
+Error
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li   
+\backslash
+ElseIf $M[X,a]$ is an error entry 
+\backslash
+Then
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li      
+\backslash
+Error
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li   
+\backslash
+ElseIf $M[X,a] 
+\backslash
+isequal X
+\backslash
+rightarrow Y_1Y_2
+\backslash
+ldots Y_k$ 
+\backslash
+Then
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li      output the production
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li      pop the stack
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li      push $Y_k,Y_{k-1},
+\backslash
+ldots ,Y_1$ onto the stack
+\end_layout
+
+\begin_layout Plain Layout
+
+      
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+End 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{codebox}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Shift-Reduce Parsing
+\end_layout
+
+\begin_layout Standard
+Shift-reduce parsing is a form of bottom-up parsing in which, during left-to-rig
+ht scan of the input string, the parser shifts zero or more input symbols
+ onto the stack, until it is ready to reduce a string 
+\begin_inset Formula $\beta$
+\end_inset
+
+ to the head of the appropriate production.
+\end_layout
+
+\begin_layout Standard
+The following algorithm, takes as input a string 
+\begin_inset Formula $w$
+\end_inset
+
+ and a grammar 
+\begin_inset Formula $G$
+\end_inset
+
+ and returns accept if 
+\begin_inset Formula $w\in L(G)$
+\end_inset
+
+, and an error, otherwise.
+ Initially the parser is in a configuration with 
+\begin_inset Formula $w$
+\end_inset
+
+$ in the input buffer and an empty stack ($ is also used to mark the bottom
+ of the bottom of the stack)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{codebox}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procname{
+\backslash
+proc{Shitf-Reduce-Parsing}($G,w$)}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li $ip 
+\backslash
+gets w[1]$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+While $
+\backslash
+attrib{stack}{top} 
+\backslash
+neq S$ or $ip 
+\backslash
+neq 
+\backslash
+text{
+\backslash
+$}$ 
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li   
+\backslash
+If $
+\backslash
+attrib{stack}{top} 
+\backslash
+isequal 
+\backslash
+alpha$ such that $A
+\backslash
+rightarrow
+\backslash
+alpha$ is in $G$  
+\backslash
+Then
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li      
+\backslash
+proc{Reduce}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li   
+\backslash
+Else 
+\backslash
+proc{Shift}  
+\end_layout
+
+\begin_layout Plain Layout
+
+     
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+End 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+If $
+\backslash
+attrib{stack}{top} 
+\backslash
+isequal S$ 
+\backslash
+Then
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li    
+\backslash
+proc{Accept} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li  
+\backslash
+Else 
+\backslash
+proc{Error} 
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{codebox}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The algorithms relies on four procedures whose behavior is intuitively described
+ below.
+\end_layout
+
+\begin_layout Description
+Shift: Shifts the next symbol onto the top of the stack.
+\end_layout
+
+\begin_layout Description
+Reduce: The right end of the string to be reduced must be at the top of
+ the stack.
+ Locate the left end of the string within the stack and decide with what
+ nonterminal to replace the string.
+\end_layout
+
+\begin_layout Description
+Accept: Announce successful completion of parsing.
+\end_layout
+
+\begin_layout Description
+Error: Discover a syntax error and call an error recovery routine.
+\end_layout
+
+\begin_layout Subsubsection
+Conflicts
+\end_layout
+
+\begin_layout Description
+Shift-reduce
+\begin_inset space ~
+\end_inset
+
+conflict: knowing the entire stack content and the next input symbol, the
+ parser cannot decide whether to shift or to reduce.
+ (e.g.
+ 
+\begin_inset Formula $G:S\rightarrow1S,S\rightarrow1$
+\end_inset
+
+, 
+\begin_inset Formula $w="111"$
+\end_inset
+
+, after shifting the first 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $1$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ the parser doesn't know if it has to reduce with 
+\begin_inset Formula $S\rightarrow1$
+\end_inset
+
+ or shift again)
+\end_layout
+
+\begin_layout Description
+Reduce-reduce
+\begin_inset space ~
+\end_inset
+
+conflict: knowing the entire stack content and the next input symbol, the
+ parser cannot decide which of several reductions to make.
+ (e.g.
+ 
+\begin_inset Formula $G:S\rightarrow A1,S\rightarrow B2,A\rightarrow1,B\rightarrow1$
+\end_inset
+
+, 
+\begin_inset Formula $w="111"$
+\end_inset
+
+, after shifting the first 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $1$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ the parser doesn't know if it has to reduce with 
+\begin_inset Formula $A\rightarrow1$
+\end_inset
+
+ or 
+\begin_inset Formula $B\rightarrow1$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+It can be shown that when these conflict happen the grammar is not an LR(0)
+ grammar.
+ Both conflicts can be solved by Simple LR parsers.
+\end_layout
+
+\begin_layout Subsection
+Simple LR (SLR) Parsing
+\end_layout
+
+\begin_layout Standard
+The most prevalent type of bottom-up parsers is based on a concept called
+ LR(k) parsing: the 
+\begin_inset Quotes eld
+\end_inset
+
+L
+\begin_inset Quotes erd
+\end_inset
+
+ is for left-to-right scanning of the input, the 
+\begin_inset Quotes eld
+\end_inset
+
+R
+\begin_inset Quotes erd
+\end_inset
+
+ for constructing the rightmost derivation in reverse, and the 
+\begin_inset Quotes eld
+\end_inset
+
+k
+\begin_inset Quotes erd
+\end_inset
+
+ for the number of input symbols of lookahead that are used in making parsing
+ decisions.
+ The SLR or 
+\emph on
+LR(0)
+\emph default
+ parser is the simplest of this family.
+\end_layout
+
+\begin_layout Subsubsection
+LR(0) automaton
+\end_layout
+
+\begin_layout Standard
+The first step to build a LR(0) parser is to build the so called 
+\emph on
+LR(0) automaton
+\emph default
+, which is simply a DFA whose set of states is called canonical LR(0) collection.
+ In order to so we first compute the 
+\emph on
+augmented grammar
+\emph default
+ 
+\begin_inset Formula $G'=(S'\rightarrow S)\cup G$
+\end_inset
+
+.
+ The purpose of this new starting production is to indicate to the parser
+ when it should stop parsing and announce acceptance of the input.
+\end_layout
+
+\begin_layout Standard
+The following algorithm takes as input 
+\begin_inset Formula $G'$
+\end_inset
+
+ and returns the 
+\emph on
+canonical LR(0) collection 
+\emph default
+
+\begin_inset Formula $C$
+\end_inset
+
+ using the procedures 
+\begin_inset Formula $\proc{Closure}$
+\end_inset
+
+ and 
+\begin_inset Formula $\proc{Goto}$
+\end_inset
+
+ described below.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{codebox}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procname{
+\backslash
+proc{LR0-Automata-Build}($G'$)}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li $C 
+\backslash
+gets 
+\backslash
+proc{Closure}(
+\backslash
+{ S' 
+\backslash
+rightarrow
+\backslash
+cdot S 
+\backslash
+})$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+Repeat
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li    
+\backslash
+For each set of items $I
+\backslash
+in C$ 
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li       
+\backslash
+For each grammar symbol $X$ in $I$ 
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li          
+\backslash
+If 
+\backslash
+proc{Goto}($I,X$) is not empty and not in $C$ 
+\backslash
+Then
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li            $C 
+\backslash
+gets C 
+\backslash
+cup 
+\backslash
+proc{Goto}(I,X)$ 
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+          
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+       
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+Until no new sets of items are added to $C$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li return C
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{codebox}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The following algorithm takes as input 
+\begin_inset Formula $G'$
+\end_inset
+
+ and returns the set of items 
+\begin_inset Formula $A$
+\end_inset
+
+ which represents the outcome of the transition function 
+\begin_inset Formula $\proc{Goto}$
+\end_inset
+
+ for the LR(0) automata from state 
+\begin_inset Formula $I$
+\end_inset
+
+ with input 
+\begin_inset Formula $X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{codebox}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procname{
+\backslash
+proc{Goto}($G',I,X$)}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+If $
+\backslash
+{ A
+\backslash
+rightarrow
+\backslash
+alpha
+\backslash
+cdot X 
+\backslash
+beta 
+\backslash
+}
+\backslash
+in I$ 
+\backslash
+Then
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li    
+\backslash
+Return 
+\backslash
+proc{Closure}($G',
+\backslash
+{ A
+\backslash
+rightarrow
+\backslash
+alpha X 
+\backslash
+cdot 
+\backslash
+beta 
+\backslash
+}$)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{codebox}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The following procedure takes as input 
+\begin_inset Formula $G'$
+\end_inset
+
+ and returns the closure of the items set 
+\begin_inset Formula $I$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{codebox}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procname{
+\backslash
+proc{Closure}($G',I$)}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li $J 
+\backslash
+gets I$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+Repeat
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li    
+\backslash
+For each item $A
+\backslash
+rightarrow
+\backslash
+alpha
+\backslash
+cdot B
+\backslash
+beta$ in $J$ 
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li       
+\backslash
+For each production $B
+\backslash
+rightarrow
+\backslash
+gamma$ in $G$ 
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li          
+\backslash
+If $B
+\backslash
+rightarrow
+\backslash
+cdot
+\backslash
+gamma$ is not in  $J$ 
+\backslash
+Then
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li              add $B
+\backslash
+rightarrow
+\backslash
+cdot
+\backslash
+gamma$ to $J$ 
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+          
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+       
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+Until no more items are added to $J$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+Return $J$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{codebox}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note how, by construction, each state of the LR(0) automaton has a corresponding
+ grammar symbol.
+ States correspond to sets of items, and 
+\emph on
+all transitions to a particular state must be for the same grammar symbol
+\emph default
+.
+ Thus each state, except the start state 
+\begin_inset Formula $0$
+\end_inset
+
+, has a unique grammar symbol associated with it.
+\end_layout
+
+\begin_layout Subsubsection
+Parsing tables
+\end_layout
+
+\begin_layout Standard
+The next step necessary to obtain a SLR parser for a grammar 
+\begin_inset Formula $G'$
+\end_inset
+
+ is to build 
+\emph on
+action
+\emph default
+ and 
+\emph on
+goto
+\emph default
+ tables.
+ If, after creating the tables, any conflicting action result, we say that
+ the grammar is not SLR(1).
+\end_layout
+
+\begin_layout Paragraph
+Action table
+\end_layout
+
+\begin_layout Standard
+The value of 
+\begin_inset Formula $Action[i,a]$
+\end_inset
+
+ where 
+\begin_inset Formula $i$
+\end_inset
+
+ is a state of the LR(0) automaton and 
+\begin_inset Formula $a$
+\end_inset
+
+ is a terminal (or $) are determined as follows:
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\{A\rightarrow\alpha\cdot a\beta\}\in I_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\proc{Goto}(I_{i},a)=I_{j}$
+\end_inset
+
+ then 
+\begin_inset Formula $Action[i,a]="\func{shift}(j)"$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\{A\rightarrow\alpha\cdot\}\in I_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $A\neq S'$
+\end_inset
+
+ then 
+\begin_inset Formula $\forall a\in\proc{Follow}(A),Action[i,a]="\func{reduce}(\{A\rightarrow\alpha\})"$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\{S\rightarrow S'\cdot\}\in I_{i}$
+\end_inset
+
+ then 
+\begin_inset Formula $Action[i,\text{\$}]="\func{accept}"$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Otherwise 
+\begin_inset Formula $Action[i,a]="\func{error}"$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Goto table
+\end_layout
+
+\begin_layout Standard
+Set 
+\begin_inset Formula $Goto[i,A]=j$
+\end_inset
+
+, where 
+\begin_inset Formula $i$
+\end_inset
+
+ is a state of the LR(0) automaton, 
+\begin_inset Formula $A$
+\end_inset
+
+ is a nonterminal and 
+\begin_inset Formula $j$
+\end_inset
+
+ is the state corresponding to 
+\begin_inset Formula $\proc{Goto}(I_{i},A)=I_{j}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+LR-Parsing algorithm
+\end_layout
+
+\begin_layout Standard
+The following algorithms takes as input an input string 
+\begin_inset Formula $w$
+\end_inset
+
+$ and the 
+\begin_inset Formula $Action$
+\end_inset
+
+ and 
+\begin_inset Formula $Goto$
+\end_inset
+
+ parsing tables for a grammar 
+\begin_inset Formula $G$
+\end_inset
+
+ and returns the reduction steps of a bottom-up parse for 
+\begin_inset Formula $w$
+\end_inset
+
+, if 
+\begin_inset Formula $w\in L(G)$
+\end_inset
+
+, an error, otherwise.
+\end_layout
+
+\begin_layout Standard
+Note how the initial state of the parser is the one constructed from the
+ set of items containing 
+\begin_inset Formula $\{S\rightarrow\cdot S'\}$
+\end_inset
+
+ and labeled as 
+\begin_inset Formula $s_{0}$
+\end_inset
+
+.
+ We assume 
+\begin_inset Formula $s$
+\end_inset
+
+ to be the state on top of the stack.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{codebox}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procname{
+\backslash
+proc{LR-Parsing}($G',I$)}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li $s 
+\backslash
+gets s_0$   
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li $a 
+\backslash
+gets w[1]$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+While 1 
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li   
+\backslash
+If $Action[s,a] 
+\backslash
+isequal 
+\backslash
+func{shift}(t)$ 
+\backslash
+Then
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li      push $t$ onto the stack
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li      let $a$ be the next input symbol
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li   
+\backslash
+ElseIf $Action[s,a] 
+\backslash
+isequal 
+\backslash
+func{reduce}(
+\backslash
+{A
+\backslash
+rightarrow
+\backslash
+beta
+\backslash
+})$ 
+\backslash
+Then
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li      pop $|
+\backslash
+beta|$ symbols off the stack, which implies $s 
+\backslash
+gets r$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li      push $
+\backslash
+proc{Goto}(s,A)$ onto the stack
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li      $
+\backslash
+func{print}(A
+\backslash
+rightarrow
+\backslash
+beta)$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li   
+\backslash
+ElseIf $Action[s,a] 
+\backslash
+isequal 
+\backslash
+func{accept}$ 
+\backslash
+Then
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li      
+\backslash
+Return
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li   
+\backslash
+Else 
+\backslash
+func{error} 
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{codebox}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that 
+\emph on
+all
+\emph default
+ LR parsers behave in this fashion; the only difference between one LR parser
+ and another is the information stored in the 
+\begin_inset Formula $Action$
+\end_inset
+
+ and 
+\begin_inset Formula $Goto$
+\end_inset
+
+ parsing tables.
+\end_layout
+
+\begin_layout Subsection
+LR(1) Parsing
+\end_layout
+
+\begin_layout Standard
+This method is called the 
+\emph on
+canonical-LR
+\emph default
+ or just 
+\emph on
+LR
+\emph default
+ method and makes full use of the lookahead symbol(s).
+ The set of items for this method is large and is called the 
+\emph on
+LR(1) items
+\emph default
+.
+\end_layout
+
+\begin_layout Subsubsection
+LR(1) automaton
+\end_layout
+
+\begin_layout Standard
+The general form of an 
+\emph on
+LR(1) item
+\emph default
+ becomes 
+\begin_inset Formula $[A\rightarrow\alpha\cdot\beta,a]$
+\end_inset
+
+ where 
+\begin_inset Formula $A\rightarrow\alpha\beta$
+\end_inset
+
+ is a production and 
+\begin_inset Formula $a$
+\end_inset
+
+ is a terminal or the right end marker 
+\begin_inset Formula $\$$
+\end_inset
+
+.
+ The second element is called the 
+\emph on
+lookahead
+\emph default
+.
+ The lookahead affects only the items where 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ or have the form 
+\begin_inset Formula $[A\rightarrow\alpha\cdot,a]$
+\end_inset
+
+.
+ In this case such an item calls for a reduction only if the next input
+ symbol is 
+\begin_inset Formula $a$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The method for building the collection of sets of a valid LR(1) items is
+ essentially the same as the one for building the canonical collection of
+ sets of LR(0) items.
+ We need only to modify the following procedures.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{codebox}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procname{
+\backslash
+proc{LR0-Automata-Build}($G'$)}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li $C 
+\backslash
+gets 
+\backslash
+proc{Closure}(
+\backslash
+{ [S' 
+\backslash
+rightarrow
+\backslash
+cdot S,
+\backslash
+$] 
+\backslash
+})$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+Repeat
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li    
+\backslash
+For each set of items $I
+\backslash
+in C$ 
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li       
+\backslash
+For each grammar symbol $X$ in $I$ 
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li          
+\backslash
+If 
+\backslash
+proc{Goto}($I,X$) is not empty and not in $C$ 
+\backslash
+Then
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li            $C 
+\backslash
+gets C 
+\backslash
+cup 
+\backslash
+proc{Goto}(I,X)$ 
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+          
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+       
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+Until no new sets of items are added to $C$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+Return C
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{codebox}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{codebox}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procname{
+\backslash
+proc{Goto}($G',I,X$)}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li $J 
+\backslash
+gets 
+\backslash
+emptyset$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+For each  item $[A
+\backslash
+rightarrow
+\backslash
+alpha
+\backslash
+cdot X 
+\backslash
+beta ,a] 
+\backslash
+in I$ 
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li    add item $[A
+\backslash
+rightarrow
+\backslash
+alpha X 
+\backslash
+cdot 
+\backslash
+beta ,a]$ to set $J$ 
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li    
+\backslash
+Return 
+\backslash
+proc{Closure}($J$)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{codebox}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{codebox}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procname{
+\backslash
+proc{Closure}($G',I$)}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li $J 
+\backslash
+gets I$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+Repeat
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li    
+\backslash
+For each item $[A
+\backslash
+rightarrow
+\backslash
+alpha
+\backslash
+cdot B
+\backslash
+beta ,a]$ in $J$ 
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li       
+\backslash
+For each production $B
+\backslash
+rightarrow
+\backslash
+gamma$ in $G'$ 
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li          
+\backslash
+For each terminal $b$ in 
+\backslash
+proc{First}($
+\backslash
+beta a$) 
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li              add $[B
+\backslash
+rightarrow
+\backslash
+cdot
+\backslash
+gamma ,b]$ to $J$ 
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+          
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+       
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+Until no more items are added to $J$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+Return $J$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{codebox}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Parsing tables
+\end_layout
+
+\begin_layout Standard
+Again, we just modify the procedure to build the 
+\begin_inset Formula $Action$
+\end_inset
+
+ table to adapt to LR(1) parsing.
+\end_layout
+
+\begin_layout Paragraph
+Action table
+\end_layout
+
+\begin_layout Standard
+The value of 
+\begin_inset Formula $Action[i,a]$
+\end_inset
+
+ where 
+\begin_inset Formula $i$
+\end_inset
+
+ is a state of the LR(1) automaton and 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+ are terminals (or $) are determined as follows:
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $[A\rightarrow\alpha\cdot a\beta,b]$
+\end_inset
+
+ is in 
+\begin_inset Formula $I_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\proc{Goto}(I_{i},a)=I_{j}$
+\end_inset
+
+ then set 
+\begin_inset Formula $Action[i,a]$
+\end_inset
+
+ to 
+\begin_inset Quotes eld
+\end_inset
+
+shift 
+\begin_inset Formula $j$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Here 
+\begin_inset Formula $a$
+\end_inset
+
+ must be a terminal.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $[A\rightarrow\alpha\cdot,a]$
+\end_inset
+
+ is in 
+\begin_inset Formula $I_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $A\neq S'$
+\end_inset
+
+, then set 
+\begin_inset Formula $Action[i,a]$
+\end_inset
+
+ to 
+\begin_inset Quotes eld
+\end_inset
+
+reduce 
+\begin_inset Formula $A\rightarrow\alpha$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $[S'\rightarrow S\cdot,\$]$
+\end_inset
+
+ is in 
+\begin_inset Formula $I_{i}$
+\end_inset
+
+ then set 
+\begin_inset Formula $Action[i,a]$
+\end_inset
+
+ to 
+\begin_inset Quotes eld
+\end_inset
+
+accept
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Otherwise 
+\begin_inset Formula $Action[i,a]="\func{error}"$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+If any conflicting actions result from the above rules, we say the grammar
+ is not LR(1) and we can't produce a parser.
+\end_layout
+
+\begin_layout Paragraph
+Goto table
+\end_layout
+
+\begin_layout Standard
+Same as LR(0) automaton.
+\end_layout
+
+\begin_layout Subsubsection
+LR-Parsing algorithm
+\end_layout
+
+\begin_layout Standard
+As said before the parsing algorithm is the same one used in SLR parsers.
+\end_layout
+
+\begin_layout Subsection
+LALR(1) Parsing
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+lookahead-LR
+\emph default
+ or 
+\emph on
+LALR
+\emph default
+ method is based on the LR(0) set of items and has many fewer states than
+ typical parsers based on LR(1) items.
+ By carefully introduction lookaheads into the LR(0) items, we can handle
+ many more grammars than with SLR, and build parsing tables that are no
+ bigger than SLR tables.
+ LALR is the method of choice in most situations.
+\end_layout
+
+\begin_layout Subsection
+Error handling
+\end_layout
+
+\begin_layout Standard
+It is desirable for a parser to report the presence of errors clearly and
+ accurately, recover from each error quickly enough to detect subsequent
+ errors and add a minimal overhead to the processing of correct programs.
+\end_layout
+
+\begin_layout Standard
+The following are four of the most useful error recovery strategies.
+\end_layout
+
+\begin_layout Paragraph
+Panic-Mode Recovery
+\end_layout
+
+\begin_layout Standard
+The parser discards input symbols one at the time until one of a designated
+ set of s
+\emph on
+ynchronizing tokens
+\emph default
+ is found.
+ These are usually delimiters, such as ';' and '}'.
+\end_layout
+
+\begin_layout Paragraph
+Phrase-Level Recovery
+\end_layout
+
+\begin_layout Standard
+On discovering an error, a parser may perform local correction on the remaining
+ input; that is, it may replace a prefix of the remaining input by some
+ string that allows the parser to continue.
+ (e.g.
+ replace ',' with ';') The major drawback is the difficulty it has in coping
+ with situations in which the actual error has occurred before the point
+ of detection.
+\end_layout
+
+\begin_layout Paragraph
+Error Productions
+\end_layout
+
+\begin_layout Standard
+By anticipating common errors that might be encountered, we can augment
+ the grammar for the language with productions that generate the erroneous
+ constructs.
+\end_layout
+
+\begin_layout Paragraph
+Global Correction
+\end_layout
+
+\begin_layout Standard
+Ideally, we would like a compiler to make as few changes as possible in
+ processing an incorrect input string.
+ There are algorithms for choosing a minimal sequence of changes to obtain
+ a globally least-cost correction.
+ Unfortunately, these methods are in general too costly to implement in
+ terms of time and space, so these techniques are currently only of theoretical
+ interest.
+\end_layout
+
+\begin_layout Section
+Syntax-directed Translation
+\end_layout
+
+\begin_layout Standard
+Syntax-directed Translation is done by attaching rules or program fragments
+ to productions in a grammar.
+ There are two different strategies to accomplish this.
+ 
+\end_layout
+
+\begin_layout Subsection
+Attributes and Syntax Directed Definitions
+\end_layout
+
+\begin_layout Standard
+An 
+\emph on
+attribute
+\emph default
+ is any quantity associated with a programming construct.
+ Since we use grammar symbols to represent programming constructs we extend
+ the notion of attributes from constructs to the symbols that represent
+ them.
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+syntax-directed definition
+\emph default
+ (
+\emph on
+SDD
+\emph default
+) associates with each grammar symbol, a set of attributes, and with each
+ production, a set of 
+\emph on
+semantic rules
+\emph default
+ for computing the values of the attributes associated with the symbols
+ appearing in the production.
+ 
+\end_layout
+
+\begin_layout Standard
+An attribute is said to be 
+\emph on
+synthesized
+\emph default
+ if its value at a parse-tree node 
+\begin_inset Formula $N$
+\end_inset
+
+ is determined from attribute values at the children of 
+\begin_inset Formula $N$
+\end_inset
+
+ and 
+\begin_inset Formula $N$
+\end_inset
+
+ itself.
+ Synthesized attributes have the desirable property that they can be evaluated
+ during a single bottom-up traversal of the 
+\emph on
+annotated parse tree
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+An attribute is said to be 
+\emph on
+inherited
+\emph default
+ if its value at a parse-tree node 
+\begin_inset Formula $N$
+\end_inset
+
+ is defined only in terms of attribute values at 
+\begin_inset Formula $N$
+\end_inset
+
+'s parent, 
+\begin_inset Formula $N$
+\end_inset
+
+ itself and 
+\begin_inset Formula $N$
+\end_inset
+
+'s siblings.
+\end_layout
+
+\begin_layout Standard
+Terminals can have synthesized attributes, but not inherited attributes.
+ Attributes for terminals have lexical values that are supplied by the lexical
+ analyzer; there are no rules in the SDD itself for computing the value
+ of an attribute for a terminal.
+\end_layout
+
+\begin_layout Subsubsection
+Evaluation orders for SDDs
+\end_layout
+
+\begin_layout Standard
+In order to decide in which order to evaluate the attributes we need to
+ build a 
+\emph on
+dependency grap
+\emph default
+h.
+ If the dependency graph has an edge from node 
+\begin_inset Formula $M$
+\end_inset
+
+ to node 
+\begin_inset Formula $N$
+\end_inset
+
+, then the attributes corresponding to 
+\begin_inset Formula $M$
+\end_inset
+
+ must be evaluated before the attributes of 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ The 
+\emph on
+topological sort
+\emph default
+ of the dependency graph leads to a sequential ordering of evaluation for
+ the attributes.
+ Clearly, if there is any cycle in the dependency graph it is impossible
+ to find such a topological order.
+ (see p.
+ 338)
+\end_layout
+
+\begin_layout Paragraph
+S-attributed SDDs
+\end_layout
+
+\begin_layout Standard
+An SDD that involves only synthesized attributes is called 
+\emph on
+S-attributed
+\emph default
+.
+ In such SDD, each rule computes an attribute for the nonterminal at the
+ head of the production from attributes taken from the body of the production.
+ An S-attributed SDD can be implemented naturally in conjunction with an
+ LR parser, since a bottom-up parser corresponds to a postorder traversal.
+ This strategy can be used to store the evaluated values for synthesized
+ attributes on the stack during LR parsing, without creating the tree nodes
+ explicitly.
+\end_layout
+
+\begin_layout Paragraph
+L-attributed SDDs
+\end_layout
+
+\begin_layout Standard
+An SDD is called 
+\emph on
+L-attributed
+\emph default
+ if every attribute is either synthesized or, if it is inherited, it depends
+ only on inherited attributes of its parent and on (any) attributes of siblings
+ to its left.
+ More precisely, suppose that there is a production 
+\begin_inset Formula $A\rightarrow X_{1}X_{2}\ldots X_{n}$
+\end_inset
+
+, and that there is an inherited attribute 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+attrib{X_i}{a}
+\end_layout
+
+\end_inset
+
+ computed by a rule associated with this production.
+ Then the rule may only use: 
+\end_layout
+
+\begin_layout Enumerate
+Inherited attributes associated with 
+\begin_inset Formula $A$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Either inherited or synthesized attributes associated with the occurrences
+ of symbols 
+\begin_inset Formula $X_{1},X_{2},\ldots,X_{i-1}$
+\end_inset
+
+ located to the left of 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Inherited or synthesized attributes associated with this occurrence of 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ itself, but only in such a way that there are no cycles in a dependency
+ graph formed by the attributes of this 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Semantic rules and side effects
+\end_layout
+
+\begin_layout Standard
+Side effects are other actions, like printing the value of an attribute,
+ that are executed during Syntax Directed Translations.
+ 
+\end_layout
+
+\begin_layout Standard
+An SDD without side effects is sometimes called
+\emph on
+ attribute grammar
+\emph default
+.
+ The rules in an attribute grammar define the value of an attribute purely
+ in terms of the values of other attributes and constants.
+ 
+\end_layout
+
+\begin_layout Standard
+Usually we allow controlled side effects; that is, we permit side effects
+ that do not constrain attribute evaluation.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Abstract syntax tree construction using SDDs
+\end_layout
+
+\begin_layout Standard
+A typical application of SDDs is the construction of syntax trees, which
+ can be then used as an internal representation usually thought the 
+\begin_inset Formula $.ast$
+\end_inset
+
+ attribute.
+ Clearly, to complete the translation to intermediate code, the compiler
+ may then walk the syntax tree, using another set of rules that are in effect
+ an SDD on the syntax tree rather than the parse tree.
+\end_layout
+
+\begin_layout Subsection
+Semantic actions and Syntax Directed Translation Schemes (SDT)
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+translation scheme
+\emph default
+ is a notation for attaching program fragments to the production of a grammar.
+ The program fragments, called 
+\emph on
+semantic actions
+\emph default
+, are executed when the production is used during syntax analysis.
+ 
+\end_layout
+
+\begin_layout Standard
+The position at which an action is to be executed is shown by enclosing
+ it between curly braces and writing it within the production body.
+ When drawing a parse tree for a translation scheme, we indicate an action
+ by constructing an extra child for it, connected by a dashed line in the
+ node that corresponds to the head of the production.
+ Any STD can be implemented by first building a parse tree and then performing
+ the actions in a left-to-right depth first order; that is, a 
+\emph on
+preorder traversal
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Typically, SDTs are implemented during parsing, without building a parse
+ tree.
+ SDT that can be implemented during parsing can be characterized by introducing
+ distinct 
+\emph on
+marker nonterminals
+\emph default
+ in place of each embedded action; each marker 
+\begin_inset Formula $M$
+\end_inset
+
+ has only one production, 
+\begin_inset Formula $M\rightarrow\epsilon$
+\end_inset
+
+.
+ If the grammar with the marker nonterminals can be parsed by a given method
+ (LL, LR,...), then the SDT can be implemented during parsing.
+ 
+\end_layout
+
+\begin_layout Subsection
+Implementing SDDs using SDTs
+\end_layout
+
+\begin_layout Standard
+SDTs are often used to implement SDDs in real compilers.
+\end_layout
+
+\begin_layout Subsubsection
+SDTs for LR-parsable grammars and S-attributed SDD
+\end_layout
+
+\begin_layout Standard
+We can construct an SDT in which each action is placed at the end of the
+ production and is executed along with the reduction of the body to the
+ head of that production.
+ SDTs with all actions at the ends of the production body are called 
+\emph on
+postfix SDTs
+\emph default
+.
+\end_layout
+
+\begin_layout Subsubsection
+SDTs for LL-parsable grammars and L-attributed SDD
+\end_layout
+
+\begin_layout Standard
+The rules for turning an L-attributed SDD, whose underlying grammar is LL-parsab
+le, into an SDT are as follow:
+\end_layout
+
+\begin_layout Enumerate
+Embed the action that computes the inherited attributes for a nonterminal
+ 
+\begin_inset Formula $A$
+\end_inset
+
+ immediately before that occurrence of 
+\begin_inset Formula $A$
+\end_inset
+
+ in the body of the production.
+ If several inherited attributes for 
+\begin_inset Formula $A$
+\end_inset
+
+ depend on one another in an acyclic fashion, order the evaluation of attributes
+ so that those needed first are computed first.
+\end_layout
+
+\begin_layout Enumerate
+Place the actions that compute a synthesized attribute for the head of a
+ production at the end of the body of that production
+\end_layout
+
+\begin_layout Subsubsection
+L-attributed SDDs and recursive-descent parsing
+\end_layout
+
+\begin_layout Standard
+TODO p.338
+\end_layout
+
+\begin_layout Subsubsection
+L-attributed SDDs and LL parsing
+\end_layout
+
+\begin_layout Standard
+TODO p.343
+\end_layout
+
+\begin_layout Subsubsection
+L-attributed SDDs and LR parsing
+\end_layout
+
+\begin_layout Standard
+TODO p.348 
+\end_layout
+
+\begin_layout Section
+Semantic Analysis and Intermediate representation
+\end_layout
+
+\begin_layout Subsection
+Type checking
+\end_layout
+
+\begin_layout Standard
+TODO
+\end_layout
+
+\begin_layout Subsection
+Intermediate representation
+\end_layout
+
+\begin_layout Standard
+The purpose of a compiler frontend is to construct an intermediate representatio
+n of the source program from which the back end generates the target program.
+ The two most important intermediate representations are:
+\end_layout
+
+\begin_layout Description
+Trees: Including 
+\emph on
+parse trees
+\emph default
+ and 
+\emph on
+Abstract Syntax Trees
+\emph default
+ (
+\emph on
+AST
+\emph default
+)
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Syntax trees resemble parse trees to an extent; however, in the syntax tree
+ the internal node represent programming constructs while in the parse tree,
+ the interior nodes represent nonterminals.
+ Many nonterminals of a grammar represent programming constructs, but others
+ are 
+\begin_inset Quotes eld
+\end_inset
+
+helpers
+\begin_inset Quotes erd
+\end_inset
+
+ of some sort.
+ (e.g.
+ see Fig.
+ 2.5, p.
+ 47 and Fig.2.22, p.
+ 70) In the syntax tree, these helpers typically are not needed and hence
+ dropped.
+\end_layout
+
+\end_inset
+
+.
+ During parsing, syntax-tree nodes are created to represent significant
+ programming constructs.
+ As analysis proceeds, information is added to the nodes in the form of
+ attributes associated with nodes.
+\end_layout
+
+\begin_layout Description
+Linear
+\begin_inset space ~
+\end_inset
+
+representations: especially 
+\emph on
+three-address code
+\emph default
+.
+ This is just a sequence of elementary program instructions, such as the
+ addition of two values.
+\end_layout
+
+\begin_layout Standard
+It is possible that a compiler will construct a syntax tree at the same
+ time it emits three-address codes.
+ However, it is common for a compiler to emit three-address code while the
+ parser 
+\begin_inset Quotes eld
+\end_inset
+
+goes through the motions
+\begin_inset Quotes erd
+\end_inset
+
+ of constructing a syntax tree
+\begin_inset Quotes erd
+\end_inset
+
+ without actually constructing the complete tree data structure.
+ Rather, the compiler stores nodes and their attributes needed for semantic
+ analysis or other purposes, along with the data structure used for parsing
+ (i.e.
+ the parse tree).
+ By doing so, those parts of the syntax tree that are needed to construct
+ the three-address code are available when needed, but disappear when no
+ longer needed.
+\end_layout
+
+\begin_layout Section
+Code generation
+\end_layout
+
+\begin_layout Standard
+The code generator takes as input the intermediate representation (IR) produced
+ by the front end of the compiler, along with relevant symbol table information,
+ and produces as output a semantically equivalent (and correct) target program.
+ The problem of generating an optimal target program for a given source
+ program is undecidable, and many of the subproblems encountered during
+ code generation such as register allocation are computationally intractable.
+ The three main tasks of a code generator are:
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Instruction selection
+\emph default
+ The nature of the instruction set of the target architecture has a strong
+ effect on the difficulty of this task.
+ Also, if we don't care about the efficiency of the target program instruction
+ selection is straightforward: on most machines, a given IR program can
+ be implemented by many different code sequences, with significant cost
+ differences between the different implementations.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Register allocation and assignment
+\emph default
+ Register allocation is the process of selecting the set of variables that
+ will reside in registers at each point in the problem.
+ Register assignment is the process of picking the specific register that
+ a variable will reside in.
+ This task is NP-complete.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Instruction ordering
+\emph default
+ The order in which computations are performed can affect the efficiency
+ of the target code.
+ Picking an optimal order in the general case is a difficult NP-complete
+ problem.
+\end_layout
+
+\begin_layout Subsection
+Basic blocks and flow graph
+\end_layout
+
+\begin_layout Standard
+In order to represent three-address instructions as a flow graph we need
+ to first partition them into basic blocks.
+ Basic blocks are maximal sequences of consecutive three-address instructions
+ with the property that:
+\end_layout
+
+\begin_layout Itemize
+The flow of control can only enter the basic block through the first instruction
+ in the block.
+ That is, there are no jumps into the middle of the block.
+\end_layout
+
+\begin_layout Itemize
+Control will leave the block without halting or branching, except possibly
+ at the last instruction in the block.
+\end_layout
+
+\begin_layout Standard
+The following algorithm accomplishes such a task:
+\end_layout
+
+\begin_layout Enumerate
+Find all 
+\emph on
+leaders
+\emph default
+, that is, the first instructions in some basic block.
+ The rules for finding the leaders are:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The first three-address instruction in the intermediate code is a leader.
+\end_layout
+
+\begin_layout Enumerate
+Any instruction that is the target of a conditional or unconditional jump
+ is a leader.
+\end_layout
+
+\begin_layout Enumerate
+Any instruction that immediately follows a conditional or unconditional
+ jump is a leader.
+\end_layout
+
+\begin_layout Enumerate
+The instruction just pass the end of the intermediate program is not included
+ as a leader.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Find the basic block: for each leader, its basic block consists of itself
+ and all instructions up to but not including the next leader or the end
+ of the intermediate program.
+ 
+\end_layout
+
+\begin_layout Standard
+Then the basic blocks become the nodes of a flow graph, whose edges indicate
+ which blocks can follow which others.
+ There is an edge from block 
+\begin_inset Formula $B$
+\end_inset
+
+ to block 
+\begin_inset Formula $C$
+\end_inset
+
+ if and only if it is possible for the first instruction in block 
+\begin_inset Formula $C$
+\end_inset
+
+ to immediately follow the last instruction in block 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ There are two ways that such and edge could be justified:
+\end_layout
+
+\begin_layout Itemize
+There is a conditional or unconditional jump from the end of 
+\begin_inset Formula $B$
+\end_inset
+
+ to the beginning of 
+\begin_inset Formula $C$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $C$
+\end_inset
+
+ immediately follows 
+\begin_inset Formula $B$
+\end_inset
+
+ in the original order of the three-address instructions, and 
+\begin_inset Formula $B$
+\end_inset
+
+ does not end in an unconditional jump.
+\end_layout
+
+\begin_layout Standard
+Often we add two nodes, called 
+\emph on
+entry
+\emph default
+ and 
+\emph on
+exit
+\emph default
+, that do not correspond to executable intermediate instructions.
+\end_layout
+
+\begin_layout Subsection
+Liveliness and next-use
+\end_layout
+
+\begin_layout Standard
+The following algorithm determines the liveliness and next-use for each
+ statement in a basic block 
+\begin_inset Formula $B$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We start at the last statement in 
+\begin_inset Formula $B$
+\end_inset
+
+ and scan backwards to the beginning of 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ At each statement 
+\begin_inset Formula $i:x=y\mathtt{op}z$
+\end_inset
+
+, we do the following:
+\end_layout
+
+\begin_layout Enumerate
+Attach to statement 
+\begin_inset Formula $i$
+\end_inset
+
+ the information currently found in the symbol table regarding the next
+ use and liveness of 
+\begin_inset Formula $x$
+\end_inset
+
+, 
+\begin_inset Formula $y$
+\end_inset
+
+ and 
+\begin_inset Formula $z$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+In the symbol table, set 
+\begin_inset Formula $x$
+\end_inset
+
+ to 
+\begin_inset Quotes eld
+\end_inset
+
+not live
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+no next use
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+In the symbol table, set 
+\begin_inset Formula $y$
+\end_inset
+
+ and 
+\begin_inset Formula $z$
+\end_inset
+
+ to live and the next uses of 
+\begin_inset Formula $y$
+\end_inset
+
+ and 
+\begin_inset Formula $z$
+\end_inset
+
+ to 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Here we have used 
+\begin_inset Formula $\mathtt{op}$
+\end_inset
+
+ as a symbol representing an operator.
+ If the three-address statement 
+\begin_inset Formula $i$
+\end_inset
+
+ is o the form 
+\begin_inset Formula $x=\mathtt{op}y$
+\end_inset
+
+ or 
+\begin_inset Formula $x=y$
+\end_inset
+
+, the steps are the same as above, ignoring 
+\begin_inset Formula $z$
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document

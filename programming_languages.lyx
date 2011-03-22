@@ -1,0 +1,2033 @@
+#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 1
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Programming Languages: notes for UIC qual
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+This work is licensed under a 
+\bar under
+
+\begin_inset CommandInset href
+LatexCommand href
+name "Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License"
+target "http://creativecommons.org/licenses/by-nc-sa/3.0"
+
+\end_inset
+
+
+\bar default
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+Gugo
+\end_layout
+
+\begin_layout Subsection*
+Disclaimer
+\end_layout
+
+\begin_layout Standard
+These notes have been prepared with the 
+\series bold
+only
+\series default
+ purpose to help me pass the Computer Science qualifiying exam at the University
+ of Illinois at Chicago.
+ They are distributed as they are (including errors, typos, omissions, etc.)
+ to help other students pass this exam (and possibly relieving them from
+ part of the pain associated with such a process).
+ I take 
+\series bold
+no responsibility
+\series default
+ for the material contained in these notes (which means that you can't sue
+ me if you don't pass the qual!) Moreover, this pdf version is distributed
+ together with the original LaTeX (and LyX) sources hoping that someone
+ else will improve and correct them.
+ I mean in absolute no way to violate copyrights and/or take credit stealing
+ the work of others.
+ The ideas contained in these pages are 
+\series bold
+not mine
+\series default
+ but I've just aggregated information scattered all over the internet.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Important programming paradigms
+\end_layout
+
+\begin_layout Subsection
+Procedural PLs (Imperative)
+\end_layout
+
+\begin_layout Description
+Sample
+\begin_inset space ~
+\end_inset
+
+languages: C, ADA, Pascal, ALGOL, ...
+ 
+\end_layout
+
+\begin_layout Standard
+Based on procedures (functions).
+ Modularity.
+\end_layout
+
+\begin_layout Subsection
+Object Oriented PLs (Imperative)
+\end_layout
+
+\begin_layout Description
+Sample
+\begin_inset space ~
+\end_inset
+
+languages: COBOL, Simula, ADA, Smalltalk, C++, Java, Eiffel...
+ 
+\end_layout
+
+\begin_layout Standard
+They are based on the use of units called objects which are a mixture of
+ data and methods to manipulate them.
+ Core features of OOP are: 
+\emph on
+encapsulation
+\emph default
+, 
+\emph on
+inheritance
+\emph default
+, 
+\emph on
+polymorphism
+\emph default
+, 
+\emph on
+dynamic dispatch
+\emph default
+ (runtime decision on the method to execute) and 
+\emph on
+open recursion
+\emph default
+ (this keyword).
+\end_layout
+
+\begin_layout Subsection
+Functional (Declarative)
+\end_layout
+
+\begin_layout Description
+Sample
+\begin_inset space ~
+\end_inset
+
+languages: LISP, ML, Haskell, Erlang,...
+\end_layout
+
+\begin_layout Standard
+They try to mimic mathematical functions and therefore they DON'T make use
+ of variables "freeing" the programmer from details related to the memory
+ space at execution (however this makes them extremely inefficient).
+ This implies there are NO loops and repetition is achieved through recursion.
+ Programming is reduced to writing functions while execution consists of
+ an evaluation of those functions.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Referential transparency
+\emph default
+: evaluation of the same function with the same parameters always produces
+ the same result.
+ 
+\end_layout
+
+\begin_layout Standard
+They provide a set of primitive functions, a set of functional forms (i.e.
+ composition) to construct more complex functions (from the primitive ones),
+ a function application operation and some structures to hold the data.
+\end_layout
+
+\begin_layout Subsection
+Logic (Declarative)
+\end_layout
+
+\begin_layout Description
+Sample
+\begin_inset space ~
+\end_inset
+
+languages: Prolog,...
+ 
+\end_layout
+
+\begin_layout Standard
+Their approach is to express programs in form of symbolic logic and use
+ a logical inferencing process to produce results.
+ Since they are declarative only the specifications of the desired results
+ are stated rather than detailed procedures to produce them.
+\end_layout
+
+\begin_layout Section
+Binding
+\end_layout
+
+\begin_layout Standard
+Programs deal with 
+\emph on
+entities
+\emph default
+: variables, subprograms, expressions, statements, etc.
+ All program entities have propertied, called 
+\emph on
+attributes
+\emph default
+, which characterize them.
+\end_layout
+
+\begin_layout Standard
+In a general sense, a 
+\emph on
+binding
+\emph default
+ is an association between an 
+\emph on
+attribute
+\emph default
+ (name, scope, value, type,...) and an 
+\emph on
+entity
+\emph default
+ (function, variable,...) or between an operation and a symbol.
+ 
+\end_layout
+
+\begin_layout Standard
+The moment when this association takes place is called 
+\emph on
+binding time
+\emph default
+.
+ Bindings can take place at language design time (e.g.
+ meaning of * symbol), language implementation time (e.g.
+ name of a variable), compile time (e.g.
+ overloading of + symbol), link time, load time or run time (e.g.
+ value of a variable).
+ 
+\end_layout
+
+\begin_layout Standard
+Also, binding can, in some cases, never happen! (e.g.
+ variable type in assembly) In such a case, it is useful to see the unbound
+ parameter as optional.
+\end_layout
+
+\begin_layout Subsubsection
+Static & dynamic binding
+\end_layout
+
+\begin_layout Itemize
+A binding is 
+\emph on
+static
+\emph default
+ if it occurs before run time and remains unchanged throughout program execution.
+ 
+\end_layout
+
+\begin_layout Itemize
+If a binding first occurs during run time or can change in the course of
+ program execution, it is called 
+\emph on
+dynamic
+\emph default
+.
+\end_layout
+
+\begin_layout Section
+Variables
+\end_layout
+
+\begin_layout Standard
+A program 
+\emph on
+variable
+\emph default
+ is an abstraction of a computer memory cell or collection of cells.
+ A variable can be characterized as a sextuple:
+\end_layout
+
+\begin_layout Description
+Name: the string used to identify the variable.
+\end_layout
+
+\begin_layout Description
+Type: determines the range of values the variable can have and the set of
+ operations that are defined for values of the type.
+ 
+\end_layout
+
+\begin_layout Description
+Scope: portion of program where the variable is visible.
+\end_layout
+
+\begin_layout Description
+Lifetime: time during which the variable is bound to a memory location.
+\end_layout
+
+\begin_layout Description
+Address
+\begin_inset space ~
+\end_inset
+
+(or
+\begin_inset space ~
+\end_inset
+
+l-value): it's the memory location associated with the variable.
+ When more than one variable name can be used to access a single memory
+ location, the names are called 
+\emph on
+aliases
+\emph default
+.
+ (see overloading)
+\end_layout
+
+\begin_layout Description
+Value
+\begin_inset space ~
+\end_inset
+
+(or
+\begin_inset space ~
+\end_inset
+
+r-value): it's the content of the memory cell (or cells) associated with
+ the variable.
+\end_layout
+
+\begin_layout Standard
+A detailed explanation of each one of these elements follows.
+\end_layout
+
+\begin_layout Subsection
+Names
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+name
+\emph default
+ is a string of characters used to identify some entity in a program.
+\end_layout
+
+\begin_layout Subsubsection
+Overloading
+\end_layout
+
+\begin_layout Standard
+We say a name is overloaded when the same name refers to two different entities.
+ However, the specific occurrence provides enough information for the binding
+ to be unambiguous.
+\end_layout
+
+\begin_layout Standard
+Not to be confused with aliasing where two names refer to the same entity.
+ (see l-value and r-value below)
+\end_layout
+
+\begin_layout Subsection
+Data types
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+data
+\emph default
+ 
+\emph on
+type
+\emph default
+ of a variable determines the range of values the variable can have and
+ the set of operations that are defined for values of the type.
+ Before a variable can be referenced in a program, it must be bound to a
+ data type.
+ The two important aspects of this binding are 
+\emph on
+how
+\emph default
+ the type is specified and 
+\emph on
+when
+\emph default
+ the binding takes place.
+\end_layout
+
+\begin_layout Standard
+Note that a language can be also 
+\emph on
+typeless
+\emph default
+: type is an abstraction which is useful but not necessary.
+\end_layout
+
+\begin_layout Standard
+Each language provides some p
+\emph on
+rimitive data types
+\emph default
+ (which usually include: numeric types, Boolean types and character types)
+ and constructs to assemble user-defined data types.
+\end_layout
+
+\begin_layout Subsubsection
+Static typing through variable declaration
+\end_layout
+
+\begin_layout Standard
+An 
+\emph on
+explicit declaration
+\emph default
+ is a statement in a program that lists variable names and specifies that
+ they are a particular type.
+ An 
+\emph on
+implicit declaration
+\emph default
+ is a means of associating variables with types through default conventions
+ instead of declaration statements.
+ In this case, the first appearance of a variable name in a program constitutes
+ its implicit declaration.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+In C and C++, we must sometimes distinguish between declarations and definitions.
+ Declarations specify types and other attributes but do not cause allocation
+ of storage.
+ Definitions specify attributes and cause storage allocations.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Both explicit and implicit declarations create 
+\emph on
+static bindings
+\emph default
+ to types.
+\end_layout
+
+\begin_layout Subsubsection
+Dynamic typing
+\end_layout
+
+\begin_layout Standard
+The variable is bound to a type when it is assigned a value in an assignment
+ statement.
+ When the assignment statement is executed, the variable being assigned
+ is bound to the type of the value, variable, or expression on the right
+ side of the assignment.
+\end_layout
+
+\begin_layout Subsubsection
+Comparison between the two strategies
+\end_layout
+
+\begin_layout Standard
+The primary advantage of dynamic over static binding of variables to types
+ is that it provides a great deal of 
+\emph on
+programming flexibility
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+There are two disadvantages to dynamic type binding.
+ 
+\end_layout
+
+\begin_layout Standard
+First, the error detection (type checking) capability of the compiler is
+ diminished compared to a compiler for a language with static bindings,
+ because any two types can appear at opposite sides of the assignment operator.
+ 
+\end_layout
+
+\begin_layout Standard
+Second, the cost of implementing dynamic attribute binding is considerable,
+ particularly in execution time, since type checking must be done at run
+ time.
+\end_layout
+
+\begin_layout Subsection
+Type checking
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Type checking
+\emph default
+ is the activity of ensuring that the operands of an operator (including
+ subprograms and assignment statements) are compatible types.
+ A 
+\emph on
+compatible
+\emph default
+ type is one that is either legal for the operator or is allowed under language
+ rules to be implicitly converted by compiler-generated code to a legal
+ type.
+ This automatic conversion is called a 
+\emph on
+coercion
+\emph default
+.
+ A type error is the application of an operator to an operand of an inappropriat
+e type.
+\end_layout
+
+\begin_layout Subsubsection
+Strong typing
+\end_layout
+
+\begin_layout Standard
+We define a programming language to be 
+\emph on
+strongly typed
+\emph default
+ if type errors are always detected.
+ This requires that:
+\end_layout
+
+\begin_layout Itemize
+each name in a program in the language has a single type associated with
+ it, and that type is known at compile time.
+ (i.e.
+ all the types are statically bound)
+\end_layout
+
+\begin_layout Itemize
+the types of all operands can be determined, either at compile time or at
+ run time.
+\end_layout
+
+\begin_layout Subsubsection
+Compatibility
+\end_layout
+
+\begin_layout Standard
+There are two different compatibility methods:
+\end_layout
+
+\begin_layout Description
+Name
+\begin_inset space ~
+\end_inset
+
+type
+\begin_inset space ~
+\end_inset
+
+compatibility means that two variables have compatible types only if they
+ are in either the same declaration or in declarations that use the same
+ type names.
+ This is easy to implement but is highly restrictive.
+\end_layout
+
+\begin_layout Description
+Structure
+\begin_inset space ~
+\end_inset
+
+type
+\begin_inset space ~
+\end_inset
+
+compatibility means that two variables have compatible types if their types
+ have identical structures.
+ This is more flexible but is more difficult to implement.
+\end_layout
+
+\begin_layout Subsection
+Scope 
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+scope
+\emph default
+ of a variable is the range of statements over which it is visible.
+ A variable is visible in a statement if it can be referenced in that statement.
+ A 
+\emph on
+referencing environment
+\emph default
+ is the collection of all names that are visible in the statement.
+ 
+\end_layout
+
+\begin_layout Standard
+We have two types of scope:
+\end_layout
+
+\begin_layout Description
+Static: their scope of the variable can be determined before the execution
+ starts.
+ The referencing environment for a statement is made of all the local variables
+ plus all the variables in the static ancestors.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout List
+\labelwidthstring 00.00.0000
+Cons: too many functions/data are visible to children procedures, hard restructu
+ring of code
+\end_layout
+
+\begin_layout List
+\labelwidthstring 00.00.0000
+Pros: easy to read, local variable hidden, higher reliability
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Dynamic: the scope is determined by the calling sequence of subprograms.
+ The referencing environment for a statement is made of all the local variables
+ plus all the visible variables in all active subprograms.
+ (a subprogram is active if its execution has begun but has not yet terminated)
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout List
+\labelwidthstring 00.00.0000
+Cons: no static type check, low readability, longer access to non-locals
+ (chain lookup)
+\end_layout
+
+\begin_layout List
+\labelwidthstring 00.00.0000
+Pros: variables in the caller are implicitly visible in the called
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Note that, for both static and dynamic scoping, the most specific variable
+ overrides the less specific.
+\end_layout
+
+\begin_layout Subsection
+Lifetime
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+lifetime
+\emph default
+ of a variable is the time during which it is bound to a particular memory
+ cell, that is, the time between it's 
+\emph on
+allocation
+\emph default
+ and 
+\emph on
+deallocation
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+To investigate storage bindings of variables, it is convenient to separate
+ scalar variables into four categories:
+\end_layout
+
+\begin_layout Description
+Static Static variables are those that are bound to a memory cell before
+ program execution begins.
+ (
+\family typewriter
+static
+\family default
+ variables in C, C++ and Java).
+\end_layout
+
+\begin_layout Description
+Stack-dynamic Stack-dynamic variables are those whose storage bindings are
+ created when their declaration statements are elaborated, but whose types
+ are statically bound.
+ (local variables in C) 
+\end_layout
+
+\begin_layout Description
+Explicit
+\begin_inset space ~
+\end_inset
+
+Heap-dynamic Explicit Heap-dynamic variables are nameless (abstract) memory
+ cells that are allocated and deallocated by explicit directives, specified
+ by the programmer.
+ These variables, which are allocated from and deallocated to the heap,
+ can only be referenced through pointer or reference variables (objects
+ in Java, 
+\family typewriter
+new
+\family default
+ and 
+\family typewriter
+delete
+\family default
+ in C++) 
+\end_layout
+
+\begin_layout Description
+Implicit
+\begin_inset space ~
+\end_inset
+
+Heap-dynamic: Implicit Heap-dynamic variables are bound to heap storage
+ only when they are assigned values.
+ In fact, all their attributes are bound every time they are assigned: in
+ a sense, they are just names that adapt to whatever use they are asked
+ to serve.
+ (variables in JavaScript and all the major scripting languages)
+\end_layout
+
+\begin_layout Subsubsection
+Scoping and lifetime
+\end_layout
+
+\begin_layout Standard
+The scope and the lifetime of a variable are clearly not the same because
+ static scope is a textual, or spatial, concept whereas lifetime is a temporal
+ concept.
+ This means you can't compare them!
+\end_layout
+
+\begin_layout Subsection
+l-value and r-value
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+l-value
+\emph default
+ of a variable (or its 
+\emph on
+address
+\emph default
+) is the memory address (i.e.
+ the storage area) with which it is associated.
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+r-value
+\emph default
+ (or simply 
+\emph on
+value
+\emph default
+) is the actual data that is stored in such a memory location.
+\end_layout
+
+\begin_layout Subsubsection
+Aliases
+\end_layout
+
+\begin_layout Standard
+When more than one variable name can be used to access a single memory address,
+ the names are called 
+\emph on
+aliases
+\emph default
+.
+ Aliases decrease readability of programs and allow variables to be changed
+ by manipulation of other variables.
+\end_layout
+
+\begin_layout Section
+Subprograms
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+subprogram
+\emph default
+ (also called 
+\emph on
+subroutine
+\emph default
+, 
+\emph on
+procedure
+\emph default
+, 
+\emph on
+method
+\emph default
+, 
+\emph on
+function
+\emph default
+, or 
+\emph on
+routine
+\emph default
+) is a portion of code within a larger program that performs a specific
+ task and is relatively independent of the remaining code.
+ A subprogram can be characterized as a 5-tuple:
+\end_layout
+
+\begin_layout Description
+Name: the string used to identify the subprogram.
+\end_layout
+
+\begin_layout Description
+Scope: generally each subprogram has its scope (for other statements to
+ reference them) and is also allowed to define its own variables (local
+ variables), thereby defining its own local referencing environment.
+\end_layout
+
+\begin_layout Description
+l-value: it's the memory location associated with the subprogram.
+ This is used by those languages that allow pointers to subprograms.
+\end_layout
+
+\begin_layout Description
+r-value: the executable statements of the subprogram.
+\end_layout
+
+\begin_layout Description
+Signature: the input parameters and return types of the subprogram.
+\end_layout
+
+\begin_layout Subsection
+Parameter passing
+\end_layout
+
+\begin_layout Standard
+The parameters in the subprogram header are called 
+\emph on
+formal parameters
+\emph default
+.
+ When a subprogram is called, a list of parameters to be bound to the formal
+ parameters of the subroutine, is required: these are called 
+\emph on
+actual parameters
+\emph default
+.
+ There are two ways the binding can take place: 
+\end_layout
+
+\begin_layout Description
+positional
+\begin_inset space ~
+\end_inset
+
+parameters, in which the first actual parameter is bound to the first formal
+ parameter and so on, and
+\end_layout
+
+\begin_layout Description
+keyword
+\begin_inset space ~
+\end_inset
+
+parameters, where the name of the formal parameter to which an actual parameter
+ is to be bound, is specified with the actual parameter.
+\end_layout
+
+\begin_layout Standard
+There are three semantics models to transfer parameters to a subprogram:
+ 
+\emph on
+in mode
+\emph default
+, 
+\emph on
+out mode
+\emph default
+ and 
+\emph on
+in-out mode
+\emph default
+.
+ There are also two conceptual models of how data transfers take place:
+ either the 
+\emph on
+actual value
+\emph default
+ is physically moved or an 
+\emph on
+access path
+\emph default
+ to the data is transmitted.
+ The previous can be combined in various ways, yielding to the following
+ parameter passing methods:
+\end_layout
+
+\begin_layout Description
+Pass-by-value: the value of the actual parameter is used to initialize the
+ corresponding formal parameter, which then acts as a local variable in
+ the subprogram.
+ Main disadvantages: could require expensive physical move.
+ Also, if a function is passed as parameter it needs to be evaluated and,
+ if the function never returns, the call will never be executed.
+\end_layout
+
+\begin_layout Description
+Pass-by-result: the formal parameter acts as a local variable and, right
+ before the control is transferred back to the caller, its value is passed
+ back to the caller.
+ Main disadvantages: same as pass-by-value, assignment ordering problem
+ (e.g.
+ 
+\family typewriter
+sub(p1,p1)
+\family default
+)
+\end_layout
+
+\begin_layout Description
+Pass-by-value-result: combination of the previous two...
+\end_layout
+
+\begin_layout Description
+Pass-by-reference: transmits an access path, usually the variable address,
+ to the called program.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+We can think of this as a 
+\begin_inset Quotes eld
+\end_inset
+
+shared variable
+\begin_inset Quotes erd
+\end_inset
+
+ between the caller and the called.
+\end_layout
+
+\end_inset
+
+ Main disadvantages: aliasing!!! Slower accesses to value due to additional
+ layer in addressing.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Note how this method produces different results from pass-by-value-result
+ when: (a) two formal parameters become aliases; (b) a formal parameter
+ and a non local variable become aliases.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Pass-by-name: the actual parameters are textually substituted for the correspond
+ing formal parameter in all its occurrences in the subprogram.
+ Semantic varies based on the type of the parameter (scalar variable, constant,
+ array element, arithmetic expression, etc.).
+ Main disadvantages: slowness of textual substitution, confusing.
+\end_layout
+
+\begin_layout Standard
+Subprogram calls can be type checked, meaning that the type of each actual
+ parameter is checked against the type of the corresponding formal parameter.
+\end_layout
+
+\begin_layout Subsubsection
+Passing parameters that are subprogram names
+\end_layout
+
+\begin_layout Standard
+A first problem is how to type check the parameters of the activations of
+ the subprogram that was passed as parameter.
+\end_layout
+
+\begin_layout Standard
+A second problem is how to determine the correct referencing environment
+ for executing the passed subprogram.
+ There are three possible strategies:
+\end_layout
+
+\begin_layout Description
+Shallow
+\begin_inset space ~
+\end_inset
+
+binding: use the environment of the call statement that enacts the passed
+ subprogram (i.e.
+ the environment at the point where the subprogram is executed inside the
+ subprogram that takes it as a parameter).
+\end_layout
+
+\begin_layout Description
+Deep
+\begin_inset space ~
+\end_inset
+
+binding: use the environment of the definition of the passed subprogram
+ (i.e.
+ the environment at the point where the definition of the actual passed
+ subprogram is)
+\end_layout
+
+\begin_layout Description
+Ad
+\begin_inset space ~
+\end_inset
+
+hoc
+\begin_inset space ~
+\end_inset
+
+binding: use the environment of the call statement that passed the subprogram
+ as an actual parameter
+\end_layout
+
+\begin_layout Subsubsection
+Generic subprograms
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+generic
+\emph default
+ or 
+\emph on
+polymorphic subprogram
+\emph default
+ takes parameters of different types on different activations.
+ 
+\emph on
+Parametric polymorphism
+\emph default
+ is provided by subprograms that takes a generic parameter that is used
+ in a type expression that describes the types of the parameters of the
+ subprogram.
+ (e.g.
+ templates in C++)
+\end_layout
+
+\begin_layout Standard
+See Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Polymorphism-and-dynamic"
+
+\end_inset
+
+ for more details on polymorphism.
+\end_layout
+
+\begin_layout Subsection
+Declaration vs Definition
+\end_layout
+
+\begin_layout Standard
+Subprograms can have 
+\emph on
+declarations
+\emph default
+, also called 
+\emph on
+prototypes
+\emph default
+, (used to provide type information but not to declare variables) as well
+ as 
+\emph on
+definitions
+\emph default
+ (where the body of the subprogram is specified).
+ They are necessary when the compiler must translate a call to a subprogram
+ before it has seen that subprogram's definition.
+ A classic example of this is 
+\emph on
+recursion
+\emph default
+.
+\end_layout
+
+\begin_layout Section
+Runtime environment
+\end_layout
+
+\begin_layout Standard
+A subprogram consists of two separate parts: the
+\emph on
+ code segment
+\emph default
+ (i.e.
+ the actual code of the subprogram), which is constant, and the 
+\emph on
+activation record
+\emph default
+ (or 
+\emph on
+frame
+\emph default
+), which consists of all the data that can change when the subprogram is
+ executed.
+ An 
+\emph on
+activation record
+\emph default
+ 
+\emph on
+instance
+\emph default
+ (ARI) is a concrete example of an activation record.
+\end_layout
+
+\begin_layout Subsection
+Static languages (FORTRAN)
+\end_layout
+
+\begin_layout Standard
+In static languages, memory requirements can be evaluated before program
+ execution and, since activation records have fixed size, they can be statically
+ allocated (i.e.
+ before the execution starts).
+ Recursion, in such languages, is clearly impossible.
+\end_layout
+
+\begin_layout Subsection
+Stack languages (ALGOL-like)
+\end_layout
+
+\begin_layout Standard
+In ALGOL-like languages, memory requirements can be predicted and the execution
+ is organized with a LIFO discipline.
+ 
+\end_layout
+
+\begin_layout Standard
+The code resides in a separate part of the memory and it is executed one
+ instruction after the other according to the instructions themselves.
+ The address of the currently executing instruction is stored in the 
+\emph on
+instruction pointer
+\emph default
+ register (
+\emph on
+ip
+\emph default
+).
+ This way we can execute the same code multiple times with different activation
+ records, supporting recursion.
+ 
+\end_layout
+
+\begin_layout Standard
+The format of an activation record for a given subprogram in a static scoped
+ language is known at compile time and, typically, it is in the form shown
+ below.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Low mem.
+ addr.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Return address
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Stack bottom
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Static link
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Dynamic link
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Parameters
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+High mem.
+ addr.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Local variables
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Stack top
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The return address, static link, dynamic link and parameters are placed
+ on the activation record by the calling function so they must come first.
+ 
+\end_layout
+
+\begin_layout Description
+Return
+\begin_inset space ~
+\end_inset
+
+address: it is a pointer to the code segment of the caller and an offset
+ address offset in that code segment containing the instruction following
+ the call.
+\end_layout
+
+\begin_layout Description
+Static
+\begin_inset space ~
+\end_inset
+
+link: points to the bottom of an ARI of the static parent and is used to
+ reference non local variables.
+ (see 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Nonlocal-references"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Description
+Dynamic
+\begin_inset space ~
+\end_inset
+
+link: point to the top of the ARI of the caller.
+ This pointer is used in the destruction of the current ARI when the procedure
+ completes its execution.
+ The stack top (
+\emph on
+stack pointer
+\emph default
+ or 
+\emph on
+sp
+\emph default
+) is set to the value of the old dynamic link.
+\end_layout
+
+\begin_layout Description
+Parameters: the actual parameters in the ARI are the values or the addresses
+ provided by the caller.
+\end_layout
+
+\begin_layout Description
+Local
+\begin_inset space ~
+\end_inset
+
+variables: local variables of the called subprogram.
+ References to such variables can be represented in the code as offsets
+ from the beginning of an activation record.
+ Such an offset is called 
+\emph on
+local offset
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Activating a subprogram requires the dynamic creation of its ARI (i.e.
+ the binding to a 
+\emph on
+base address
+\emph default
+ of the ARI).
+ The reason this must be created at run-time is that, even if the form of
+ an activation record is known, the size of it is unknown at compile time.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Recursion
+\end_layout
+
+\begin_layout Standard
+When recursion comes into play we need to add a new entry to the activation
+ record (in the top position) called 
+\emph on
+functional value
+\emph default
+, used to store the returned value of the recursive function.
+\end_layout
+
+\begin_layout Subsubsection
+Nonlocal references 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Nonlocal-references"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A reference to a non local variable requires a two-step access process.
+ The first one is to find the ARI in the stack in which the variable was
+ allocated.
+ The second step is to use the 
+\emph on
+local offset
+\emph default
+ of the variable (within the ARI) to access it.
+ 
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+static chain
+\emph default
+ is a chain of static links that connect certain ARIs in the stack.
+ The purpose of this chain is to implement the access to nonlocal variables
+ in static-scoped languages.
+\end_layout
+
+\begin_layout Standard
+Because the nesting of scope is known at compile time, the compiler can
+ determine the 
+\emph on
+static depth
+\emph default
+, which is an integer associated with a static scope that indicates how
+ deeply it is nested in the outermost scope.
+ The length of the static chain needed to reach the correct activation record
+ instance for nonlocal reference to a variable 
+\family typewriter
+x
+\family default
+ is exactly the difference between the static depth of the subprogram containing
+ the reference to 
+\family typewriter
+x
+\family default
+ and the static depth of the procedure containing the declaration for 
+\family typewriter
+x
+\family default
+.
+ The actual reference could be represented as a pair (chain offset, local
+ offset), where chain offset is clearly the numbers of links to the correct
+ ARI.
+\end_layout
+
+\begin_layout Subsubsection
+Dynamic scoping
+\end_layout
+
+\begin_layout Standard
+The mechanism is the same explained in the previous paragraph but instead
+ of following the static links we follow the dynamic ones.
+\end_layout
+
+\begin_layout Subsection
+Heap languages
+\end_layout
+
+\begin_layout Standard
+In heap languages the memory usage is unpredictable, since all data are
+ explicitly and dynamically allocated in the heap (which grows in the opposite
+ direction with respect to the stack).
+\end_layout
+
+\begin_layout Standard
+The lifetime of such data does not depend on the unit in which their allocation
+ statement appears but instead it lasts as long as they are referred some
+ existing pointer variables.
+\end_layout
+
+\begin_layout Section
+Other entities
+\end_layout
+
+\begin_layout Subsection
+Expressions
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+short-circuit evaluation
+\emph default
+ of an expression is one in which the result is determined without evaluating
+ all of the operands and/or operators.
+ (e.g.
+ the value of the arithmetic expression 
+\family typewriter
+(13 * a) * (b / 13 - 1)
+\family default
+ is independent of the value of 
+\family typewriter
+(b / 13 - 1)
+\family default
+ if 
+\family typewriter
+a = 0
+\family default
+, because 
+\family typewriter
+0 * x = 0
+\family default
+ for any 
+\family typewriter
+x
+\family default
+)
+\end_layout
+
+\begin_layout Subsection
+Pointers
+\end_layout
+
+\begin_layout Standard
+A pointer is a variable whose r-value is the l-value of another variable.
+ The r-value of a pointer is called 
+\emph on
+reference
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Note that, in C++, pointers and references are different! A reference is
+ an alias for an object and, when bound to an object, it cannot be made
+ to refer to a different object.
+ When passed as a parameter, a reference behaves similarly to a pointer,
+ but the actual address of the references object is masked.
+\end_layout
+
+\end_inset
+
+.
+ Pointers can be:
+\end_layout
+
+\begin_layout Description
+typed: requires the variable referenced by the pointer to be of a specific
+ type.
+\end_layout
+
+\begin_layout Description
+untyped: pointers are concerned only with addresses in memory.
+\end_layout
+
+\begin_layout Standard
+The fundamental operation on pointer is 
+\emph on
+dereferencing
+\emph default
+.
+ Dereferencing a pointer means to access the r-value of the variable referenced
+ by the pointer.
+ 
+\end_layout
+
+\begin_layout Standard
+Some languages, like C, require typed pointer but allow 
+\begin_inset Quotes eld
+\end_inset
+
+pointers arithmetic
+\begin_inset Quotes erd
+\end_inset
+
+ (other operations on pointers other than dereferencing) which can potentially
+ hinder pointers type safety.
+ 
+\end_layout
+
+\begin_layout Standard
+Pointers are very useful when efficiency is crucial but they are a low-level
+ construct, and, as such, extremely error-prone.
+\end_layout
+
+\begin_layout Subsubsection
+Dangling pointers
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+dangling pointer
+\emph default
+ is a pointer that contains the address of a heap-dynamic variable that
+ has been deallocated.
+\end_layout
+
+\begin_layout Subsubsection
+Lost heap-dynamic variables (i.e.
+ memory leaks)
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+lost heap-dynamic variable
+\emph default
+ is an allocated heap-dynamic variable that is no longer accessible to the
+ user program.
+ Such variables are often called garbage, because they are not useful for
+ their original purpose, and they also cannot be reallocated for some new
+ use by the program.
+ They therefore 
+\begin_inset Quotes eld
+\end_inset
+
+consume
+\begin_inset Quotes erd
+\end_inset
+
+ memory without releasing it, causing what is called 
+\emph on
+memory leak
+\emph default
+.
+\end_layout
+
+\begin_layout Subsubsection
+Garbage collection
+\end_layout
+
+\begin_layout Standard
+By making manual memory deallocation unnecessary (and often forbidding it),
+ 
+\emph on
+garbage collection
+\emph default
+ (GC) frees the programmer from manually dealing with memory deallocation.
+ Garbage collection solves both dangling pointers and lost heap-dynamic
+ variables problems (and double free bugs, very common in C).
+ The basic principles of garbage collection are: 
+\end_layout
+
+\begin_layout Enumerate
+Find data objects in a program that cannot be accessed in the future 
+\end_layout
+
+\begin_layout Enumerate
+Reclaim the resources used by those objects
+\end_layout
+
+\begin_layout Standard
+There are two distinct techniques that can be used to implement GC:
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+reference counter method
+\emph default
+ (or 
+\emph on
+eager approach
+\emph default
+) maintains a counter in every cell, which stores the number of pointers
+ that are currently pointing at the cell.
+ Embedded in the decrement operation for the reference counters, which occurs
+ when a pointer is disconnected from the cell, is a check for a zero value.
+ If the reference counter reaches zero, it mean that no program pointers
+ are pointing at the cell, and it has thus become garbage and can be returned
+ to the list of available space.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+lazy approach
+\emph default
+ allows the run-time system to allocate storage cells as requested and disconnec
+ts pointers from cells as necessary, without regard for storage reclamation
+ (allowing garbage to accumulate), until it has allocated all available
+ cells.
+ At this point, a garbage collection process marks every heap cell as garbage
+ (all heap cell have an extra indicator bit or field).
+ Then, starting from the stack, every pointer in the program is traced into
+ the heap, and all reachable cells are marked as not being garbage.
+ Finally, all cells in the heap that have not been specifically marked as
+ still being used are returned to the list of the available space.
+\end_layout
+
+\begin_layout Section
+Object-oriented related languages
+\end_layout
+
+\begin_layout Standard
+A language that is OO must provide support for three key language features:
+ abstract data types, inheritance, and a particular kind of dynamic binding
+ of messages to methods.
+\end_layout
+
+\begin_layout Subsection
+Abstract Data Types (ADT)
+\end_layout
+
+\begin_layout Standard
+An ADT is a data type that satisfies the following two propertied:
+\end_layout
+
+\begin_layout Itemize
+The representation, or definition, of the data type and the operations on
+ objects of the data type are contained (encapsulated) in a single syntactic
+ unit.
+ Also, other program units may be allowed to create variables of the defined
+ type.
+\end_layout
+
+\begin_layout Itemize
+The representation of objects of the type is hidden from the program units
+ that use the type, so the only direct operations possible on those objects
+ are those provided in the type's definition.
+\end_layout
+
+\begin_layout Standard
+In OO languages ADTs are usually represented by classes.
+\end_layout
+
+\begin_layout Subsection
+Dynamic dispatch and polymorphism
+\end_layout
+
+\begin_layout Standard
+The subprograms that define the operations on objects of a class are called
+ 
+\emph on
+methods
+\emph default
+.
+ The calls to methods are often called 
+\emph on
+messages
+\emph default
+.
+ The entire collection of methods of an object is called the 
+\emph on
+message protocol
+\emph default
+, or 
+\emph on
+message interface
+\emph default
+, of the object.
+\end_layout
+
+\begin_layout Standard
+The difference between procedures in general and an object's method is that
+ the latter, being associated with a particular object, may access or modify
+ the data private to that object in a way consistent with the intended behavior
+ of the object.
+ Consequently, rather than thinking "a method is just a sequence of commands",
+ a programmer using an object-oriented language will consider a method to
+ be "an object's way of providing a service" (its "method of doing the job",
+ hence the name); a method call is thus considered to be a request to an
+ object to perform some task.
+ Consequently, method calls are often modelled as a means of passing a message
+ to an object.
+ Rather than directly performing an operation on an object, a message (most
+ of the time accompanied by parameters) is sent to the object telling it
+ what it should do.
+ The object either complies or raises an exception describing why it cannot
+ do so.
+ 
+\end_layout
+
+\begin_layout Standard
+Usually this is implemented using 
+\emph on
+dynamic dispatch
+\emph default
+ which is the process of mapping a message to a specific sequence of code
+ (method) at runtime.
+ Normally in a typed language (Smalltalk) the dispatch mechanism will be
+ performed based on the type of the arguments (most commonly based on the
+ type of the receiver of a message) or use 
+\emph on
+duck typing
+\emph default
+.
+ Languages with weak or no typing systems often carry a dispatch table as
+ part of the object data for each object.
+ This allows instance behaviour as each instance may map a given message
+ to a separate method.
+ Some languages offer a hybrid approach.
+ Dynamic dispatch will always incur an overhead so some languages (C++)
+ offer the option to turn dynamic dispatch off for particular methods.
+\end_layout
+
+\begin_layout Subsection
+Inheritance
+\end_layout
+
+\begin_layout Standard
+Inheritance is a way to compartmentalize and reuse code by creating collections
+ of attributes and behaviors which can be based on previously created ones.
+ This is different from polymorphism since the first one is code related
+ while the second one is data type related.
+\end_layout
+
+\begin_layout Subsubsection
+Overriding methods
+\end_layout
+
+\begin_layout Standard
+In addition to inheriting entities from its parent class, a derived class
+ can add new entities and modify inherited methods.
+ A modified method has the same name, and often the same protocol, as the
+ one pf which it is a modification.
+ The new method is said to 
+\emph on
+override
+\emph default
+ the inherited version, which is then called 
+\emph on
+overridden method
+\emph default
+.
+\end_layout
+
+\begin_layout Subsubsection
+Multiple inheritance vs single inheritance
+\end_layout
+
+\begin_layout Standard
+If a class is a subclass of a single parent class, then the derivation process
+ is called 
+\emph on
+single inheritance
+\emph default
+.
+ If a class has more than one parent class, the process is called 
+\emph on
+multiple inheritance
+\emph default
+.
+ When a number of classes are related through single inheritance, their
+ relationship to each other can be shown in a 
+\emph on
+derivation tree
+\emph default
+.
+ The class relationships in a multiple inheritance can be shown in a 
+\emph on
+derivation graph
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+One obvious problem of multiple inheritance is name collision.
+ A variation of such a problem is called
+\emph on
+ diamond inheritance
+\emph default
+.
+ Moreover the use of multiple inheritance can easily lead to intricate program
+ organizations.
+\end_layout
+
+\begin_layout Subsection
+Polymorphism and dynamic binding 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Polymorphism-and-dynamic"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The term polymorphic is from the Greek, meaning “having multiple forms.”
+ It is applied to code, both data structures and subroutines that can work
+ with values of multiple types.
+ For this concept to make sense, the types must generally have certain character
+istics in common, and the code must not depend on any other characteristics.
+ The commonality is usually captured in one of two main ways.
+ 
+\end_layout
+
+\begin_layout Enumerate
+In 
+\emph on
+parametric polymorphism
+\emph default
+ the code takes a type (or set of types) as a parameter, either explicitly
+ or implicitly.
+ 
+\end_layout
+
+\begin_layout Enumerate
+In 
+\emph on
+subtype polymorphism
+\emph default
+ the code is designed to work with values of some specific type T, but the
+ programmer can define additional types to be extensions or refinements
+ of T, and the polymorphic code will work with these subtypes as well.
+ (a.k.a.
+ 
+\emph on
+Liskov substitution principle
+\emph default
+)
+\end_layout
+
+\begin_layout Standard
+Explicit parametric polymorphism is also known as 
+\emph on
+genericity
+\emph default
+.
+ Generic facilities appear in Ada, C++ (
+\emph on
+templates
+\emph default
+) and recent versions of Java and C#, among others.
+ Implicit parametric polymorphism appears in the Lisp and ML families of
+ languages, and in various scripting languages, and has the major disadvantage
+ of delaying type checking until run time.
+\end_layout
+
+\begin_layout Standard
+Subtype polymorphism is, instead, fundamental to object-oriented languages,
+ in which subtypes (classes) are said to inherit the methods of their parent
+ types.
+ This is usually implemented by creating a single copy of the code, and
+ by inserting sufficient “metadata” in the representation of objects that
+ the code can tell when to treat them differently.
+\end_layout
+
+\end_body
+\end_document

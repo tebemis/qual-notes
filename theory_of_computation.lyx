@@ -1,0 +1,4037 @@
+#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+\end_preamble
+\use_default_options true
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 1
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Theory of computation: notes for UIC qual
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+This work is licensed under a 
+\bar under
+
+\begin_inset CommandInset href
+LatexCommand href
+name "Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License"
+target "http://creativecommons.org/licenses/by-nc-sa/3.0"
+
+\end_inset
+
+
+\bar default
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+Gugo
+\end_layout
+
+\begin_layout Subsection*
+Disclaimer
+\end_layout
+
+\begin_layout Standard
+These notes have been prepared with the 
+\series bold
+only
+\series default
+ purpose to help me pass the Computer Science qualifiying exam at the University
+ of Illinois at Chicago.
+ They are distributed as they are (including errors, typos, omissions, etc.)
+ to help other students pass this exam (and possibly relieving them from
+ part of the pain associated with such a process).
+ I take 
+\series bold
+no responsibility
+\series default
+ for the material contained in these notes (which means that you can't sue
+ me if you don't pass the qual!) Moreover, this pdf version is distributed
+ together with the original LaTeX (and LyX) sources hoping that someone
+ else will improve and correct them.
+ I mean in absolute no way to violate copyrights and/or take credit stealing
+ the work of others.
+ The ideas contained in these pages are 
+\series bold
+not mine
+\series default
+ but I've just aggregated information scattered all over the internet.
+\end_layout
+
+\begin_layout Subsection*
+Strongly suggested book
+\end_layout
+
+\begin_layout Standard
+Before you even start reading this notes, do yourself a favor and go buy
+ Michael Sipser's book.
+ (
+\begin_inset CommandInset href
+LatexCommand href
+name "http://www-math.mit.edu/~sipser/book.html"
+target "http://www-math.mit.edu/~sipser/book.html"
+
+\end_inset
+
+) It is crispy clear and beautifully written and prepared.
+ All people that studied on this book passed the exam! :)
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Regular Languages
+\end_layout
+
+\begin_layout Subsection
+DFA
+\end_layout
+
+\begin_layout Paragraph
+Formal definition
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+finite automaton
+\emph default
+ is a 5-uple 
+\begin_inset Formula $(Q,\Sigma,\delta,q_{0},F$
+\end_inset
+
+), where 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $Q$
+\end_inset
+
+ is a finite set called the 
+\emph on
+states
+\emph default
+,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ is a finite set called the 
+\emph on
+alphabet
+\emph default
+,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\delta:Q\times\Sigma\rightarrow Q$
+\end_inset
+
+ is the 
+\emph on
+transition function
+\emph default
+,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $q_{0}\in Q$
+\end_inset
+
+ is the 
+\emph on
+start state
+\emph default
+, and
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $F\subseteq Q$
+\end_inset
+
+ is the 
+\emph on
+set of accept states
+\emph default
+.
+\end_layout
+
+\begin_layout Paragraph
+Formal definition of computation
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $M=(Q,\Sigma,\delta,q_{0},F)$
+\end_inset
+
+ be a finite automaton and let 
+\begin_inset Formula $w=w_{1}w_{2}\dots w_{n}$
+\end_inset
+
+ be a string where each 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ is a member of the alphabet 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $M$
+\end_inset
+
+ accepts 
+\begin_inset Formula $w$
+\end_inset
+
+ if a sequence of states 
+\begin_inset Formula $r_{0},r_{1},\dots,r_{n}$
+\end_inset
+
+ in 
+\begin_inset Formula $Q$
+\end_inset
+
+ exists with three conditions:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $r_{0}=q_{0}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\delta(r_{i},w_{i+1})=r_{i+1}$
+\end_inset
+
+ for 
+\begin_inset Formula $i=0,\dots,n-1$
+\end_inset
+
+ and
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $r_{n}\in F$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We say 
+\begin_inset Formula $M$
+\end_inset
+
+ recognizes language 
+\begin_inset Formula $A$
+\end_inset
+
+ if 
+\begin_inset Formula $A=\{w|M\, accepts\, w\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Facts
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $A$
+\end_inset
+
+ is the set of all strings that the machine 
+\begin_inset Formula $M$
+\end_inset
+
+ accepts, we say that 
+\emph on
+
+\begin_inset Formula $A$
+\end_inset
+
+ is the language of machine 
+\begin_inset Formula $M$
+\end_inset
+
+
+\emph default
+ and write 
+\begin_inset Formula $L(M)=A$
+\end_inset
+
+.
+ We say that 
+\emph on
+
+\begin_inset Formula $M$
+\end_inset
+
+ recognizes 
+\begin_inset Formula $A$
+\end_inset
+
+
+\emph default
+ or that 
+\emph on
+
+\begin_inset Formula $M$
+\end_inset
+
+ accepts 
+\begin_inset Formula $A$
+\end_inset
+
+
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Recognize is preferred because accepting may also refer to strings
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+A machine may accept several strings, but it always recognizes 
+\emph on
+only one language
+\emph default
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+A language is 
+\emph on
+regular
+\emph default
+ if some finite automaton recognizes it.
+\end_layout
+
+\begin_layout Itemize
+If the machine accepts no strings, it still recognizes one language, that
+ is the empty language 
+\begin_inset Formula $\emptyset$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+In order for a DFA to accept the empty string 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+, the start state must also be an accept state.
+\end_layout
+
+\begin_layout Subsection
+NFA
+\end_layout
+
+\begin_layout Paragraph
+Formal definition
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+nondeterministic finite automaton
+\emph default
+ is a 5-uple 
+\begin_inset Formula $(Q,\Sigma,\delta,q_{0},F$
+\end_inset
+
+), where 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $Q$
+\end_inset
+
+ is a finite set called the 
+\emph on
+states
+\emph default
+,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ is a finite set called the 
+\emph on
+alphabet
+\emph default
+,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\delta:Q\times\Sigma_{\varepsilon}\rightarrow\mathcal{P}(Q)$
+\end_inset
+
+ is the 
+\emph on
+transition function
+\emph default
+,
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Where 
+\begin_inset Formula $\Sigma_{\varepsilon}=\{\Sigma\cup\{\varepsilon\}\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\{\{\emptyset\},\{Q\}\}\in\mathcal{P}(Q)$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ indicates the empty string of length 0.
+ Note also how 
+\begin_inset Formula $L_{A}=\emptyset\neq L_{B}=\{\varepsilon\}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $q_{0}\in Q$
+\end_inset
+
+ is the 
+\emph on
+start state
+\emph default
+, and
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $F\subseteq Q$
+\end_inset
+
+ is the 
+\emph on
+set of accept states
+\emph default
+.
+\end_layout
+
+\begin_layout Paragraph
+Formal definition of computation
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $N=(Q,\Sigma,\delta,q_{0},F)$
+\end_inset
+
+ be an NFA and 
+\begin_inset Formula $w$
+\end_inset
+
+ a string over the alphabet 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $N$
+\end_inset
+
+ accepts 
+\begin_inset Formula $w$
+\end_inset
+
+ if we can write 
+\begin_inset Formula $w=y_{1}y_{2}\dots y_{m}$
+\end_inset
+
+ where each 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ is a member of 
+\begin_inset Formula $\Sigma_{\varepsilon}$
+\end_inset
+
+ and a sequence of states 
+\begin_inset Formula $r_{0},r_{1},\dots,r_{n}$
+\end_inset
+
+ in 
+\begin_inset Formula $Q$
+\end_inset
+
+ exists with three conditions:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $r_{0}=q_{0}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $r_{i+1}\in\delta(r_{i},y_{i+1})$
+\end_inset
+
+ for 
+\begin_inset Formula $i=0,\dots,m-1$
+\end_inset
+
+ and
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $r_{m}\in F$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Equivalence of DFA and NFA
+\end_layout
+
+\begin_layout Standard
+The following procedure converts a NFA 
+\begin_inset Formula $N=(Q,\Sigma,\delta,q_{0},F)$
+\end_inset
+
+ to the equivalent DFA 
+\begin_inset Formula $N'=(Q',\Sigma,\delta',q'_{0},F')$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $Q'=\mathcal{P}(Q)$
+\end_inset
+
+; (which means that usually the DFA is much larger than the corresponding
+ NFA!)
+\end_layout
+
+\begin_layout Enumerate
+For 
+\begin_inset Formula $R\in Q'$
+\end_inset
+
+ and 
+\begin_inset Formula $a\in\Sigma$
+\end_inset
+
+ let 
+\begin_inset Formula $\delta'(R,a)=\underset{r\in R}{\bigcup}\delta(r,a)$
+\end_inset
+
+; (all states reachable from the states in 
+\begin_inset Formula $R$
+\end_inset
+
+ with input 
+\begin_inset Formula $a$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $q'_{0}=\{q_{o}\}$
+\end_inset
+
+; (same start state)
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $F'=\{R\in Q'|R\text{ contains an accept state of }N\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+If there are 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ arrows we need to define 
+\begin_inset Formula $E(R)=\{q|q\text{\,\ can be reched from \ensuremath{R}by traveling along 0 or more \ensuremath{\varepsilon}arrows}\}$
+\end_inset
+
+ (called 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+-closure) and modify points 3 and 4:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+3.
+ 
+\begin_inset Formula $\delta'(R,a)=\{q\in Q|q\in E(\delta(r,a))\, for\, some\, r\in R\}$
+\end_inset
+
+ (same as before but all the reachable with an 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ arrow)
+\end_layout
+
+\begin_layout Standard
+4.
+ 
+\begin_inset Formula $q'_{0}=E(\{q_{o}\})$
+\end_inset
+
+; (same start state and all the ones reachable with an 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ arrow)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+It is 
+\emph on
+very useful
+\emph default
+ to calculate 
+\begin_inset Formula $E$
+\end_inset
+
+ for all states before starting the conversion procedure
+\end_layout
+
+\begin_layout Itemize
+We send a state 
+\begin_inset Formula $q$
+\end_inset
+
+ on the 
+\begin_inset Formula $\emptyset$
+\end_inset
+
+ state on input 
+\begin_inset Formula $a$
+\end_inset
+
+ only if 
+\begin_inset Formula $\delta(q,a)=\emptyset$
+\end_inset
+
+.
+ This represents the stuck reject.
+ Sink state that guarantees rejection.
+\end_layout
+
+\begin_layout Itemize
+To go from a DFA to the equivalent NFA no further action is needed since
+ DFAs are a particular case of NFAs.
+\end_layout
+
+\begin_layout Standard
+In practice just start from the start state and compute 
+\begin_inset Formula $\delta$
+\end_inset
+
+ only for all possible inputs and continue until no new states are added.
+\end_layout
+
+\begin_layout Subsection
+Closure automata construction
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See pictures p.
+ 59, 61, 62 of Sipser's book
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+Union automata (
+\begin_inset Formula $N_{1}\cup N_{2}$
+\end_inset
+
+): new start state with two 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ arrows entering the start states of 
+\begin_inset Formula $N_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $N_{2}$
+\end_inset
+
+ respectively.
+\end_layout
+
+\begin_layout Itemize
+Concatenation automata (
+\begin_inset Formula $N_{1}\cdot N_{2}$
+\end_inset
+
+): 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ arrows exiting the accept states of 
+\begin_inset Formula $N_{1}$
+\end_inset
+
+ and entering the start state of 
+\begin_inset Formula $N_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Star automata (
+\begin_inset Formula $N_{1}^{*}$
+\end_inset
+
+): new start/end state with an 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ arrow entering the old start state
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+This is done to avoid recognition of other undesired strings other than
+ 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ arrows connecting the accept states with the old start state.
+\end_layout
+
+\begin_layout Subsection
+Regular Expressions
+\end_layout
+
+\begin_layout Standard
+We say that 
+\begin_inset Formula $R$
+\end_inset
+
+ is a 
+\emph on
+regular expression
+\emph default
+ if 
+\begin_inset Formula $R$
+\end_inset
+
+ is
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $a$
+\end_inset
+
+ for some 
+\begin_inset Formula $a\in\Sigma$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\emptyset$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $(R_{1}\cup R_{2})$
+\end_inset
+
+, where 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+ are regular expressions,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $(R_{1}\cdot R_{2})$
+\end_inset
+
+, where 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{2}$
+\end_inset
+
+ are regular expressions, or
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $(R_{1}^{*})$
+\end_inset
+
+, where 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ is a regular expression.
+\end_layout
+
+\begin_layout Subsubsection
+Facts:
+\end_layout
+
+\begin_layout Enumerate
+We can write 
+\begin_inset Formula $R_{1}\cup R_{2}$
+\end_inset
+
+ also as 
+\begin_inset Formula $R_{1}|R_{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $R^{+}=RR^{*}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $R\cup\emptyset=R$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $R\cdot\varepsilon=R$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $R\cdot\emptyset=\emptyset$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\emptyset^{*}=\{\varepsilon\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A language is regular if and only if some regular expression describes it.
+\end_layout
+
+\begin_layout Subsubsection
+Conversion from R.E.
+ to NFA (if) 
+\end_layout
+
+\begin_layout Standard
+We just consider the 6 points in the definition of regular expression:
+\end_layout
+
+\begin_layout Enumerate
+Two states (start and accept) connected by an 
+\begin_inset Formula $a$
+\end_inset
+
+ arrow
+\end_layout
+
+\begin_layout Enumerate
+One state: start and accept at the same time
+\end_layout
+
+\begin_layout Enumerate
+One state: start with no accept
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $R=R_{1}\cup R_{2}$
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See pictures p.67 of Sipser's Book for this last three points.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $R=R_{1}\cdot R_{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $R=R_{1}^{*}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Conversion from DFA to R.E.
+ (only if) 
+\end_layout
+
+\begin_layout Enumerate
+If we have a NFA we need first to convert it to a DFA.
+\end_layout
+
+\begin_layout Enumerate
+Convert the DFA 
+\begin_inset Formula $M$
+\end_inset
+
+ into a GNFA 
+\begin_inset Formula $G$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Add a new start state 
+\begin_inset Formula $s$
+\end_inset
+
+ with an 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ arrow to the old start state and a new accept state 
+\begin_inset Formula $a$
+\end_inset
+
+ with 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ arrows from the old accept states.
+\end_layout
+
+\begin_layout Enumerate
+If any arrows have multiple labels (e.g.
+ 
+\begin_inset Formula $\delta(q_{i},a)=\delta(q_{i},b)=q_{j}$
+\end_inset
+
+) replace them with a single arrow whose label is the union of the previous
+ labels.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+We choose a state (
+\begin_inset Formula $q_{rip}$
+\end_inset
+
+) of 
+\begin_inset Formula $G$
+\end_inset
+
+ at the time and we eliminate it obtaining a new GNFA 
+\begin_inset Formula $G'$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $Q'=Q-\{q_{rip}\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For 
+\emph on
+every
+\emph default
+ pair 
+\begin_inset Formula $q_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $q_{j}$
+\end_inset
+
+ such that 
+\begin_inset Formula $q_{i}\in Q'-q_{acc}$
+\end_inset
+
+ and 
+\begin_inset Formula $q_{j}\in Q'-q_{start}$
+\end_inset
+
+, 
+\begin_inset Formula $\delta'(q_{i},q_{j})=(R_{1})(R_{2})^{*}(R_{3})\cup(R_{4})$
+\end_inset
+
+ where 
+\begin_inset Formula $R_{1}=(q_{i},q_{rip})$
+\end_inset
+
+, 
+\begin_inset Formula $R_{2}=(q_{rip},q_{rip})$
+\end_inset
+
+, 
+\begin_inset Formula $R_{3}=\delta(q_{rip},q_{j})$
+\end_inset
+
+and 
+\begin_inset Formula $R_{4}=\delta(q_{i},q_{j})$
+\end_inset
+
+ and where 
+\begin_inset Formula $q_{i}\in Q'-q_{acc}$
+\end_inset
+
+ and 
+\begin_inset Formula $q_{j}\in Q'-q_{start}$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Once we have only 
+\begin_inset Formula $s$
+\end_inset
+
+ and 
+\begin_inset Formula $a$
+\end_inset
+
+ the label of 
+\begin_inset Formula $\delta(s,a)$
+\end_inset
+
+ is the regular expression
+\end_layout
+
+\begin_layout Section
+Context Free Languages
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+context-free grammar
+\emph default
+ is a 4-tuple (
+\begin_inset Formula $V,\Sigma,R,S)$
+\end_inset
+
+, where
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $V$
+\end_inset
+
+ is a finite set called the 
+\emph on
+variables
+\emph default
+,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ is a finite set, disjoint from 
+\begin_inset Formula $V$
+\end_inset
+
+, called the 
+\emph on
+terminals
+\emph default
+,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $R$
+\end_inset
+
+ is a finite set of 
+\emph on
+rules
+\emph default
+, with each rule being a variable and a string of variables and terminals,
+ and
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $S\in V$
+\end_inset
+
+ is the 
+\emph on
+start variable
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $u,v$
+\end_inset
+
+ and 
+\begin_inset Formula $w$
+\end_inset
+
+ are strings of variables and terminals, and 
+\begin_inset Formula $A\rightarrow w$
+\end_inset
+
+ is a rule of the grammar, we say that 
+\begin_inset Formula $uAv$
+\end_inset
+
+ 
+\emph on
+yields
+\emph default
+ 
+\begin_inset Formula $uwv$
+\end_inset
+
+, written 
+\begin_inset Formula $A\Rightarrow uwv$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Say 
+\begin_inset Formula $u$
+\end_inset
+
+ 
+\emph on
+derives
+\emph default
+ 
+\begin_inset Formula $v$
+\end_inset
+
+, written 
+\begin_inset Formula $u\Rightarrow v$
+\end_inset
+
+, if 
+\begin_inset Formula $u=v$
+\end_inset
+
+ or if a sequence 
+\begin_inset Formula $u_{1},u_{2},\ldots,u_{k}$
+\end_inset
+
+ exists for 
+\begin_inset Formula $k\geq0$
+\end_inset
+
+ and 
+\begin_inset Formula $u\Rightarrow u_{1}\Rightarrow u_{2}\Rightarrow\ldots\Rightarrow u_{k}\Rightarrow v$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+language
+\emph default
+ of the grammar is 
+\begin_inset Formula $\{w\in\Sigma^{*}|S\overset{*}{\Rightarrow}w\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Ambiguity
+\end_layout
+
+\begin_layout Itemize
+A derivation of a string 
+\begin_inset Formula $w$
+\end_inset
+
+ in a grammar 
+\begin_inset Formula $G$
+\end_inset
+
+ is a 
+\emph on
+leftmost derivation
+\emph default
+ if at every step the leftmost remaining variable is the one being replaced.
+ (Two derivations may differ merely in the order in which they replace variables
+ yet not in their overall structure!)
+\end_layout
+
+\begin_layout Itemize
+A string is derived 
+\emph on
+ambiguously
+\emph default
+ in a CFG 
+\begin_inset Formula $G$
+\end_inset
+
+ if it has two or more different leftmost derivations.
+ Grammar 
+\begin_inset Formula $G$
+\end_inset
+
+ is 
+\emph on
+ambiguous
+\emph default
+ if it generates some string ambiguously.
+\end_layout
+
+\begin_layout Itemize
+Some CFLs, however, can be generated only by ambiguous grammars: these languages
+ are called inherently ambiguous.
+\end_layout
+
+\begin_layout Subsection
+Chomsky normal form
+\end_layout
+
+\begin_layout Standard
+A CFG is in Chomsky normal for if every rule is of the form 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $A\rightarrow BC$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $A\rightarrow a$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $a$
+\end_inset
+
+ is any terminal and 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $B$
+\end_inset
+
+ and 
+\begin_inset Formula $C$
+\end_inset
+
+ are any variable - except that B and C may not be the start variable.
+ In addition we permit the rule 
+\begin_inset Formula $S\rightarrow\varepsilon$
+\end_inset
+
+, where 
+\begin_inset Formula $S$
+\end_inset
+
+ is the start variable.
+\end_layout
+
+\begin_layout Itemize
+Any CFL is generated by a CFG in Chomsky normal form
+\end_layout
+
+\begin_layout Itemize
+Any string 
+\begin_inset Formula $w$
+\end_inset
+
+ such that 
+\begin_inset Formula $|w|=n$
+\end_inset
+
+ can be derived with 
+\begin_inset Formula $\frac{n}{2}$
+\end_inset
+
+ derivations
+\end_layout
+
+\begin_layout Itemize
+Every regular language is context free
+\end_layout
+
+\begin_layout Itemize
+CNF is useful when working with grammar related algorithms
+\end_layout
+
+\begin_layout Subsection
+Push Down Automata (PDA)
+\end_layout
+
+\begin_layout Itemize
+A language is context free if and only if some push down automaton recognizes
+ it.
+\end_layout
+
+\begin_layout Standard
+Not asked in the theory part but useful for compilers!!!
+\end_layout
+
+\begin_layout Section
+Turing machines
+\end_layout
+
+\begin_layout Paragraph
+Formal definition
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+Turing machine
+\emph default
+ is a 7-uple 
+\begin_inset Formula $(Q,\Sigma,\Gamma,\delta,q_{0},q_{accept},q_{reject}$
+\end_inset
+
+), where 
+\begin_inset Formula $Q,\Sigma,\Gamma$
+\end_inset
+
+ are all finite sets and
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $Q$
+\end_inset
+
+ is the set of 
+\emph on
+states
+\emph default
+,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ is the 
+\emph on
+input alphabet
+\emph default
+ not containing the 
+\emph on
+blank symbol
+\emph default
+ 
+\begin_inset Formula $\sqcup$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ is the 
+\emph on
+tape alphabet
+\emph default
+ where 
+\begin_inset Formula $\sqcup\in\Gamma$
+\end_inset
+
+ and 
+\begin_inset Formula $\Sigma\subseteq\Gamma$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\delta:Q\times\Gamma\rightarrow Q\times\Gamma\times\{L,R\}$
+\end_inset
+
+ is the transition function,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $q_{0}\in Q$
+\end_inset
+
+ is the start state,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $q_{accept}\in Q$
+\end_inset
+
+ is the accept state, and
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $q_{reject}\in Q$
+\end_inset
+
+is the reject state, where 
+\begin_inset Formula $q_{accept}\neq q_{reject}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Computation 
+\end_layout
+
+\begin_layout Standard
+We define a 
+\emph on
+configuration
+\emph default
+ of a TM as a setting of the state, the current tape content and the current
+ head location.
+ We usually represent them as a string 
+\begin_inset Formula $uqv$
+\end_inset
+
+ where 
+\begin_inset Formula $q$
+\end_inset
+
+ is a state, 
+\begin_inset Formula $uv$
+\end_inset
+
+ is the current tape content and the head location is the first symbol of
+ 
+\begin_inset Formula $v$
+\end_inset
+
+.
+ The tape contains only blanks following the last character of 
+\begin_inset Formula $v$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+start configuration
+\emph default
+ of 
+\begin_inset Formula $M$
+\end_inset
+
+ on input 
+\begin_inset Formula $w$
+\end_inset
+
+ is 
+\begin_inset Formula $q_{0}w$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+In an 
+\emph on
+accepting configuration
+\emph default
+ the state of the configuration is 
+\begin_inset Formula $q_{accept}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+In a 
+\emph on
+rejecting configuration
+\emph default
+ the state of the configuration is 
+\begin_inset Formula $q_{reject}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+Accepting and rejecting configurations are 
+\emph on
+halting configurations
+\emph default
+ and 
+\bar under
+do not
+\bar default
+ yield further configurations.
+\end_layout
+
+\begin_layout Itemize
+A Turing machine 
+\begin_inset Formula $M$
+\end_inset
+
+ accepts input 
+\begin_inset Formula $w$
+\end_inset
+
+ if a sequence of configurations 
+\begin_inset Formula $C_{1}C_{2},\ldots,C_{k}$
+\end_inset
+
+ exists, where
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $C_{1}$
+\end_inset
+
+ is the start configuration of 
+\begin_inset Formula $M$
+\end_inset
+
+ on input 
+\begin_inset Formula $w$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+each 
+\begin_inset Formula $C_{i}$
+\end_inset
+
+ yields 
+\begin_inset Formula $C_{i+1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $C_{k}$
+\end_inset
+
+ is an accepting configuration.
+\end_layout
+
+\end_deeper
+\begin_layout Paragraph
+Facts
+\end_layout
+
+\begin_layout Itemize
+When we start a TM, three outcomes are possible: accept, reject or loop
+ (the TM doesn't halt)
+\end_layout
+
+\begin_layout Itemize
+We call a language 
+\emph on
+Turing-recognizable
+\emph default
+ (or recursively enumerable) if some Turing machine recognizes it.
+ I can enumerate all the 
+\begin_inset Quotes eld
+\end_inset
+
+yes
+\begin_inset Quotes erd
+\end_inset
+
+ instances (strings that are accepted)
+\end_layout
+
+\begin_layout Itemize
+Turing machines that halt on every input are called 
+\emph on
+deciders
+\emph default
+ because they always make a decision to accept or reject.
+\end_layout
+
+\begin_layout Itemize
+We call a language 
+\emph on
+Turing-decidable
+\emph default
+ (or recursive) if some Turing machine decides it.
+ Every decidable language is Turing-recognizable.
+\end_layout
+
+\begin_layout Subsection
+Variants of Turing machine
+\end_layout
+
+\begin_layout Standard
+Every 
+\emph on
+multitape
+\emph default
+ Turing machine has an equivalent single-tape Turing machine.
+\end_layout
+
+\begin_layout Standard
+Every 
+\emph on
+nondeterministic
+\emph default
+ Turing machine has an equivalent deterministic Turing machine.
+ Which means that nondeterminism does not affect the power of the Turing
+ machine model.
+\end_layout
+
+\begin_layout Subsection
+Church-Turing thesis
+\end_layout
+
+\begin_layout Standard
+We choose to represent various computational problems by languages; which
+ means we reduce algorithms (and problems) to languages that can or cannot
+ be accepted by a Turing machine.
+ If such a TM is a decider then the language (and therefore the problem)
+ is decidable.
+ 
+\end_layout
+
+\begin_layout Section
+Decidability
+\end_layout
+
+\begin_layout Subsection
+Decidable languages
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $A_{DFA}=\{\left\langle B,w\right\rangle |B\text{ is a DFA that accepts input string }w\}$
+\end_inset
+
+ is a decidable language.
+ 
+\begin_inset Formula $A_{DFA}$
+\end_inset
+
+ represents the problem of testing whether a particular deterministic finite
+ automaton 
+\begin_inset Formula $B$
+\end_inset
+
+ accepts a given string 
+\begin_inset Formula $w$
+\end_inset
+
+: doing this is the same problem of testing whether 
+\begin_inset Formula $\left\langle B,w\right\rangle $
+\end_inset
+
+ is a member of the language 
+\begin_inset Formula $A_{DFA}$
+\end_inset
+
+.
+ (To prove this just simulate 
+\begin_inset Formula $B$
+\end_inset
+
+ on 
+\begin_inset Formula $M$
+\end_inset
+
+ and if the simulation ends in an accept state, accept, otherwise, reject.
+ The TM will terminate because 
+\begin_inset Formula $w$
+\end_inset
+
+ is finite)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $A_{NFA}=\{\left\langle B,w\right\rangle |B\text{ is a NFA that accepts input string }w\}$
+\end_inset
+
+ is a decidable language.
+ (Proof: convert NFA to DFA)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $A_{REX}=\{\left\langle R,w\right\rangle |R\text{ is a regular expression that generates string }w\}$
+\end_inset
+
+ is a decidable language.
+ (Proof: convert REX to DFA)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $E_{DFA}=\{\left\langle A\right\rangle |A\text{ is a DFA and }L(A)=\emptyset\}$
+\end_inset
+
+ is a decidable language.
+ (Proof: Mark the states of 
+\begin_inset Formula $A$
+\end_inset
+
+ following the arrows and starting from the start state; if no accept state
+ is marked, accept, otherwise, reject.
+ The TM will terminate because 
+\begin_inset Formula $|Q_{A}|$
+\end_inset
+
+ is finite.)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $EQ_{DFA}=\{\left\langle A,B\right\rangle |A\text{ and }B\text{ are DFAs and }L(A)=L(B)\}$
+\end_inset
+
+ is a decidable language.
+ (Proof: construct 
+\begin_inset Formula $L(C)=L(A)\otimes L(B)$
+\end_inset
+
+ and test 
+\begin_inset Formula $E_{DFA}(C)$
+\end_inset
+
+.)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $A_{CFG}=\{\left\langle G,w\right\rangle |G\text{ is a CFG that generates string }w\}$
+\end_inset
+
+ is a decidable language.
+ (Proof: Convert grammar in Chomsky normal form, list all derivations with
+ length 
+\begin_inset Formula $2|w|-1$
+\end_inset
+
+ steps, if any of these derivations generate 
+\begin_inset Formula $w$
+\end_inset
+
+, accept, otherwise, reject.
+ TM will terminate because the number of productions of length 
+\begin_inset Formula $2|w|-1$
+\end_inset
+
+ steps is finite.)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $E_{CFG}=\{\left\langle G\right\rangle |G\text{ is a CFG and }L(G)=\emptyset\}$
+\end_inset
+
+ is a decidable language.
+ (Proof: Mark all terminals, mark any variable 
+\begin_inset Formula $A$
+\end_inset
+
+ where 
+\begin_inset Formula $G$
+\end_inset
+
+ has a rule 
+\begin_inset Formula $A\rightarrow U_{1}U_{2}\ldots U_{k}$
+\end_inset
+
+ and each symbol 
+\begin_inset Formula $U_{1}U_{2}\ldots U_{k}$
+\end_inset
+
+ has already been marked, if 
+\begin_inset Formula $S$
+\end_inset
+
+ is not marked accept, otherwise, reject.
+ TM will terminate because number of variables in 
+\begin_inset Formula $G$
+\end_inset
+
+ is finite.)
+\end_layout
+
+\begin_layout Itemize
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+\begin_inset Formula $EQ_{CFG}$
+\end_inset
+
+ is 
+\family default
+\series default
+\shape default
+\size default
+\emph on
+\bar default
+\noun default
+\color inherit
+undecidable
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+! (Because CFG are not closed w.r.t.
+ intersection and complement)
+\end_layout
+
+\begin_layout Standard
+Every context free language is decidable.
+ This implies 
+\begin_inset Formula $\text{regular}\subseteq\text{context free}\subseteq\text{decidable}\subseteq\text{Touring recognizable}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+The halting problem
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+\begin_inset Formula $A_{TM}=\{\left\langle M,w\right\rangle |M\text{ is a TM and M accepts input string }w\}$
+\end_inset
+
+ is undecidable.
+\end_layout
+
+\begin_layout Standard
+Proof is by contradiction using diagonalization.
+ Suppose 
+\begin_inset Formula $H$
+\end_inset
+
+ is a decider for 
+\begin_inset Formula $A_{TM}$
+\end_inset
+
+ that, on input 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+
+\begin_inset Formula $\left\langle M,w\right\rangle $
+\end_inset
+
+, accepts if 
+\begin_inset Formula $M$
+\end_inset
+
+ accepts 
+\begin_inset Formula $w$
+\end_inset
+
+, and rejects if 
+\begin_inset Formula $M$
+\end_inset
+
+ does not accept 
+\begin_inset Formula $w$
+\end_inset
+
+ (including loops).
+ We can define another TM 
+\begin_inset Formula $D$
+\end_inset
+
+ with
+\begin_inset Formula $H$
+\end_inset
+
+ as a subroutine that, on input 
+\begin_inset Formula $\left\langle M\right\rangle $
+\end_inset
+
+, runs 
+\begin_inset Formula $H(M,\left\langle M\right\rangle )$
+\end_inset
+
+ and outputs the opposite of what 
+\begin_inset Formula $H$
+\end_inset
+
+ outputs; that is, if 
+\begin_inset Formula $H$
+\end_inset
+
+ accepts, reject and if 
+\begin_inset Formula $H$
+\end_inset
+
+ rejects, accept.
+ Run 
+\begin_inset Formula $D(\left\langle D\right\rangle )$
+\end_inset
+
+ and observe that no matter what 
+\begin_inset Formula $D$
+\end_inset
+
+ does, it is forced to do the opposite, which is obviously a contradiction.
+ Thus neither 
+\begin_inset Formula $M$
+\end_inset
+
+ nor 
+\begin_inset Formula $H$
+\end_inset
+
+ can exist.
+\end_layout
+
+\begin_layout Itemize
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+\begin_inset Formula $A_{TM}$
+\end_inset
+
+ is Turing-recognizable (we can simulate 
+\begin_inset Formula $\left\langle M,w\right\rangle $
+\end_inset
+
+ on a Turing machine 
+\begin_inset Formula $U$
+\end_inset
+
+ that accepts if 
+\begin_inset Formula $M$
+\end_inset
+
+ accepts, rejects if 
+\begin_inset Formula $M$
+\end_inset
+
+ rejects and loops if 
+\begin_inset Formula $M$
+\end_inset
+
+ loops).
+\end_layout
+
+\begin_layout Itemize
+Some languages are not Turing recognizable.
+ (We prove this by showing that the set of all Turing machines is countable
+ while the set of all languages is uncountable) This means that there are
+ some languages which not only can't be decided by a Turing machine but
+ can't even be recognized by it.
+\end_layout
+
+\begin_layout Itemize
+A language (only one, not the class!) is 
+\emph on
+co-Turing-recognizable
+\emph default
+ if it is the complement of a Turing-recognizable language.
+ Co-RE languages are the ones for which I can enumerate all the NO instances
+ (strings not accepted).
+\end_layout
+
+\begin_layout Itemize
+A language (only one, not the class!) is decidable if and only if it is
+ both Turing-recognizable and co-Turing-recognizable.
+ 
+\begin_inset Formula $\text{R}=\text{RE}\cap\text{co-RE}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\overline{A_{TM}}$
+\end_inset
+
+ is not Turing-recognizable.
+\end_layout
+
+\begin_layout Section
+Reducibility
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+reduction
+\emph default
+ is a way of converting one problem to another problem in such a way that
+ a solution to the second problem can be used to solve the first problem.
+\end_layout
+
+\begin_layout Standard
+As a rule of thumb, every time an unknown 
+\begin_inset Formula $A$
+\end_inset
+
+ can be reduced to a more specific 
+\begin_inset Formula $B$
+\end_inset
+
+ we can say 
+\begin_inset Formula $A$
+\end_inset
+
+ gets the same more specific properties of 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ Vice-versa, whenever 
+\begin_inset Formula $A$
+\end_inset
+
+ can be reduced to an unknown 
+\begin_inset Formula $B$
+\end_inset
+
+ the only thing we can assert is that 
+\series bold
+
+\begin_inset Formula $B$
+\end_inset
+
+
+\series default
+ has the same general properties of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Mapping reducibility
+\end_layout
+
+\begin_layout Standard
+A function 
+\begin_inset Formula $f:\Sigma^{*}\rightarrow\Sigma^{*}$
+\end_inset
+
+ is a 
+\emph on
+computable function
+\emph default
+ if some Turing machine 
+\begin_inset Formula $M$
+\end_inset
+
+, on every input 
+\begin_inset Formula $w$
+\end_inset
+
+, halts with just 
+\begin_inset Formula $f(w)$
+\end_inset
+
+ on its tape.
+\end_layout
+
+\begin_layout Standard
+Language 
+\begin_inset Formula $A$
+\end_inset
+
+ is 
+\emph on
+mapping reducible
+\emph default
+ to language 
+\begin_inset Formula $B$
+\end_inset
+
+, written 
+\begin_inset Formula $A\leq_{m}B$
+\end_inset
+
+, if there is a computable function 
+\begin_inset Formula $f:\Sigma^{*}\rightarrow\Sigma^{*}$
+\end_inset
+
+, where for every 
+\begin_inset Formula $w$
+\end_inset
+
+, 
+\begin_inset Formula $w\in A\iff f(w)\in B$
+\end_inset
+
+.
+ The function 
+\begin_inset Formula $f$
+\end_inset
+
+ is called 
+\emph on
+reduction
+\emph default
+ of 
+\begin_inset Formula $A$
+\end_inset
+
+ to 
+\begin_inset Formula $B$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Facts
+\end_layout
+
+\begin_layout Itemize
+Note how the previous definition also implies 
+\begin_inset Formula $w\notin A\iff f(w)\notin B$
+\end_inset
+
+ that is 
+\begin_inset Formula $\bar{A}\leq_{m}\bar{B}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $A\leq_{m}B$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ is decidable, then 
+\begin_inset Formula $A$
+\end_inset
+
+ is decidable.
+ (Proof: we have a decider 
+\begin_inset Formula $M$
+\end_inset
+
+ for 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ Therefore we can specify a decider for 
+\begin_inset Formula $A$
+\end_inset
+
+ that first computes 
+\begin_inset Formula $f(w)$
+\end_inset
+
+ and then runs 
+\begin_inset Formula $M$
+\end_inset
+
+ on input 
+\begin_inset Formula $f(w)$
+\end_inset
+
+ and outputs whatever 
+\begin_inset Formula $M$
+\end_inset
+
+ outputs)
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $A\leq_{m}B$
+\end_inset
+
+ and 
+\begin_inset Formula $A$
+\end_inset
+
+ is undecidable, then 
+\begin_inset Formula $B$
+\end_inset
+
+ is undecidable.
+ (Proof: corollary of the previous one)
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $A\leq_{m}B$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ is Turing-recognizable, then 
+\begin_inset Formula $A$
+\end_inset
+
+ is Turing-recognizable.
+ (Proof: same as before)
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $A\leq_{m}B$
+\end_inset
+
+ and 
+\begin_inset Formula $A$
+\end_inset
+
+ is not Turing-recognizable, then 
+\begin_inset Formula $B$
+\end_inset
+
+ is not Turing-recognizable.
+ (Proof: corollary of the previous one) Since we know that 
+\begin_inset Formula $\overline{A_{TM}}$
+\end_inset
+
+is not Turing recognizable we often let 
+\begin_inset Formula $A$
+\end_inset
+
+ be 
+\begin_inset Formula $\overline{A_{TM}}$
+\end_inset
+
+ so that, to show 
+\begin_inset Formula $B$
+\end_inset
+
+ is not Turing-recognizable, we just need to prove 
+\begin_inset Formula $A_{TM}\leq_{m}\bar{B}$
+\end_inset
+
+ (which is equivalent to 
+\begin_inset Formula $\overline{A_{TM}}\leq_{m}B$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Undecidable problems
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $HALT_{TM}$
+\end_inset
+
+ is undecidable.
+ Proof of this theorem illustrates the general technique to prove undecidability
+! By contradiction we assume 
+\begin_inset Formula $HALT_{TM}$
+\end_inset
+
+ is decidable and we show that 
+\begin_inset Formula $A_{TM}$
+\end_inset
+
+ is reducible to 
+\begin_inset Formula $HALT_{TM}$
+\end_inset
+
+ which will imply that 
+\begin_inset Formula $A_{TM}$
+\end_inset
+
+ is decidable too, which is clearly a contradiction.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $E_{TM}=\{\langle M\rangle|M\text{ is a TM and }L(M)=\emptyset\}$
+\end_inset
+
+ is undecidable.
+ (Proof: we assume that 
+\begin_inset Formula $E_{TM}$
+\end_inset
+
+ is decidable and then we show that this yields to the decidability of 
+\begin_inset Formula $A_{TM}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $EQ_{TM}=\{\langle M_{1},M_{2}\rangle|M_{1}\text{ and }M_{2}\text{ are TMs and }L(M_{1})=L(M_{2})\}$
+\end_inset
+
+ is undecidable.
+ (Proof: show that 
+\begin_inset Formula $E_{TM}$
+\end_inset
+
+ is reducible to 
+\begin_inset Formula $EQ_{TM}$
+\end_inset
+
+ and, therefore, if 
+\begin_inset Formula $EQ_{TM}$
+\end_inset
+
+ were decidable, 
+\begin_inset Formula $E_{TM}$
+\end_inset
+
+ also would be decidable.
+ )
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $REGULAR_{TM}=\{\langle M\rangle|M\text{ is a TM and }L(M)\text{ is a regular language}\}$
+\end_inset
+
+ is undecidable.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Rice's theorem
+\emph default
+.
+ Let 
+\begin_inset Formula $P$
+\end_inset
+
+ be any nontrivial property of the language of a Turing Machine.
+ The problem of determining whether a given Turing Machine's language has
+ property 
+\begin_inset Formula $P$
+\end_inset
+
+ is undecidable.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $A_{LBA}=\{\langle M,w\rangle|M\text{ is a LBA that accepts string }w\}$
+\end_inset
+
+ is decidable.
+ A
+\emph on
+ linear bounded automaton 
+\emph default
+(LBA) is a restricted type of Turing machine wherein the tape head isn't
+ permitted to move off the portion of the tape containing the input.
+ This automata recognizes languages that are Type-1 in the Chomsky classificatio
+n.
+ (Proof: the reason why the problem is decidable is that such and automata
+ can have only a limited number of configurations when string of length
+ 
+\begin_inset Formula $n$
+\end_inset
+
+ is the input, which means such an automata can be simulated on a TM which
+ will be able to recognize when a loop occurs, thanks to the finite amount
+ of configurations)
+\end_layout
+
+\begin_layout Section
+Complexity
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a deterministic TM that halts on all inputs.
+ The running time or time complexity of 
+\begin_inset Formula $M$
+\end_inset
+
+ is the function 
+\begin_inset Formula $f:\mathbb{N}\rightarrow\mathbb{N}$
+\end_inset
+
+, where 
+\begin_inset Formula $f(n)$
+\end_inset
+
+ is the maximum number of steps that a 
+\begin_inset Formula $M$
+\end_inset
+
+ uses on any input of length 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $f(n)$
+\end_inset
+
+ is the running time of 
+\begin_inset Formula $M$
+\end_inset
+
+, we say that 
+\begin_inset Formula $M$
+\end_inset
+
+ runs in time 
+\begin_inset Formula $f(n)$
+\end_inset
+
+ and that 
+\begin_inset Formula $M$
+\end_inset
+
+ is an 
+\begin_inset Formula $f(n)$
+\end_inset
+
+ time TM.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ be functions 
+\begin_inset Formula $f,g:\mathbb{N}\rightarrow\mathbb{R}^{+}$
+\end_inset
+
+.
+ Say that 
+\begin_inset Formula $f(n)=O(g(n))$
+\end_inset
+
+ if positive integers 
+\begin_inset Formula $c$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{0}$
+\end_inset
+
+ exists such that for every integer 
+\begin_inset Formula $n\geq n_{0}$
+\end_inset
+
+, 
+\begin_inset Formula $f(n)\leq cg(n)$
+\end_inset
+
+.
+ 
+\begin_inset Formula $ $
+\end_inset
+
+Using the asymptotic notation allows us to omit details of the machine descripti
+on that affect the running time by at most a constant factor.
+\end_layout
+
+\begin_layout Subsection
+Complexity relationships among models
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $t:\mathbb{N}\rightarrow\mathbb{R}^{+}$
+\end_inset
+
+ be a function.
+ Define the 
+\emph on
+time complexity class
+\emph default
+, 
+\begin_inset Formula $TIME(t(n))$
+\end_inset
+
+, to be the collection of all languages that are decidable by an 
+\begin_inset Formula $O(t(n))$
+\end_inset
+
+ Turing Machine.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $t(n)$
+\end_inset
+
+ be a function, where 
+\begin_inset Formula $t(n)\geq n$
+\end_inset
+
+.
+ Then every 
+\begin_inset Formula $t(n)$
+\end_inset
+
+ time multitape Turing machine has an equivalent 
+\begin_inset Formula $O(t^{2}(n))$
+\end_inset
+
+ time single-tape Turing machine.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $N$
+\end_inset
+
+ be a nondeterministic Turing machine that is a decider.
+ The running time of 
+\begin_inset Formula $N$
+\end_inset
+
+ is the function 
+\begin_inset Formula $f:\mathbb{N}\rightarrow\mathbb{N}$
+\end_inset
+
+, where 
+\begin_inset Formula $f(n)$
+\end_inset
+
+ it the maximum number of steps that 
+\begin_inset Formula $N$
+\end_inset
+
+uses on any branch of its computation on any input of length 
+\begin_inset Formula $n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $t(n)$
+\end_inset
+
+ be a function, where 
+\begin_inset Formula $t(n)\geq n$
+\end_inset
+
+.
+ Then every 
+\begin_inset Formula $t(n)$
+\end_inset
+
+ time nondeterministic Turing machine has an equivalent 
+\begin_inset Formula $2^{O(t(n))}$
+\end_inset
+
+ time deterministic single-tape Turing machine.
+ (Which means nondeterministic machines are exponentially quicker than determini
+stic TMs!)
+\end_layout
+
+\begin_layout Subsection
+The class P
+\end_layout
+
+\begin_layout Standard
+P is the class of languages that are decidable in polynomial time on a determini
+stic single-tape Turing machine.
+ In other words,
+\begin_inset Formula \[
+P=\underset{k}{\bigcup}TIME(n^{k})\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+P roughly corresponds to the class of problems realistically solvable on
+ a computer.
+ All reasonable deterministic models are polynomially equivalent
+\end_layout
+
+\begin_layout Subsubsection
+Examples of problems in P
+\end_layout
+
+\begin_layout Standard
+When we analyze an algorithm to show that it runs in polynomial time, we
+ need to do two things.
+ First, we need to give a polynomial upper bound on the number of stages
+ that the algorithm uses when it runs on an input of length 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Then, we have to examine the individual stages in the description of the
+ algorithm to be sure that each stage can be implemented in polynomial time
+ on a reasonable deterministic model.
+ Also, we need to make sure that a reasonable encoding method for the problem
+ is used where by 
+\begin_inset Quotes eld
+\end_inset
+
+reasonable method
+\begin_inset Quotes erd
+\end_inset
+
+ we mean one that allows for polynomial time encoding and decoding of objects
+ into natural internal representation.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $PATH=\{\langle G,s,t\rangle|G\text{ is a directed graph that has a directed path from }s\text{ to }t\}$
+\end_inset
+
+ is P.
+ (Proof: run BFS/DFS starting from 
+\begin_inset Formula $s$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $RELPRIME=\{\langle x,y\rangle|x\text{ and }y\text{ are relatively prime}\}$
+\end_inset
+
+ is P.
+ (i.e.
+ 1 is the largest number that divides both)
+\end_layout
+
+\begin_layout Itemize
+Every CFL (and therefore every CFG) is a member of P.
+ (Proof: we already proved that 
+\begin_inset Formula $A_{CFG}$
+\end_inset
+
+ is decidable, we just need to show that the algorithm used in that proof
+ runs in polynomial time, unfortunately it doesn't so we need to devise
+ a new one using dynamic programming)
+\end_layout
+
+\begin_layout Subsection
+The class NP
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+verifier
+\emph default
+ for a language 
+\begin_inset Formula $A$
+\end_inset
+
+ is an algorithm 
+\begin_inset Formula $V$
+\end_inset
+
+, where 
+\begin_inset Formula $A=\{w|V\, accepts\,\langle w,c\rangle\, for\, some\, string\, c\}$
+\end_inset
+
+.
+ We measure the running time of a verifier only in terms of the length of
+ 
+\begin_inset Formula $w$
+\end_inset
+
+ so a 
+\emph on
+polynomial time verifier
+\emph default
+ runs polynomial time in the length of 
+\begin_inset Formula $w$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+A language 
+\begin_inset Formula $A$
+\end_inset
+
+ is 
+\emph on
+polynomial time verifiable
+\emph default
+ if it has a polynomial time verifier.
+\end_layout
+
+\begin_layout Standard
+A verifier uses additional information, represented by the symbol 
+\begin_inset Formula $c$
+\end_inset
+
+ in the previous definition, to verify that string 
+\begin_inset Formula $w$
+\end_inset
+
+ is a member of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ This information is called a 
+\emph on
+certificate
+\emph default
+ or 
+\emph on
+proof
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+NP is the class of languages that have polynomial time verifiers.
+\end_layout
+
+\begin_layout Standard
+An alternative characterization, which also gives the name to the NP class,
+ can be given by using nondeterministic Turing machines.
+\end_layout
+
+\begin_layout Standard
+NP is the class of languages that are decidable in polynomial time on a
+ nondeterministic Turing machine.
+ In other words,
+\begin_inset Formula \[
+NP=\underset{k}{\bigcup}NTIME(n^{k})\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $NTIME(t(n))=\{L|L\text{ is a language decided by a }O(t(n))\text{ nondeterministic Touring machine}\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Note that we make a separate complexity class, called 
+\emph on
+CoNP
+\emph default
+, which contains the languages that are complements of languages in NP (like
+ 
+\begin_inset Formula $\overline{CLIQUE}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsubsection
+Examples of problems in NP
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $HAMPATH=\{\langle G,s,t\rangle|G\text{ is a directed graph with an Hamiltonian path from }s\text{ to }t\}$
+\end_inset
+
+ is NP.
+ (Proof: the Hamiltonian path is the certificate)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $CLIQUE=\{\langle G,k\rangle|G\text{ is an undirected graph with a }k\text{-clique}\}$
+\end_inset
+
+ is NP.
+ (Proof: the clique is the certificate)
+\end_layout
+
+\begin_layout Subsection
+Polynomial time reducibility
+\end_layout
+
+\begin_layout Standard
+A function 
+\begin_inset Formula $f:\Sigma^{*}\rightarrow\Sigma^{*}$
+\end_inset
+
+ is a 
+\emph on
+polynomial computable function
+\emph default
+ if some polynomial time Turing machine 
+\begin_inset Formula $M$
+\end_inset
+
+ exists that halts with just 
+\begin_inset Formula $f(w)$
+\end_inset
+
+ on its tape, when started on any input 
+\begin_inset Formula $w$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Language 
+\begin_inset Formula $A$
+\end_inset
+
+ is 
+\emph on
+polynomial time mapping reducible
+\emph default
+, or simply 
+\emph on
+polynomial time reducible
+\emph default
+, to language 
+\begin_inset Formula $B$
+\end_inset
+
+, written 
+\begin_inset Formula $A\leq_{P}B$
+\end_inset
+
+, if a polynomial time computable function 
+\begin_inset Formula $f:\Sigma^{*}\rightarrow\Sigma^{*}$
+\end_inset
+
+ exists , where for every 
+\begin_inset Formula $w$
+\end_inset
+
+, 
+\begin_inset Formula $w\in A\iff f(w)\in B$
+\end_inset
+
+.
+ The function 
+\begin_inset Formula $f$
+\end_inset
+
+ is called 
+\emph on
+polynomial time reduction
+\emph default
+ of 
+\begin_inset Formula $A$
+\end_inset
+
+ to 
+\begin_inset Formula $B$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Basically, polynomial time reducibility is the efficient analog to mapping
+ reducibility.
+\end_layout
+
+\begin_layout Subsubsection
+Facts:
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $A\leq_{P}B$
+\end_inset
+
+ and 
+\begin_inset Formula $B\in P$
+\end_inset
+
+, then 
+\begin_inset Formula $A\in P$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $3SAT=\{\langle\phi\rangle|\phi\text{ is a satisfiable 3cnf-formula}\}$
+\end_inset
+
+ is polynomial time reducible to 
+\begin_inset Formula $CLIQUE$
+\end_inset
+
+.
+ (where 
+\begin_inset Formula $3SAT$
+\end_inset
+
+ is a special case of 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+
+\begin_inset Formula $SAT=\{\langle\phi\rangle|\phi\text{ is a satisfiable boolean formula}\}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
+ 
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+A Boolean formula is 
+\family default
+\series default
+\shape default
+\emph on
+\bar default
+\noun default
+\color inherit
+satisfiable
+\family roman
+\series medium
+\shape up
+\emph off
+\bar no
+\noun off
+\color none
+ if some assignment of 0s and 1s to the variables makes the formula evaluate
+ to 1.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
+ Note we don't have to find such an assignment, of course if we find it
+ the formula is satisfiable, but we need to be able to say if there is at
+ least one such an assignment.
+\end_layout
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Subsection
+The class NP-complete
+\end_layout
+
+\begin_layout Standard
+A language 
+\begin_inset Formula $B$
+\end_inset
+
+ is 
+\emph on
+NP-complete
+\emph default
+ if it satisfies two conditions:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $B$
+\end_inset
+
+ is in 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+NP
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
+, and
+\end_layout
+
+\begin_layout Enumerate
+every 
+\begin_inset Formula $A$
+\end_inset
+
+ in NP is polynomial time reducible to 
+\begin_inset Formula $B$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Which means that, if 
+\begin_inset Formula $B$
+\end_inset
+
+ is NP-complete and 
+\begin_inset Formula $B\in P$
+\end_inset
+
+ then 
+\begin_inset Formula $P=NP$
+\end_inset
+
+.
+ In other words, if a polynomial time algorithm exists to solve 
+\begin_inset Formula $B$
+\end_inset
+
+, then all problems in NP are solvable in polynomial time.
+ 
+\end_layout
+
+\begin_layout Standard
+The possible containments among the classes P, NP and NP-complete are showed
+ in the following diagram.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename p=np.pdf
+	width 40text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+The P versus NP question
+\end_layout
+
+\begin_layout Standard
+There are two possibilities: either 
+\begin_inset Formula $P=NP$
+\end_inset
+
+ or 
+\begin_inset Formula $P\neq NP$
+\end_inset
+
+.
+ So far we have been unable to prove the existence of a single language
+ in NP that is not in P.
+ (which would prove they are different).
+ At the same time we still have not found polynomial time algorithms for
+ all problems in NP.
+ (which will prove they are the same).
+\end_layout
+
+\begin_layout Standard
+The best method known for solving languages in NP deterministically uses
+ exponential time.
+ In other words, we can prove that 
+\begin_inset Formula $NP\subseteq EXPTIME$
+\end_inset
+
+ where 
+\begin_inset Formula $EXPTIME=\bigcup_{k}TIME\left(2^{n^{k}}\right)$
+\end_inset
+
+, that is the class of languages that are decidable in exponential time
+ on a single-tape deterministic Turing machine.
+ Again, this is the practical method but NP could be contained in a smaller
+ deterministic time complexity class as we will show in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Relationship-to-other"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Facts:
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $B$
+\end_inset
+
+ is NP-complete and 
+\begin_inset Formula $B\leq_{P}C$
+\end_inset
+
+ and 
+\begin_inset Formula $C\in NP$
+\end_inset
+
+ then 
+\begin_inset Formula $C$
+\end_inset
+
+ is NP-complete.
+ (Which means that if we want to demonstrate that a problem is NP-complete
+ we need to show that a known NP-complete problem reduces to out problem
+ in polynomial time!)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $SAT$
+\end_inset
+
+ is NP-complete (Cook-Levin theorem: very important because identifies the
+ 
+\begin_inset Quotes eld
+\end_inset
+
+first
+\begin_inset Quotes erd
+\end_inset
+
+ NP-complete problem) 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $SAT\in P\iff P=NP$
+\end_inset
+
+ (Cook-Levin theorem rephrased)
+\end_layout
+
+\begin_layout Itemize
+A problem 
+\begin_inset Formula $B$
+\end_inset
+
+ is NP-hard if and only if there is an NP-complete problem 
+\begin_inset Formula $A$
+\end_inset
+
+ that is polynomial time Turing-reducible to 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ This differs from NP-complete problems because for those problems there
+ is also the requirement that 
+\begin_inset Formula $B\in NP$
+\end_inset
+
+ which is not present here.
+\end_layout
+
+\begin_layout Subsubsection
+Examples of problems in NP-complete
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $HAMPATH$
+\end_inset
+
+ is NP-complete
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $CLIQUE$
+\end_inset
+
+ is NP-complete
+\end_layout
+
+\begin_layout Subsection
+Space complexity
+\end_layout
+
+\begin_layout Standard
+Analogously to what we did for time we estimate space complexity of Turing
+ machines by using asymptotic notation.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $f:\mathcal{N}\rightarrow\mathbb{R}^{+}$
+\end_inset
+
+be a function.
+ The space complexity classes 
+\begin_inset Formula $SPACE(f(n))$
+\end_inset
+
+ and 
+\begin_inset Formula $NSPACE(f(n))$
+\end_inset
+
+ are defined as follows.
+\begin_inset Formula \[
+SPACE(f(n))=\{L|L\text{ is a language decided by an }O(f(n))\text{ space deterministic Touring machine}\}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+NSPACE(f(n))=\{L|L\text{ is a language decided by an }O(f(n))\text{ space nondeterministic Touring machine}\}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Savitch's theorem
+\end_layout
+
+\begin_layout Standard
+For any function 
+\begin_inset Formula $f:\mathcal{N}\rightarrow\mathbb{R}^{+}$
+\end_inset
+
+, where 
+\begin_inset Formula $f(n)\geq n$
+\end_inset
+
+, 
+\begin_inset Formula $NSPACE(f(n))\subseteq SPACE(f^{2}(n))$
+\end_inset
+
+.
+ This means that deterministic machines can simulate nondeterministic machines
+ using a surprisingly small amount of space.
+ Hence the idea that space appears to be more powerful than time because
+ space can be reused, whereas time cannot.
+\end_layout
+
+\begin_layout Subsection
+The class PSPACE and NPSPACE
+\end_layout
+
+\begin_layout Standard
+By analogy with the class P, we define the class PSPACE as the class of
+ languages that are decidable in polynomial space time on a deterministic
+ Turing machine.
+ In other words, 
+\begin_inset Formula \[
+PSPACE=\underset{k}{\bigcup}SPACE(n^{k})\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We define NPSPACE, the nondeterministic counterpart to PSPACE, in terms
+ of the NSPACE classes.
+ However, 
+\begin_inset Formula $PSPACE=NPSPACE$
+\end_inset
+
+, by virtue of Savitch's theorem, because the square root of any polynomial
+ is still a polynomial.
+\end_layout
+
+\begin_layout Subsubsection
+Relationship to other complexity classes 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Relationship-to-other"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+P\subseteq NP\subseteq PSPACE=NSPACE\subseteq EXPTIME\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The conjecture is that all of these containments are proper.
+ We know for sure that 
+\begin_inset Formula $P\neq EXPTIME$
+\end_inset
+
+ which means that at least one containment is proper, but we don't know
+ which one.
+\end_layout
+
+\begin_layout Section
+\start_of_appendix
+Closures
+\end_layout
+
+\begin_layout Standard
+The following table summarizes the closure properties of language families
+ with respect to some common operations.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="6">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Operation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Regular
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+DCFL
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CFL
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+r.e.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Union
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $L_{1}\cup L_{2}=\{w|w\in L_{1}\vee w\in L_{2}\}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NO
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Concatenation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $L_{1}\cdot L_{2}=\{w\cdot z|w\in L_{1}\wedge z\in L_{2}\}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NO
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Star
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $L_{1}^{*}=\{\varepsilon\}\cup\{w\in L_{1}\wedge z\in L_{1}^{*}\}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NO
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intersection
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $L_{1}\cap L_{2}=\{w|w\in L_{1}\wedge w\in L_{2}\}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NO
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NO
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Complement
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\overline{L_{1}}=\{w|w\notin L_{1}\}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NO
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NO
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Reverse
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $L_{1}^{R}=\{w^{R}|w\in L_{1}\}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NO
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intersec.
+ with reg.
+ lang.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $L_{1}\cap R=\{w|w\in L_{1}\wedge w\in R,R\,\text{regular}\}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Regular = Regular languages
+\end_layout
+
+\begin_layout Itemize
+DCFL = Determininistic Context Free Languages
+\end_layout
+
+\begin_layout Itemize
+CFL = Context Free Languages
+\end_layout
+
+\begin_layout Itemize
+r.e.
+ = Recursively Enumerable languages
+\end_layout
+
+\end_body
+\end_document

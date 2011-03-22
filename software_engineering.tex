@@ -1,0 +1,508 @@
+%% LyX 1.6.7 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\setcounter{tocdepth}{1}
+\usepackage{babel}
+
+\usepackage{textcomp}
+\usepackage{amstext}
+\usepackage[unicode=true, pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=true,pdfborder={0 0 0},backref=false,colorlinks=false]
+ {hyperref}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\providecommand{\LyX}{L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
+\newcommand{\lyxmathsym}[1]{\ifmmode\begingroup\def\b@ld{bold}
+  \text{\ifx\math@version\b@ld\bfseries\fi#1}\endgroup\else#1\fi}
+
+
+\makeatother
+
+\begin{document}
+
+\title{Software Engineering: notes for UIC qual%
+\thanks{This work is licensed under a \underbar{\protect\href{http://creativecommons.org/licenses/by-nc-sa/3.0}{Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License}}.%
+}}
+
+
+\author{Gugo}
+
+\maketitle
+
+\subsection*{Disclaimer}
+
+These notes have been prepared with the \textbf{only} purpose to help
+me pass the Computer Science qualifiying exam at the University of
+Illinois at Chicago. They are distributed as they are (including errors,
+typos, omissions, etc.) to help other students pass this exam (and
+possibly relieving them from part of the pain associated with such
+a process). I take \textbf{no responsibility} for the material contained
+in these notes (which means that you can't sue me if you don't pass
+the qual!) Moreover, this pdf version is distributed together with
+the original \LaTeX{} (and \LyX{}) sources hoping that someone else
+will improve and correct them. I mean in absolute no way to violate
+copyrights and/or take credit stealing the work of others. The ideas
+contained in these pages are \textbf{not mine} but I've just aggregated
+information scattered all over the internet.
+
+\tableofcontents{}
+
+
+\section{Software lifecycles}
+
+
+\subsection{Software release lifecycle}
+
+The software release life cycle is composed of discrete phases that
+describe the software's maturity as it advances from planning and
+development to release and support phases.
+\begin{description}
+\item [{Pre-alpha:}] refers to all activities performed during the software
+project prior to system testing. These activities can include requirements
+analysis, software design, software development and unit testing.There
+are several types of pre-alpha versions: development releases, nightly
+builds, milestones, etc. 
+\item [{Alpha:}] in this phase, developers generally test the software
+using white box techniques. Additional validation is then performed
+using black box or gray box techniques, by another testing team. Moving
+to black box testing inside the organization is known as alpha release.
+Alpha software can be unstable and could cause crashes or data loss.
+The alpha phase usually ends with a \emph{feature freeze}, indicating
+that no more features will be added to the software. At this time,
+the software is said to be feature complete.
+\item [{Beta:}] in this phase, pilot testing is performed by a limited
+number of end users in the target environment. The users of a beta
+version are called beta testers. They are usually customers or prospective
+customers of the organization that develops the software, willing
+to test the software for free or for a reduced price. 
+\item [{Release~Candidate:}] The term release candidate (RC) refers to
+a version with potential to be a final product, ready to release unless
+fatal bugs emerge. In this stage of product stabilization, all product
+features have been designed, coded and tested through one or more
+beta cycles with no known showstopper-class bug.
+\item [{RTM:}] The term \textquotedbl{}release to manufacturing\textquotedbl{}
+or \textquotedbl{}release to marketing\textquotedbl{} (both abbreviated
+RTM), also known as \textquotedbl{}gold\textquotedbl{}, is a term
+used to indicate that the software has reached a point that it is
+ready to or has been delivered or provided to the customer. RTM happens
+prior to general availability (GA) when the product is released to
+the public.
+\item [{GA:}] General Availability or General Acceptance (both abbreviated
+GA) is the point where all necessary commercialization activities
+have been completed and the software has been made available to the
+general market
+\end{description}
+
+\subsection{Development lifecycles}
+\begin{itemize}
+\item Waterfall model: it's an activity-centered life cycle that prescribes
+sequential executions of subsets of the development processes and
+management processes
+\item v-Model: it's a modification of the waterfall model that makes explicit
+the dependency between development activities and verification activities.
+\item Spiral model: is an activity-centered life cycle model that was devised
+to address the source of weaknesses in the waterfall model, in particular
+to accommodate infrequent change during the software development.
+This model focuses on addressing risks incrementally, in order of
+priority.
+\item Unified Software Development Process: distinguishes important time
+ranges in software development called cycles. (birth, childhood, adulthood,
+retirement, death) Each cycle has four phases: Inception, Elaboration,
+Construction, Transition.
+\item Issue-based model: based on solving issues that are generated progressively. 
+\item Agile software development: it is a group of software development
+methodologies based on iterative and incremental development, where
+requirements and solutions evolve through collaboration between self-organizing,
+cross-functional teams. 
+\end{itemize}
+
+\section{Requirements elicitation}
+
+
+\subsection{Functional Requirements}
+
+Functional requirements describe the behavior and the interactions
+of the system with its environment independently of its implementation.
+The environment includes the user and any other external system with
+which the system interacts. 
+
+
+\subsection{Nonfunctional Requirements}
+
+Nonfictional requirements describe aspects of the system that are
+not directly related to the functional behavior. Nonfictional requirements
+include a broad variety of requirements that apply to many different
+aspects of the system. Some nonfunctional requirements categories
+are: usability, reliability, performance, supportability, constraints
+(implementation requirements, legal categories,...).
+
+
+\subsection{Analysis}
+
+Once the requirement elicitation activity is over the development
+team focuses on the analysis phase. Analysis focuses on producing
+a model of the system, called \emph{analysis model}, that is correct,
+complete, consistent and verifiable. The two are different since during
+this phase the developers focus on structuring and formalizing the
+requirements elicited from users. Doing so leads to new insight and
+the discovery of errors in the requirements. 
+
+The analysis model is composed of three parts: the \emph{functional
+model}, represented by use cases and scenarios, the \emph{analysis
+object model}, represented by class and object diagrams, and the \emph{dynamic
+model}, represented by state machine and sequence diagrams. 
+
+
+\subsection{RAD}
+
+The \emph{Requirement Analysis Document} (\emph{RAD}) is the result
+of the requirements elicitation (and analysis) activities. This document
+completely describes the system in terms of functional and nonfunctional
+requirements. The first part of the document is written during the
+requirement elicitation phase while the second part is completed during
+the analysis phase.
+
+
+\section{Design}
+
+
+\subsection{Design principles}
+\begin{itemize}
+\item \emph{Coupling} is the number of dependencies between two subsystems.
+If two subsystems are loosely coupled, they are relatively independent,
+so modifications to one will have little impact on the other. If two
+subsystems are strongly coupled, modifications to one subsystem is
+likely to have impact on the other. 
+\item \emph{Cohesion} is the number of dependencies within a subsystem.
+If a subsystem contains many objects that are related to each other
+and perform similar task, its cohesion is high. If a subsystem contains
+a number of unrelated objects, its cohesion is low. 
+\end{itemize}
+When designing a system a good property is that subsystems are as
+loosely coupled as possible (\emph{minimize coupling}) and as highly
+cohese as possible (\emph{maximize cohesion}).
+\begin{itemize}
+\item \emph{Layering} allows systems to be organized as a hierarchy of subsystems,
+each providing higher-level services to the subsystems above it by
+using lower-level services from subsystems below it.
+\item \emph{Partitioning} organizes subsystems as peers that mutually provide
+different services to each other.
+\end{itemize}
+
+\subsubsection{Different purposed for classes and inheritance}
+
+Class hierarchies and polymorphism can be used to model both the application
+domain and the solution domain. 
+\begin{itemize}
+\item \emph{Application objects}, also called \emph{domain objects}, represents
+concepts of the domain that are relevant to the system.
+\item \emph{Solution objects} represent components that do not have a counterpart
+in the application domain, such as persistent data stores, user interface
+objects, or middleware.
+\end{itemize}
+In the same way inheritance can be used both to classify analysis
+object into taxonomies or to reduce redundancy and enhance extensibility
+of the software product.
+\begin{itemize}
+\item \emph{Specification inheritance} consists of the classification of
+concepts into type hierarchies.
+\item \emph{Implementation inheritance}, instead, is the use of inheritance
+for the sole purpose of reusing code. Usually \emph{delegation} (i.e.
+implementing an operation in a certain class by resending a message
+to another class) is a preferable mechanism to achieve reuse.
+\end{itemize}
+
+\subsection{Architectural styles}
+\begin{description}
+\item [{Model-View-Controller:}] View renders data, observing Model, and
+you can have multiple. Controller receives user input and makes modifications
+to Model. 
+\item [{Repository:}] Independent component interact only through the repository.
+\item [{Multi-tier~architecture:}] Each tier is dedicated to a purpose.
+Usually interface, application logic and storage.
+\item [{Pipes~and~filters:}] Subsystems process data received as inputs
+and send results to other subsystems via a set of outputs.
+\item [{Client-Server:}] the server provides services to a client which
+requires them.
+\item [{Peer-to-peer:}] generalization of client server where subsystems
+are both.
+\end{description}
+
+\subsection{Design patterns}
+
+In object-oriented development, \emph{design patterns} are template
+solutions that developers have refined over time to solve a range
+of recurring problems.
+
+
+\subsubsection{Creational patterns (5)}
+
+These patterns have to do with class instantiation. They can be further
+divided into class-creation patterns and object-creational patterns.
+While class-creation patterns use inheritance effectively in the instantiation
+process, object-creation patterns use delegation to get the job done.
+\begin{itemize}
+\item \emph{Abstract Factory} groups object factories that have a common
+theme. 
+\item \emph{Builder} constructs complex objects by separating construction
+and representation. 
+\item \emph{Factory method} creates objects without specifying the exact
+class to create. 
+\item \emph{Prototype} creates objects by cloning an existing object. 
+\item \emph{Singleton} restricts object creation for a class to only one
+instance. 
+\end{itemize}
+
+\subsubsection{Structural patterns (7)}
+
+These concern class and object composition. They use inheritance to
+compose interfaces and define ways to compose objects to obtain new
+functionality. 
+\begin{itemize}
+\item \emph{Adapter} allows classes with incompatible interfaces to work
+together by wrapping its own interface around that of an already existing
+class. 
+\item \emph{Bridge} decouples an abstraction from its implementation so
+that the two can vary independently. 
+\item \emph{Composite} composes zero-or-more similar objects so that they
+can be manipulated as one object. 
+\item \emph{Decorator} dynamically adds/overrides behaviour in an existing
+method of an object. 
+\item \emph{Facade} provides a simplified interface to a large body of code. 
+\item \emph{Flyweight} reduces the cost of creating and manipulating a large
+number of similar objects. 
+\item \emph{Proxy} provides a placeholder for another object to control
+access, reduce cost, and reduce complexity. 
+\end{itemize}
+
+\subsubsection{Behavioral patterns (11)}
+
+Most of these design patterns are specifically concerned with communication
+between objects. 
+\begin{itemize}
+\item \emph{Chain of responsibility} delegates commands to a chain of processing
+objects. 
+\item \emph{Command} creates objects which encapsulate actions and parameters. 
+\item \emph{Interpreter} implements a specialized language. 
+\item \emph{Iterator} accesses the elements of an object sequentially without
+exposing its underlying representation. 
+\item \emph{Mediator} allows loose coupling between classes by being the
+only class that has detailed knowledge of their methods. 
+\item \emph{Memento} provides the ability to restore an object to its previous
+state (undo). 
+\item \emph{Observer} is a publish/subscribe pattern which allows a number
+of observer objects to see an event. 
+\item \emph{State} allows an object to alter its behavior when its internal
+state changes. 
+\item \emph{Strategy} allows one of a family of algorithms to be selected
+on-the-fly at runtime. 
+\item \emph{Template method} defines the skeleton of an algorithm as an
+abstract class, allowing its subclasses to provide concrete behavior. 
+\item \emph{Visitor} separates an algorithm from an object structure by
+moving the hierarchy of methods into one object.
+\end{itemize}
+
+\section{Testing}
+
+
+\subsection{Testing concepts}
+
+A \emph{fault} (also known as a \emph{bug} or \emph{defect}) is a
+design or coding mistake that may cause abnormal component behavior.
+
+An \emph{erroneous state} is the manifestation of a fault during the
+execution of the system. An erroneous state is caused by one or more
+faults and can trigger a failure. 
+
+A \emph{failure} is a deviation between the specification and the
+actual behavior. A failure is triggered by one or more erroneous states.
+Note that not all erroneous states trigger a failure!
+
+A \emph{test} \emph{case} is a set of inputs and expected results
+that exercises a component with the purpose of causing failures and
+detecting faults.
+
+
+\subsubsection{Verification and Validation (V\&V)}
+\begin{description}
+\item [{Verification:}] The process of evaluating software to determine
+whether the products of a given development phase satisfy the conditions
+imposed at the start of that phase. Synthesized by the phrase: {}``Have
+we made what we were trying to make?''. Often an internal process.
+\item [{Validation:}] The process of evaluating software during or at the
+end of the development process to determine whether it satisfies specified
+requirements. Synthesized by the phrase: {}``Are we trying to make
+the right thing?'' Often a process that involves users.
+\end{description}
+
+\subsection{Component inspection}
+
+The purpose of component inspection is to find faults in a component
+by reviewing its source code in a formal meeting. It is very time
+consuming but generally more effective than testing in uncovering
+faults. It is used as a complement to testing in safety-critical projects. 
+
+
+\subsection{Unit testing}
+
+Unit testing focuses on the building blocks of the software system,
+that is, objects and subsystems. There are three motivations behind
+focusing on these building blocks: it reduces complexity of overall
+test activities, it makes easier to the pinpoint and correct faults
+and allows parallelism of testing activities.
+
+
+\subsubsection{Equivalence testing}
+
+This black-box technique minimizes the number of test cases. The possible
+inputs are partitioned in equivalence classes, and a test case is
+selected as a representative for each class. The assumption behind
+equivalence testing is that the system behaves in similar ways for
+all members of a class.
+
+
+\subsubsection{Boundary testing}
+
+This special case of equivalence testing focuses on the conditions
+at the boundary of the equivalence classes. The assumption behind
+boundary testing is that developers often overlook special cases at
+the boundary of the equivalence classes.
+
+A disadvantage of these techniques is that they do not explore combinations
+of input data.
+
+
+\subsubsection{Path testing}
+
+This white box technique identifies faults in the implementation of
+a component. The assumption behind path testing is that, by exercising
+all possible paths through the code at least once, most fault will
+trigger failures. The identification of paths requires knowledge of
+the source code and data structures. 
+
+
+\paragraph{Cyclomatic complexity}
+
+It can be shown that the minimum number of tests necessary to cover
+all edges (branches) is equal to the number of independent paths through
+the flow graph of a particular program. This is defined as the \emph{cyclomatic
+complexity} (\emph{CC}) of a graph.
+
+$CC=|E|\lyxmathsym{\textminus}|V|+2P$ where $|E|$ is the number
+of edges of the graph, $|V|$ is the number of nodes of the graph
+and $P$ is the number of connected components.
+
+
+\subsubsection{State-based testing}
+
+State-based testing focuses on object-oriented systems and compares
+the resulting state of the system with the expected state. In the
+context of a class, state-based testing consists of deriving test
+cases from the UML state machine diagram for the class. 
+
+
+\subsection{Integration testing}
+
+Integration testing detects faults that have been not been detected
+during unit testing by focusing on small groups s of components. Two
+or more components are integrated and tested, and when no new faults
+are revealed, additional components are added to the group. This procedure
+allows the testing of increasingly more complex parts of the system
+while keeping the location of potential faults relatively small. 
+
+
+\subsubsection{Horizontal integration testing strategies}
+
+Integrates components according to layers. 
+
+The \emph{big bang} strategy assumes that all components are first
+tested individually and then tested together as a single system. 
+
+The\emph{ bottom-up testing strategy }first tests each component of
+the bottom layer individually, and then integrates them with components
+of the next layer up. A major advantage of this technique is that
+no stubs are needed.
+
+The \emph{top-down testing strategy} unit tests components of the
+top layer first, and then integrates the components of the next layer
+down. The advantage of this technique is that interface faults can
+be more easily found.
+
+The \emph{sandwich testing strategy} combines the previous two.
+
+
+\subsubsection{Vertical integration testing strategies}
+
+Integrates components according to functions. It focuses on early
+integration. For a given use case, the needed parts of each component,
+such the user interface, business logic, middleware and storage, are
+identified and developed in parallel and integration tested. This
+technique is used very often by agile methodologies.
+
+
+\subsubsection{Regression testing}
+
+Object-oriented development is an iterative process. When modifying
+a component, developers design new unit tests exercising the new feature
+under consideration. However, they should not assume that the rest
+of the system will work with the modified component, since the modification
+could introduce side effects or reveal previously hidden faults in
+other components. Integration tests that are rerun on the system to
+detect such failures are called \emph{regression tests}. 
+
+
+\subsection{System testing}
+
+Once the components have been integrated, system testing ensures that
+the complete system complies with the functional and non functional
+requirements.
+\begin{itemize}
+\item \emph{Functional testing} finds differences between the functional
+requirements and the system. It is a black-box technique since test
+cases are derived from the use case model.
+\item \emph{Performance testing} finds differences between the design goals
+selected during system design and the system. Because the design goals
+are derived from he nonfunctional requirements, the test cases can
+be derived from the RAD. The following tests are performed: stress
+testing, volume testing, security testing, timing testing, recovery
+testing.
+\item During \emph{pilot testing} the system is installed and used by a
+selected group of users. Users exercise the system and if it had been
+permanently installed. 
+\item In \emph{acceptance testing} the customer performs usability, functional
+and performance tests in the target environment. After acceptance
+testing, the client reports to the project manager which requirements
+are not satisfied. 
+\end{itemize}
+
+\subsection{Types of testing}
+\begin{itemize}
+\item \emph{Black box testing}: tests the functionality of the system without
+knowing the internal structure 
+\item \emph{White box testing}: a complete knowledge of the internal structure
+of the system is used during the testing process
+\item \emph{Gray box testing}: some knowledge of the internal structure
+of the system is used to write better test cases but then the system
+is tested as a black box
+\end{itemize}
+
+\subsection{White testing examples}
+\begin{itemize}
+\item \emph{Statement Coverage criteria}: all lines of code are executed.
+\item \emph{Decision Coverage criteria}: all branch statements must be executed
+(both conditions).
+\item \emph{Condition Coverage criteria}: all conditions (in branch statements,
+loops,...) must be executed.
+\end{itemize}
+
+\section{Formal methods}
+
+TODO
+\end{document}

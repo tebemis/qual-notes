@@ -1,0 +1,1187 @@
+%% LyX 1.6.7 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\setcounter{tocdepth}{1}
+\usepackage{babel}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[unicode=true, pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=true,pdfborder={0 0 0},backref=false,colorlinks=false]
+ {hyperref}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\providecommand{\LyX}{L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\newenvironment{lyxlist}[1]
+{\begin{list}{}
+{\settowidth{\labelwidth}{#1}
+ \setlength{\leftmargin}{\labelwidth}
+ \addtolength{\leftmargin}{\labelsep}
+ \renewcommand{\makelabel}[1]{##1\hfil}}}
+{\end{list}}
+
+\makeatother
+
+\begin{document}
+
+\title{Foundations of Computer Science: notes for UIC qual%
+\thanks{This work is licensed under a \underbar{\protect\href{http://creativecommons.org/licenses/by-nc-sa/3.0}{Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License}}.%
+}}
+
+
+\author{Gugo}
+
+\maketitle
+
+\subsection*{Disclaimer}
+
+These notes have been prepared with the \textbf{only} purpose to help
+me pass the Computer Science qualifiying exam at the University of
+Illinois at Chicago. They are distributed as they are (including errors,
+typos, omissions, etc.) to help other students pass this exam (and
+possibly relieving them from part of the pain associated with such
+a process). I take \textbf{no responsibility} for the material contained
+in these notes (which means that you can't sue me if you don't pass
+the qual!) Moreover, this pdf version is distributed together with
+the original \LaTeX{} (and \LyX{}) sources hoping that someone else
+will improve and correct them. I mean in absolute no way to violate
+copyrights and/or take credit stealing the work of others. The ideas
+contained in these pages are \textbf{not mine} but I've just aggregated
+information scattered all over the internet.
+
+\tableofcontents{}
+
+
+\section{Set Theory (Basic concepts) }
+
+
+\subsection{Definitions}
+\begin{itemize}
+\item A \emph{set} is an unordered collection of distinct objects.
+\item The \emph{empty set} $\emptyset$ is defined as $\emptyset=\{\nexists x:x\in\emptyset\}$.
+\item The \emph{universe set} $U$ is defined as $U=\{\forall x:x\in U\}$.
+\item The \emph{intersection} of sets $A$ and $B$ is the set $A\cap B=\{x:x\in A\text{ and }x\in B\}$.
+\item The \emph{union} of sets $A$ and $B$ is the set $A\cup B=\{x:x\in A\text{ or }x\in B\}$.
+\item The \emph{complement} of set $A$ is the set $\bar{A}=\{x:x\notin A\}$.
+\item The \emph{difference} of sets $A$ and $B$ is the set $A\backslash B=A\cap\bar{B}=\{x:x\in A\text{ and }x\notin B\}$.
+\item The \emph{symmetric difference (XOR)} of sets $A$ and $B$ is the
+set $A\otimes B=(A\backslash B)\cup(B\backslash A)$.
+\end{itemize}
+
+\subsection{Properties \label{sub:Properties}}
+\begin{itemize}
+\item Empty set: $A\cup\emptyset=A$ and $A\cap\emptyset=\emptyset$.
+\item Universe set: $A\cup U=U$ and $A\cap U=A$.
+\item Idempotency: $A\cup A=A$ and $A\cap A=A$.
+\item Cummutative: $A\cup B=B\cup A$ and $A\cap B=B\cap A$.
+\item Associative: $A\cup(B\cup C)=(A\cup B)\cup C$ and $A\cap(B\cap C)=(A\cap B)\cap C$.
+\item Distributive: $A\cup(B\cap C)=(A\cup B)\cap(B\cup C)$ and $A\cap(B\cup C)=(A\cap B)\cup(B\cap C)$.
+\item Absorption: $A\cup(A\cap B)=A$ and $A\cap(A\cup B)=A$.
+\item DeMorgan: $\overline{A\cup B}=\bar{A}\cap\bar{B}$ and $\overline{A\cap B}=\bar{A}\cup\bar{B}$.
+\item Negation: $A\cup\bar{A}=U$ and $A\cap\bar{A}=\emptyset$.
+\item Double negation: $\bar{\bar{A}}=A$.
+\end{itemize}
+
+\subsection{Power set and partitions}
+\begin{itemize}
+\item We define the \emph{power set} of a set $A$ as the set of all subset
+of $A$: $\mathcal{P}(A)=\{X:X\subseteq A\}$. The cardinality of
+such a set is: $\left|\mathcal{P}(A)\right|=2^{\left|A\right|}$
+\item We say a collection $\alpha=\{A_{i}\}$ of non-empty sets forms a
+\emph{partition} of the set $A$ if and only if:
+
+\begin{itemize}
+\item $A_{i}\in\alpha\implies A_{i}\in\mathcal{P}(A)$
+\item the sets are pairwise disjoint, that is, $A_{i},A_{j}\in\alpha$ and
+$i\neq j$ $\implies A_{i}\cap A_{j}=\emptyset$
+\item $\underset{A_{i}\in\alpha}{\bigcup}A_{i}=A$
+\end{itemize}
+\end{itemize}
+
+\subsection{Cartesian product}
+
+The Cartesian product of two sets $A$ and $B$, denoted $A\times B$,
+is the set of all the \emph{ordered} pairs such that the first element
+of the pair is an element of $A$ and the second is an element of
+$B$. More formally $A\times B=\{(a,b):a\in A\text{ and }b\in B\}$
+whose cardinality is $|A\times B|=|A|\cdot|B|$ if $A$ and $B$ are
+finite.
+
+We denote an \emph{n-fold} Cartesian product over a single set $A^{n}=A\times A\times\dots\times A$
+whose cardinality is $|A^{n}|=|A|^{n}$ if A is finite.
+
+
+\section{Relations }
+
+An \emph{n-ary} relation on sets $A_{1},\, A_{2},\,\dots,\, A_{n}$
+is a subset of $A_{1}\times A_{2}\times\dots\times A_{n}$.
+
+A \emph{binary relation} $R$ on two sets $A$ and $B$ is a subset
+of the Cartesian product $A\times B.$
+
+
+\subsection{Properties of binary relations}
+\begin{itemize}
+\item A binary relation $R\subseteq A\times A$ is \emph{reflexive} if $aRa$
+for all $a\in A$.
+\item A relation $R$ is \emph{symmetric} if $aRb\implies bRa$.
+\item A relation $R$ is \emph{transitive} if $aRb\wedge bRc\implies aRc$.
+\item A binary relation $R$ on a set $A$ is \emph{antisymmetric} if $aRb\wedge bRa\implies a=b$.
+\end{itemize}
+An example of relation that is neither symmetric nor antisymmetric
+is $x$ {}``divides'' $y$ on $\mathbb{Z}$: 6 divides 3 doesn't
+imply 3 divides 6; 3 divides -3 and -3 divides 3 doesn't imply -3=3!
+
+
+\subsection{Types of binary relations}
+
+
+\subsubsection{Equivalence relation}
+
+A binary relation that is reflexive, symmetric and transitive is an
+\emph{equivalence relation}.
+
+If $R$ is an equivalence relation on a set $A$, then for $a\in A$,
+the \emph{equivalence class} of $a$ is the set $[a]=\{b\in A:\, aRb\}$,
+that is, the set of all elements equivalent to $a$.
+
+The equivalence classes of any equivalence relation $R$ on a set
+$A$ form a partition of $A$, and any partition of $A$ determines
+an equivalence relation on $A$ for which the sets in the partition
+are the equivalence classes.
+
+
+\subsubsection{Partial order}
+
+A binary relation that is reflexive, antisymmetric and transitive
+is a \emph{partial order}.
+
+A set on which a partial order relation is defined is called a \emph{partially
+ordered set}. (poset)
+
+In a poset $A$, there may be no single {}``maximum'' element $a$
+such that $bRa$ for all $b\in A$. Instead, the set may contain several
+\emph{maximal} elements $a$ such that for no $b\in A$, where $b\neq a$,
+is it the case that $aRb$.
+
+
+\subsubsection{Total relation}
+
+A binary relation $R$ on a set $A$ is a \emph{total relation} if
+$\forall a,b\in A,\, aRb\vee bRa$, that is, if every pairing of elements
+of $A$ is related by $R$.
+
+
+\subsubsection{Total order}
+
+A binary relation that is both a partial order and a total relation
+is a \emph{total order}.
+
+
+\section{Functions }
+
+Given two sets $A$ and $B$, a function $f$ is a binary relation
+on $A$ and $B$ such that $\forall a\in A,\exists!b\in B:\,(a,b)\in f$.
+
+The set $A$ is called the \emph{domain} of $f$ and the set $B$
+in called the \emph{codomain} of $f$.
+
+Intuitively $f$ assigns an element of $B$ to \emph{each} element
+of $A$. No element of \emph{A} is assigned two different elements
+of \emph{B}, but the same element of \emph{B} can be assigned to two
+different elements of \emph{A}.
+
+If $f:A\rightarrow B$ is a function the \emph{image} of a set $A'\subseteq A$
+under $f$ is defined by $f(A')=\{b\in B:\, b=f(a)\, for\, some\, a\in A'\}$.
+The \emph{range} of $f$ is the image of its domain, that is, $f(A)$.
+
+
+\subsection{Types of functions}
+\begin{itemize}
+\item A function is a \emph{surjection} if its range is its codomain. A
+surjection $f:A\rightarrow B$ is sometimes described as \emph{mapping}
+$A$\emph{ onto }$B$ and $|B|=|f(A)|\leq|A|$.
+\item A function $f:A\rightarrow B$ is an \emph{injection} if distinct
+arguments to $f$ produce distinct values, that is, $a\neq a'\implies f(a)\neq f(a')$.
+An injection is sometimes called a \emph{one-to-one} function and
+$|B|\geq|f(A)|=|A|$.
+\item A function $f:A\rightarrow B$ is a \emph{bijection} if it's injective
+and surjective\emph{. }A bijection is sometimes called a \emph{one-to-one
+correspondence} or, when $B=A$, \emph{permutation} and $|B|=|f(A)|=|A|$.
+When a function $f$ is bijective we define its inverse $f^{-1}$
+as $f^{-1}(b)=a\iff f(a)=b$. 
+\end{itemize}
+
+\subsection{Counting functions}
+\begin{itemize}
+\item The set of all (possible) functions from $A$ to $B$ is written $B^{A}$
+and $|B^{A}|=|B|^{|A|}$. This is obtained thinking that, for each
+element $a\in A$, $f(a)$ can be any value $b\in B$. Therefore we
+have $|B|$ ways of choosing $b$ for each value of $a$ which leads
+to $|B^{A}|=\underset{|A|\, times}{\underbrace{|B|\cdot|B|\cdot\dots\cdot|B|}}=|B|^{|A|}$.
+\end{itemize}
+
+\subsection{Boolean Functions}
+
+A Boolean function is a function $f:\times^{n}\{0,1\}\rightarrow\{0,1\}$.
+In general the number of such Boolean functions is $2^{2^{n}}$. 
+
+Boolean functions are strictly related to Propositional Logic: see
+section \ref{sec:Propositional-Calculus} for more details.
+
+
+\section{Basic counting and combinatorics}
+
+
+\subsection{Combinatorics}
+
+
+\subsubsection{Counting subsets}
+\begin{itemize}
+\item How many \emph{ordered subsets} of cardinality $k$ can be obtained
+from a set of cardinality $n$? (\emph{permutation}s)
+\end{itemize}
+\[
+n(n-1)\dots(n-k)=\frac{n!}{(n-k)!}\]
+
+\begin{itemize}
+\item What happens when $n=k$ ? (\emph{permutation}s)
+\end{itemize}
+\[
+\frac{n!}{0!}=n!=k!\]
+
+\begin{itemize}
+\item What if the \emph{permutation} is circular?
+\end{itemize}
+\[
+(n-1)!\]
+
+\begin{itemize}
+\item How many \emph{subsets} of cardinality $k$ can be obtained from a
+set of cardinality $n$? (\emph{combinations})
+\end{itemize}
+\[
+\frac{n!}{k!(n-k)!}=\left({n\atop k}\right)=\left({n\atop n-k}\right)\]
+
+
+
+\subsubsection{Counting multisets (picking from {}``infinite'' buckets)}
+\begin{itemize}
+\item How many \emph{ordered} \emph{multisets} of cardinality $k$ can be
+obtained from a set of cardinality n? (or given $k$ holes and $n$
+types, how many different ways do I have to distribute the types?)
+\end{itemize}
+\[
+n^{k}\]
+
+\begin{itemize}
+\item How many \emph{multisets} of cardinality $k$ can be obtained from
+a set of cardinality $n$? (or given $k$ holes and $n$ types, how
+many different ways do I have to put them in non considering permutations?)\[
+\left({n+k-1\atop n-1}\right)=\left({n+k-1\atop k}\right)=\left(\left({n\atop k}\right)\right)\]
+
+\item Given $k$ holes and $n$ types (or $k$ indistinguishable objects
+and $n$ bins) the number of different ways to distribute them so
+that there is at least one in each bin is \[
+\left({k-1\atop n-1}\right)\]
+
+\end{itemize}
+
+\subsubsection{Multinomial coeffiecients (picking from {}``finite'' buckets)}
+\begin{itemize}
+\item How many multisets of cardinality $n$ can be obtained from a multiset
+of cardinality $n$ where $k_{i}$ are the multiplicities of each
+of the distinct elements? (\emph{multiset permutation}) \[
+\frac{n!}{k_{1}!k_{2!}\dots k_{m}!}=\left({n\atop k_{1},k_{2}\dots,k_{m}}\right)\]
+
+\end{itemize}
+
+\subsection{Combinatorial principles}
+
+
+\subsubsection{Rule of sum}
+
+If $A$ and $B$ are two \emph{disjoint finite} sets, then $|A\cup B|=|A|+|B|$.
+Which means that the number of ways to choose one element from one
+of two disjoint sets is the sum of the cardinalitied of he two sets.
+
+
+\subsubsection{Rule of product}
+
+If $A$ and $B$ are two\emph{ finite} sets, then $|A\times B|=|A|\cdot|B|$.
+Which means that the number of ways to choose an ordered pair is the
+number of ways to choose the first element times the the number of
+ways to choose the second element.
+
+
+\subsubsection{Inclusion-exclusion principle}
+
+The inclusion-exclusion principle relates the size of the union of
+multiple sets, the size of each set, and the size of each possible
+intersection of the sets. It could be thought of as the generalization
+of the rule of sum.
+
+In it's simplest version (for two sets) it states that if $A$ and
+$B$ are two sets, then \[
+|A\cup B|=|A|+|B|-|A\cap B|\]
+
+
+from which we can conclude that $|A\cup B|\leq|A|+|B|.$ If $A$ and
+$B$ are disjoint we have $|A\cup B|=|A|+|B|$ and if $A\subseteq B$
+then $|A|\leq|B|$.
+
+
+\subsubsection{Recursive formula for binomial coefficients }
+
+Binomial coefficients can be recursively defined as\[
+\left({n\atop k}\right)=\left({n-1\atop k-1}\right)+\left({n-1\atop k}\right)\]
+
+
+with, as initial value\begin{eqnarray*}
+\left({n\atop 0}\right)=1 &  & \forall n\in\mathbb{N}\\
+\left({0\atop k}\right)=0 &  & \forall k>0\end{eqnarray*}
+
+
+
+\subsubsection{Generating function for binomial coefficients (binomial expansion)}
+
+The generating function can be written as\[
+(x+y)^{n}=\underset{k=0}{\overset{n}{\sum}}\left({n\atop k}\right)x^{k}y^{n-k}\]
+
+
+and, substituting $y=1$ we obtain\[
+(1+x)^{n}=\underset{k=0}{\overset{n}{\sum}}\left({n\atop k}\right)x^{k}\]
+
+
+and, in it's most particular case, substituting $x=y=1$\[
+2^{n}=\underset{k=0}{\overset{n}{\sum}}\left({n\atop k}\right)\]
+
+
+
+\section{Proof Techniques }
+
+
+\subsection{Mathematical Induction}
+
+Used to prove that a certain statement $P(n)$ holds for every value
+of $n\geq b$, where $n,b\in\mathbb{N}$.
+
+
+\subsubsection{Weak }
+\begin{enumerate}
+\item \emph{Base case}: show that $P(b)$ is true. (usually $b=0$ or $b=1$)
+\item \emph{Inductive step}:
+
+\begin{enumerate}
+\item \emph{Inductive hypothesis}: assume $P(n)$ holds for some $n\geq b$.
+\item Show that $P(n+1)$ holds. Usually this involves substituting $n+1$
+in $P(n)$ to find $P(n+1)$ and show that we can obtain $P(n+1)$
+from $P(n)$ using the {}``recursive definition'' of the statement
+we are trying to prove.
+\end{enumerate}
+\end{enumerate}
+
+\subsubsection{Strong }
+\begin{enumerate}
+\item \emph{Base case}: Same as weak induction.
+\item \emph{Inductive step}:
+
+\begin{enumerate}
+\item \emph{Inductive hypothesis}: assume $P(i)$ holds $\forall n\in\mathbb{N}:b\leq i\leq n$.
+\item Same as weak induction.
+\end{enumerate}
+\end{enumerate}
+
+\subsubsection{Structural }
+
+Generalization of mathematical induction used to prove that a statement
+$P(x)$ holds on any instance $x$ of some sort of recursively-defined
+structure $S$ (like lists or trees).
+\begin{enumerate}
+\item Define a well-founded partial order on the structure (\textquotedbl{}sublist\textquotedbl{}
+for lists and \textquotedbl{}subtree\textquotedbl{} for trees).
+\item \emph{Base case}: Show that $P$ holds for all the minimal structures
+(empty list, tree root).
+\item \emph{Inductive step}:
+
+\begin{enumerate}
+\item \emph{Inductive hypothesis}: assume that $P$ holds for the immediate
+substructures of a certain structure \emph{S.}
+\item Show that $P$ must hold for $S$. Usually this involves showing how
+$S$ can be obtained from the immediate substructures applying some
+sort of recursive rule.
+\end{enumerate}
+\end{enumerate}
+Since every property must be proved separately, there may exist more
+than one base case, and/or more than one inductive case, depending
+on how the function or structure was constructed. 
+
+
+\subparagraph{Example}
+
+Let $F$ be the set of fully parenthesized expressions in $x$ defined
+recursively as follows:
+\begin{enumerate}
+\item $\{x\}\in F$, $\{0\}\in F$, $\{1\}\in F$;
+\item If $e_{1},e_{2}\in F$ then $\{$'{[}'$e_{1}$'$+$'$e_{2}$'{]}'$\}\in F$;
+\item If $e_{1},e_{2}\in F$ then $\{$'{[}'$e_{1}$'$*$'$e_{2}$'{]}'$\}\in F$;
+\item If $e_{1}\in F$ then $\{$'-{[}'$e_{1}$'{]}'$\}\in F$.
+\end{enumerate}
+Prove that every $e\in F$ has the same number of left and right parentheses.
+
+\begin{center}
+{*}{*}{*}
+\par\end{center}
+
+Define $P(e)::=$ \textquotedbl{}\emph{expression e has the same number
+of left and right parentheses}\textquotedbl{}.
+\begin{lyxlist}{00.00.0000}
+\item [{Base~case:}]~\end{lyxlist}
+\begin{itemize}
+\item $e=0,e=1,e=x$ has $ $no parentheses.\end{itemize}
+\begin{lyxlist}{00.00.0000}
+\item [{Inductive~step:}]~\end{lyxlist}
+\begin{itemize}
+\item Assume $P(e_{1})$ and $P(e_{2})$ and prove $P([e_{1}+e_{2}])$;
+\item $P(e)$ implies that $e$ has $k_{e}$ left parentheses and $k_{e}$
+right parentheses for some $k_{e}\in\mathbb{N}$.
+\item Therefore $[e_{1}+e_{2}]$ will have $k_{e_{1}}+k_{e_{2}}+1$ right
+parenthese and $k_{e_{1}}+k_{e_{2}}+1$ left parentheses.
+\end{itemize}
+To properly conclude the demonstration we need to repeat the inductive
+step on properties 3 and 4.
+
+\begin{flushright}
+$\square$
+\par\end{flushright}
+
+
+\subsection{Proof by contradiction }
+
+To prove a statement $P$ holds by contradiction we need to:
+\begin{enumerate}
+\item Assume $P$ doesn't hold. ($\neg P)$
+\item Show that this leads to some contradiction. Usually this involves
+showing that:
+
+\begin{enumerate}
+\item Either $\neg P\implies\bot$
+\item or equivalently $\neg P\implies(Q\wedge\neg Q)$
+\end{enumerate}
+\end{enumerate}
+this technique is often used to prove correctness of greedy algorithms.
+
+
+\section{Summations and infinite series}
+
+
+\subsection{Properties}
+
+The value of a \emph{finite} series is always well defined, and we
+can add its terms in any order.
+
+If the limit $\underset{n\rightarrow\infty}{\lim}\overset{n}{\underset{k=0}{\sum}}a_{k}$
+does not exists the series diverges; otherwise, it converges. The
+terms of an infinite series cannot always be added in any order: we
+can change such an order only if the series is \emph{absolutely convergent},
+that is a series for which $\overset{n}{\underset{k=0}{\sum}}|a_{k}|$
+also converges.
+
+
+\subsubsection{Linearity}
+
+All finite series are linear, which means \[
+\underset{k=1}{\overset{n}{\sum}}(ca_{k}+b_{k})=c\underset{k=1}{\overset{n}{\sum}}a_{k}+\underset{k=1}{\overset{n}{\sum}}b_{k}\]
+
+
+where $c$ is any real number. This also applies to infinite convergent
+series. This property becomes really handy when manipulating and transforming
+summations incorporating other linear operators (integration, differentiation,
+logarithm,...) and in particular asymptotic notation.
+
+
+\subsubsection{Products}
+
+We can convert a formula with a product to a formula with a summation
+using the identity\[
+\lg\left(\underset{k=1}{\overset{n}{\prod}}a_{k}\right)=\underset{k=1}{\overset{n}{\sum}}\lg a_{k}\]
+
+
+
+\subsection{Common series}
+
+Some closed form solutions that are particularly handy.
+
+
+\subsubsection{Arithmetic series}
+
+\[
+\overset{n}{\underset{k=0}{\sum}}k=\frac{n(n+1)}{2}\]
+
+
+\[
+\overset{n}{\underset{k=0}{\sum}}k^{2}=\frac{n(n+1)(2n+1)}{6}\]
+
+
+\[
+\overset{n}{\underset{k=0}{\sum}}k^{3}=\frac{n^{2}(n+1)^{2}}{4}\]
+
+
+$ $
+
+
+\subsubsection{Geometric series}
+
+For real $x\neq1$, we have
+
+\[
+\overset{n}{\underset{k=0}{\sum}}x^{k}=\frac{x^{n+1}-1}{x-1}\]
+
+
+A particular case of the previous is $\sum_{k=0}^{n}2^{k}=2^{n+1}-1$
+when $x=2$.
+
+When the summation is infinite and $|x|<1$, we have the infinite
+decreasing series
+
+\[
+\overset{\infty}{\underset{k=0}{\sum}}x^{k}=\frac{1}{1-x}\]
+
+
+of which a particular case is $\sum_{k=0}^{\infty}\frac{1}{2^{k}}=2$
+when $x=2$.
+
+
+\subsubsection{Harmonic series}
+
+For positive integers $n$, the \emph{$n$}th harmonic number is \[
+H_{n}=1+\frac{1}{2}+\frac{1}{3}+\dots+\frac{1}{n}=\underset{k=1}{\overset{n}{\sum}}\frac{1}{k}=\ln n+O(1)\]
+
+
+The infinite series $\underset{k=1}{\overset{\infty}{\sum}}\frac{1}{k}$
+it's an example of divergent series.
+
+
+\subsubsection{Telescoping series}
+
+\[
+\underset{k=1}{\overset{n}{\sum}}(a_{k}-a_{k-1})=a_{n}-a_{0}\]
+
+
+\[
+\underset{k=0}{\overset{n-1}{\sum}}(a_{k}-a_{k+1})=a_{0}-a_{n}\]
+
+
+Note that sometime it is possible to rewrite a particular series as
+a telescoping series. As an example $\underset{k=1}{\overset{n-1}{\sum}}\frac{1}{k(k+1)}=\underset{k=1}{\overset{n-1}{\sum}}\left(\frac{1}{k}-\frac{1}{k+1}\right)=1-\frac{1}{n}$.
+
+
+\subsubsection{Other common series}
+
+\[
+\underset{k=0}{\overset{n}{\sum}}1=n\]
+
+
+This may seem trivial but it's very handy to manipulate and transform
+summations. 
+
+An example application of the previous is this is the series
+
+\[
+\underset{k=1}{\overset{n}{\sum}}\lg n=\lg n\cdot\underset{k=1}{\overset{n}{\sum}}1=n\lg n\]
+
+
+
+\section{Propositional Calculus \label{sec:Propositional-Calculus}}
+
+It's the study of Boolean functions, where 1 plays the role of {}``true''
+and 0 the role of {}``false''.
+
+
+\subsection{Definitions}
+\begin{description}
+\item [{Statement~variable:}] a Boolean variable
+\item [{Statement~form:}] a particular form of a Boolean function (e.g.
+$p\wedge(\sim q\vee r)$)
+\item [{Equivalence~of~two~statement~forms:}] two statements forms
+are \emph{logically equivalent} if they have the same truth table
+\item [{Tautology~(Contradiction):}] A statement form that represents
+the constant 1 function is called \emph{tautology} and is represented
+with the symbol $\top$. A statement form that represents the constant
+0 function is called \emph{contradiction} and is represented with
+the symbol $\bot$.
+\end{description}
+
+\subsection{Logic and sets}
+
+Given a set $P$, let the corresponding lower case letters $p$ stand
+for the statement that $x\in P$. Substituting:
+\begin{itemize}
+\item $\neg$ with $\sim$
+\item $\cup$ with $\vee$
+\item $\cap$ with $\wedge$
+\item $U$ with $\top$
+\item $\emptyset$ with $\bot$
+\end{itemize}
+we can use the same set properties listed in section \ref{sub:Properties},
+that is there is a correspondence between set and logic notation.
+
+
+\subsection{Implication}
+
+We define $p\implies q$ to be the Boolean function, called implication,
+with the following truth table
+
+\begin{center}
+\begin{tabular}{ccc}
+\hline 
+$p$ & $q$ & $p\implies q$\tabularnewline
+\hline
+0 & 0 & 1\tabularnewline
+0 & 1 & 1\tabularnewline
+1 & 0 & 0\tabularnewline
+1 & 1 & 1\tabularnewline
+\end{tabular}
+\par\end{center}
+
+It is possible to write an equivalent statement form using only $(\sim,\vee)$,
+This and several other facts about implication are summarized in the
+following table. $\sim q\implies\sim p$ is called the \emph{contrapositive},
+$q\implies p$ is called the \emph{converse} and$\sim p\implies\sim q$
+is called the \emph{inverse.}
+
+\begin{center}
+\begin{tabular}{ccccccccc}
+\hline 
+$p$ & $q$ & $p\implies q$ & $\sim p\vee q$ & $\sim(p\implies q)$ & $p\wedge\sim q$ & $\sim q\implies\sim p$ & $q\implies p$ & $\sim p\implies\sim q$\tabularnewline
+\hline
+0 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 1\tabularnewline
+0 & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 0\tabularnewline
+1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1\tabularnewline
+1 & 1 & 1 & 1 & 0 & 0 & 1 & 1 & 1\tabularnewline
+\end{tabular}
+\par\end{center}
+
+The $\subseteq$ operator is the equivalent of $\implies$ in the
+set notation as it can be shown with a simple Venn diagram.
+
+
+\subsubsection{Double implication}
+
+We define $p\iff q$ as the Boolean function, called \emph{double
+implication}, with the following truth table
+
+\begin{center}
+\begin{tabular}{cccc}
+\hline 
+$p$ & $q$ & $p\iff q$ & $(p\implies q)\wedge(q\implies p)$\tabularnewline
+\hline
+0 & 0 & 1 & 1\tabularnewline
+0 & 1 & 0 & 0\tabularnewline
+1 & 0 & 0 & 0\tabularnewline
+1 & 1 & 1 & 1\tabularnewline
+\end{tabular}
+\par\end{center}
+
+
+\subsubsection{Equivalence in English language}
+\begin{itemize}
+\item $p\implies q$ is normally written as {}``\emph{q if p}''. The \emph{if}
+part in {}``\emph{q} if and only if \emph{p}'' where \emph{p} is
+the \emph{sufficient} condition for \emph{q}.
+\item $p\Longleftarrow q$ is normally written as {}``\emph{q only if p}''.
+The \emph{only if} part in {}``\emph{q} if and only if \emph{p}''
+where \emph{p} is the \emph{necessary} condition for \emph{q}.
+\end{itemize}
+
+\section{First Order Logic (Predicate Calculus)}
+
+A \emph{predicate} is any function whose codomain are statements that
+are either true or false. There are two things to be careful about:
+\begin{itemize}
+\item the codomain are statements \emph{not} the truth value of the statements,
+\item the domain is arbitrary.
+\end{itemize}
+The truth set of a predicate $S$ with domain $D$ is the set of those
+$x\in D$ for which $S(x)$ is true. It is written $\{x|S(x)\}$.
+
+
+\subsection{Quantifiers}
+\begin{itemize}
+\item The phrase {}``for all'' is called universal quantifier and is written
+$\forall$. $"\forall x\in D,S(x)"$ is equivalent to saying that
+the truth set of $S(x)$ contains the set $D$.
+\item The phrase {}``for some'' is called existential quantifier and is
+written $\exists$. $"\exists x\in D,S(x)"$ is equivalent to saying
+that the truth set $S(x)$ contains at least one element of the set
+$D$.
+\end{itemize}
+
+\subsection{Algebraic rules for predicate logic}
+
+In a formula, if a predicate doens't contain a varible that is bound
+to a quantifier, then it can be moved in and out of the scope of the
+quantifier without changing the truth value of the formula.
+
+
+\subsubsection{Negating quantifiers}
+\begin{itemize}
+\item $\forall x\in D,P(x)\iff\sim(\exists x\in D,\sim P(x))$ which can
+be written also as $\sim(\forall x\in D,P(x))\iff\exists x\in D,\sim P(x)$
+\item $\exists x\in D,P(x)\iff\sim(\forall x\in D,\sim P(x))$ which can
+be written also as $\sim(\exists x\in D,P(x))\iff\forall x\in D,\sim P(x)$
+\end{itemize}
+Whenevere there are more than one quantifier we have to negate the
+most external one and then the second most external and so on until
+we reach a quantifier-free part. At this point we can apply the same
+rules of predicate logic.
+
+
+\subsubsection{Moving quantifiers}
+\begin{itemize}
+\item $\forall x\in D,(P(x)\wedge Q(x))\iff(\forall x\in D,P(x))\wedge(\forall x\in D,Q(x))$.
+We can't do this if we have $\exists$.
+\item $\exists x\in D,(P(x)\vee Q(x))\iff(\exists x\in D,P(x))\vee(\exists x\in D,Q(x))$.
+We can't do this if we have $\forall$.
+\end{itemize}
+As long as quantifiers are not involved the same rules of predicate
+logic can be used.
+
+\[
+\]
+
+
+
+\subsection{Standardized forms}
+
+Any formula can be expressed using only $(\sim,\wedge)$ or $(\sim,\vee)$.
+This leads to two standardized forms:
+\begin{itemize}
+\item \emph{Conjunctive Normal Form (CNF)}: A formula is in CNF if it is
+a conjunction of clauses, where a clause is a disjunction of literals,
+where a literal and its complement cannot appear in the same clause.
+\item \emph{Disjunctive Normal Form (DNF)}: A formula is in DNF if it is
+a disjunction of clauses, where a clause is a conjunction of literals.
+\end{itemize}
+A formula that is the CNF equivalent of a formula with $n$ clauses
+will have, in general, $O(2^{n})$ clauses; that is, in some cases
+the conversion to CNF can lead to an exponential explosion of the
+formula. The same is true for DNF.
+\begin{itemize}
+\item \emph{Prenex normal form}: A formula is in prenex normal form if it
+is written as a string of quantifiers followed by a quantifier-free
+part (referred to as the matrix).
+\item \emph{Skolem normal form}: A formula is in Skolem normal form if it
+is in conjunctive prenex normal form with only universal first-order
+quantifiers.
+\end{itemize}
+
+\section{Discrete probability }
+
+Let $U$ be a \emph{finite sample} space and $P:U\rightarrow\mathbb{R}$
+such that $P(t)\geq0,\forall t\in U$ and $\sum_{t\in U}P(t)=1$,
+then $P$ is called a \emph{probability function} on $U$ and the
+pair $(U,P)$ is called a \emph{probability space}. We extend this
+definition to subsets of $U$ called \emph{events}: $E\subseteq U:P(E)=\sum_{t\in E}P(t)$.
+
+
+\subsection{Probability of disjoint events}
+
+If $X\subset U$, $Y\subset U$ and $X\cap Y=\emptyset$ then 
+\begin{itemize}
+\item $P(X\cup Y)=P(X)+P(Y)$ and
+\item $P(X\cap Y)=0$.
+\end{itemize}
+When events are \emph{NOT} disjoint we can use Venn diagrams to calculate
+probability of events. The following equivalences may me handy:
+\begin{itemize}
+\item $P(\bar{A})=1-P(A)$
+\item $P(A\cap B)=P(A)-P(A-B)$
+\end{itemize}
+
+\subsection{Discrete probability distributions}
+
+
+\subsubsection{Bernoulli}
+
+$B(1,p)$ represents an event whose probability is $p$. 
+
+e.g. The probability of obtaining head (a success) when flipping a
+coin is $B(1,0.5)$.
+
+
+\subsubsection{Binomial}
+
+$B(n,p)$ represents the probability of obtaining exactly $k$ successes
+in a series of $n$ independent events each one with a probability
+$p$. 
+
+The probability mass function (p.m.f.) is:\[
+P(K=k)=\left({n\atop k}\right)p^{k}(1-p)^{n-k}\]
+
+
+e.g. The probability of obtaining $k$ heads when flipping a coin
+is $B(k,0.5)$
+
+
+\subsubsection{Geometric}
+
+Represents the number of Bernoulli trials before a success.
+
+The probability mass function is:\[
+P(K=k)=p(1-p)^{k-1}\]
+
+
+e.g. The probability that you need exactly $k$ trials, each one with
+probability $p$, before a success is the p.m.f.
+
+
+\subsubsection{Poisson}
+
+$Pois(\lambda)$ represents the probability of a series of events
+occurring in a fixed amount of time knowing they occur with a certain
+rate.
+
+The probability mass function is:
+
+\[
+P(K=k)=\frac{\lambda^{k}}{k!}\cdot e^{-\lambda}\]
+
+
+where $\lambda$ is the expected number of occurrences and $k$ is
+the actual number of occurrences of an event - the probability of
+which is given by the p.m.f.
+
+e.g. The probability that there will be exactly $k$ calls to a call-center
+in an hour, where the average calling rate is $\lambda$ calls/hour,
+is the p.m.f.
+
+
+\subsubsection{Hypergeometric}
+
+Represents the number of successes on $n$ draws from a population
+without replacement 
+
+The probability mass function is:
+
+\[
+P(K=k)=\frac{\left({m\atop k}\right)\left({N-m\atop n-k}\right)}{\left({N\atop m}\right)}\]
+
+
+where $m$ is the possible number of successes, $n$ is the number
+of draws, $N$ is the cardinality of the population and $k$ is the
+number of successes - the probability of which is given by the p.m.f.
+
+e.g. The probability of extracting exactly $k$ white marbles (i.e.
+having $k$ successes) drawing $n$ without replacement from an urn
+containing $N$ marbles in total, $m$ of which are white is the p.m.f.
+
+
+\section{Graphs}
+
+
+\subsection{Definitions}
+
+The following definitions may refer to directed graphs (D), undirected
+graphs (U) or both (B).
+
+
+\subsubsection{Basic definitions}
+\begin{itemize}
+\item (B) Usually $n=|V|$ and $m=|E|$. In any graph, $m\leq n^{2}$.
+\item (D) A \textbf{directed graph} $G$ is a pair $(V,E)$ where $V$ is
+a finite set (called the vertex set) and $E$ is a binary relation
+on $V$ and is called the edge set of $G$. 
+\item (U) In an \textbf{undirected graph} $G=(V,E)$ the edge set $E$ consists
+of unordered pairs of \emph{distinct} vertices.
+\item (D)\textbf{ Self-loops} are edges from a vertex to itself and are
+only possible in directed graphs.
+\item (D) A directed graph with no self-loops is \textbf{simple}.
+\item (D) If $(u,v)$ is an edge in a graph $G=(V,E)$, we say that the
+vertex $v$ is \textbf{adjacent} to vertex $u$. 
+\item (D) In a directed graph $G$, a \textbf{neighbor} of a vertex $u$
+is any vertex that is adjacent to $u$ in the undirected version of
+$G$.
+\item (U) In undirected graphs \textbf{adjacency} relation is symmetric.
+\item (U) In an undirected graph, $u$ and $v$ are \textbf{neighbors} if
+they are adjacent.
+\end{itemize}
+
+\subsubsection{Degree}
+\begin{itemize}
+\item (D) The \textbf{degree} of a vertex in a directed graph is its \textbf{in-degree}
+plus its \textbf{out-degree}.
+\item (U) The \textbf{degree} of a vertex in an undirected graph is the
+number of edge incident on it.
+\item (B) The \emph{degree} of a vertex \emph{$v$} is denoted $\deg(v)$.
+The maximum degree of a graph $G$, denoted by $\Delta(G)$, and the
+minimum degree of a graph, denoted by $\delta(G)$, are the maximum
+and minimum degree of its vertices.
+\item (B) A vertex whose degree is 0 is \textbf{isolated}.
+\item (B) In a graph $G=(V,E)$, $\sum_{v\in V}d_{v}=2\cdot|E|$ where $d_{v}$
+is the degree of vertex $v\in V$.
+\end{itemize}
+
+\subsubsection{Paths and cycles}
+\begin{itemize}
+\item (B) In a graph $G=(V,E)$, a \textbf{path} of length $k$ from a vertex
+$u$ to a vertex $u'$ it's a sequence $\left\langle v_{0},v_{1},v_{2},\dots,v_{k}\right\rangle $
+of vertices such that $u=v_{0},\, u'=v_{k}$ and $(v_{i-1},v_{i})\in E$
+for $i=1,2,\dots,k$. 
+\item (B) The \textbf{length} of the \textbf{path} is the number of edges
+in the path: therefore the path contains $k$ edges and $k+1$ vertices.
+\item (B) If there is a path $p$ from $u$ to $u'$ we say that $u'$ is
+\textbf{reachable} from $u$ via $p$.
+\item (B) A \textbf{trail} is a path in which all edges are distinct.
+\item (B) A \textbf{simple path} is a path where all vertices (and thus
+all edges) are distinct.
+\item (B) Two \textbf{paths} are \textbf{independent} (alternatively, \textbf{internally
+vertex-disjoint}) if they do not have any internal vertex in common.
+\item (B) A \textbf{subpath} of a path is a contiguous subsequence of its
+vertices.
+\item (D) A \textbf{cycle} is a path $\left\langle v_{0},v_{1},v_{2},\dots,v_{k}\right\rangle $
+where $v_{0}=v_{k}$ and the path contains at least one edge. (a self-loop
+is a cycle of length 1)
+\item (U) A \textbf{cycle} is a path $\left\langle v_{0},v_{1},v_{2},\dots,v_{k}\right\rangle $
+where $v_{0}=v_{k}$ and the path contains at least 3 edges.
+\item (B) A \textbf{simple cycle} is a cycle where all vertices are distinct.
+\item (B) A graph with no cycles is \textbf{acyclic}.
+\end{itemize}
+
+\subsubsection{Connectivity}
+\begin{itemize}
+\item (B) The \textbf{connected components} of a graph are the equivalence
+classes of vertices under the {}``it's reachable from'' relation.
+\item (U) An undirected graph is \textbf{connected} if it has \emph{exactly
+one} connected component. In any connected, undirected graph $|E|\geq|V|-1$.
+\item (D) A directed graph is\textbf{ strongly connected} if every two vertices
+are reachable from each other. The \emph{strongly connected components
+}of a directed graph are the equivalence classes of vertices under
+the {}``are mutually reachable'' relation. A directed graph is strongly
+connected if it has \emph{exactly one} strongly connected component
+\item (U) An \textbf{Eulerian circuit} is a cycle in an undirected graph
+which visits \emph{each edge exactly once} and also returns to the
+starting vertex.
+\item (U) A \textbf{Hamiltonian cycle} is a cycle in an undirected graph
+which visits \emph{each vertex exactly once} and also returns to the
+starting vertex.
+\end{itemize}
+
+\subsubsection{Graph transformations}
+\begin{itemize}
+\item (B) We say that a graph $G'=(V',E')$ is a \textbf{subgraph} of $G=(V,E)$
+if $V'\subseteq V$ and $E'\subseteq E$. Given a set $V'\subseteq V$
+the subgraph of $G$ \textbf{induced} by $V'$ is the graph $G'=(V',E')$,
+where $E'=\{(u,v)\in E:u,v\in V'\}$.
+\item (B) A \textbf{cut} is a partition of the vertices of a graph into
+two disjoint subsets. The \textbf{cut-set} of the cut is the set of
+edges whose end points are in different subsets of the partition.
+Edges are said to be \textbf{crossing} the cut if they are in its
+cut-set.
+\item (U) The \textbf{contraction} of an undirected graph $G=(V,E)$ by
+an edge $e=(u,v)$ is a graph $G'=(V',E')$, where $V'=V-\{u,v\}\cup\{x\}$
+where $x$ is a new vertex. The set of edges $E'$ is formed from
+$E$ by first deleting the edge $(u,v)$ and, for each vertex $w$
+incident on $u$ or $v$, deleting whichever of $(u,w)$ or $(v,w)$
+is in $E$ and then adding the new edge $(x,w)$. This will produce
+a graph $G'$ where $u$ and $v$ are {}``contracted'' into a single
+vertex $x$.
+\item (U) The \textbf{directed version} of an undirected graph $G$ is the
+directed graph $G'$ obtained from $G$ replacing each undirected
+edge $(u,v)$ with the two directed edges $(u,v)$ and $(v,u)$.
+\item (D) The \textbf{undirected version} of a directed graph $G$ is the
+undirected graph $G'$ obtained from $G$ by removing self-loops and
+{}``directions from edges''.
+\item (D) The \textbf{transpose} of a directed graph $G=(V,E)$ is the graph
+$G=(V,E^{T})$, where $E^{T}=\{(v,u)\in V\times V:(u,v)\in E\}$.
+Thus $G^{T}$ is $G$ with all its edges reversed. 
+\end{itemize}
+
+\subsubsection{Graph shapes}
+\begin{itemize}
+\item (B) Two graphs $G=(V,E)$ and $G'=(V',E')$ are \textbf{isomorphic}
+if there exists a \emph{bijection} $f:V\rightarrow V'$ such that
+$(u,v)\in E\iff(f(u),f(v))\in E'$. In other words, we can {}``relabel''
+the vertices of $G$ to be vertices of $G'$ maintaining the corresponding
+edges in $G$ and $G'$.
+\item (U) A \textbf{complete graph} is an undirected graph $G=(V,E)$ in
+which \emph{every pair} of vertices is adjacent. Also, $|E|=\frac{n(n-1)}{2}$.
+\item (U) A \textbf{clique} in an undirected graph $G=(V,E)$ is a subset
+of the vertex set$C\subseteq V$, such that for every two vertices
+in $C$, there exists an edge connecting the two. This is equivalent
+to saying that the subgraph induced by $C$ is complete (in some cases,
+the term clique may also refer to the subgraph itself).
+\item (U) A \textbf{bipartite graph} is an undirected graph $G=(V,E)$ in
+which $V$ can be partitioned into two sets $V_{1}$ and $V_{2}$
+such that $(u,v)\in E\implies(u\in V_{1}\wedge v\in V_{2})\vee(u\in V_{2}\wedge v\in V_{1})$.
+Also, $G$ is bipartite if and only if every cycle has \emph{even}
+length.
+\end{itemize}
+
+\subsection{Trees}
+
+
+\subsubsection{Definitions}
+\begin{itemize}
+\item An acyclic, undirected graph is a \textbf{forest}. 
+\item A connected, acyclic, undirected graph is a \textbf{(free) tree}.
+\item A \textbf{spanning tree} $T$ of a connected, undirected graph $G=(V,E)$
+is a subgraph of $G$ such that $T=(V,E')$; that is a tree {}``covering''
+all vertices of $G$.
+\end{itemize}
+
+\subsubsection{Properties}
+
+The following are all equivalent.
+\begin{itemize}
+\item $G$ is a tree.
+\item Any two vertices in a tree are connected by a unique simple path.
+\item $G$ is connected but if you remove a single edge from $E$ the resulting
+graph becomes disconnected.
+\item $G$ is acyclic but if you add a single edge to $E$ then the resulting
+graph contains a cycle.
+\item $|E|=|V|-1$.
+\end{itemize}
+
+\subsubsection{Rooted trees}
+\begin{itemize}
+\item We call any node $y$ on the unique single path from the root $r$
+to $x$ and \textbf{ancestor} of $x$. 
+\item If $y$ is an ancestor of $x$, then $x$ is a \textbf{descendant}
+of $y$.
+\item The \textbf{subtree rooted at $\mathbf{x}$} is the tree induced by
+descendant of $x$, rooted at $x$.
+\item The \textbf{degree} of a node $x$ in a rooted tree$T$ equals the
+number of children of a node.
+\item The \textbf{depth} of a node $x$ is the length of the simple path
+from the root $r$ to $x$.
+\item A level of a tree consists of all nodes at the same depth.
+\item The \textbf{height} of a node $x$ in a rooted tree is the number
+of edges on the longest simple \emph{downward} (don't go back to the
+root) path from $x$ to a leaf and the height of a tree is the height
+of its root.
+\item An \textbf{ordered tree} is a rooted tree in which the children of
+each node are ordered.
+\end{itemize}
+
+\subsubsection{Binary and positional trees}
+\begin{itemize}
+\item A binary tree $T$ is a structure defined on a finite set of nodes
+that either
+
+\begin{itemize}
+\item contains no nodes, or
+\item is composed of three disjoint sets of nodes, a root node, a binary
+tree called its \emph{left subtree}, and a binary tree called its
+\emph{right subtree}.%
+\footnote{This implies that a binary tree is an ordered tree (at least, but
+there is more). %
+} 
+\end{itemize}
+\item A \textbf{full binary tree} is a binary tree where each node is either
+a leaf or has degree exactly 2.
+
+\begin{itemize}
+\item The \textbf{number of leaves} in a full binary tree is one more the
+number of internal nodes.
+\end{itemize}
+\item A \textbf{complete binary} tree is a binary tree in which every level,
+\emph{except possibly the last}, is completely filled, and all nodes
+are as far \emph{left} as possible.
+
+\begin{itemize}
+\item The \textbf{height} in a complete binary tree with $n$ leaves is
+$\left\lceil \log n\right\rceil $.
+\item If \textbf{all the $h$ levels} are completely filled then:
+
+\begin{itemize}
+\item The number of leaves is $2^{h}$.
+\item The number of internal nodes is $2^{h}-1$.
+\end{itemize}
+\end{itemize}
+\item Full VS complete binary trees:
+
+\begin{itemize}
+\item All nodes that are not leaves have two children in a full binary tree,
+this is not true for complete binary trees because there can be a
+node with just the left children (the last one that has been filled)
+\item A complete binary tree becomes a full binary tree every time all nodes
+have exactly two children (including the last one that has been filled)
+\item A full binary tree has no shape restriction (can have {}``holes''
+in the middle) while a complete binary tree does.
+\item In a complete binary tree all the leaves must be on level $h$ or
+$h-1$ while this is not true for full binary trees (can have deep
+left/right side and very shallow right/left side)
+\end{itemize}
+\item The minimum height of a binary tree with $n$ nodes is $\left\lfloor \log n\right\rfloor $.
+\end{itemize}
+
+\subsection{Weights in a graph}
+
+Let $G=(V,E)$ be a simple graph and let $\lambda$ be a function
+from $E$ to the \emph{positive}%
+\footnote{We must be careful because sometime this is not always true and there
+are cycles of negative length for which some algorithms don't work. %
+} real numbers. We call $\lambda(e)$ the \textbf{weight} of the edge
+$e.$ If $H=(V',E')$ is a subgraph of $G$, then $\lambda(H)$, the
+weight of $H$, is the sum of $\lambda(e')$ over all $e'\in E'$.
+\begin{itemize}
+\item A \textbf{minimum weight spanning tree} for a connected graph $G$
+is a spanning tree such that $\lambda(T)\leq\lambda(T')$ whenever
+$T'$ is another spanning tree.
+\end{itemize}
+
+\subsection{Graph coloring}
+
+Given an undirected graph $G=(V,E)$ a \textbf{graph coloring} is
+a way of coloring the vertices of a graph such that no two adjacent
+vertices share the same color; this is called a vertex coloring. A
+coloring using at most $k$ colors is called a (proper) $k$-coloring.
+The smallest number of colors needed to color a graph $G$ is called
+its chromatic number, $\chi(G)$. Some facts about graph coloring
+follow:
+\begin{itemize}
+\item $1\leq\chi(G)\leq n$, since assigning distinct colors to distinct
+vertices always yields a proper coloring.
+\item $\chi(G)\leq\Delta(G)+1$, since it is possible to devise a greedy
+algorithm that produces such a coloring. 
+\item Since complete graphs have $\Delta(G)=n-1$ and $\chi(G)=n$, and
+odd cycles have $\Delta(G)=2$ and $\chi(G)=3$, for these graphs
+this bound is the best possible.
+\item A graph can be colored with \textbf{1 color} if and only if $E=\emptyset$.
+\item Determining if a graph can be colored with \textbf{2 colors} is equivalent
+to determining whether or not the graph is bipartite, and thus computable
+in linear time using breadth-first search.
+\item Generally deciding if a given graph admits a $k$-coloring is NP-complete.
+\end{itemize}
+
+\subsection{Matchings}
+
+Given an undirected graph \emph{G = (V,E)}, a \textbf{matching} $M$
+in $G$ is a set of pairwise non-adjacent edges; that is, no two edges
+share a common vertex.
+\begin{itemize}
+\item A vertex is \textbf{matched} (or \textbf{saturated}) if it is incident
+to an edge in the matching. Otherwise the vertex is \textbf{unmatched}.
+\item A \textbf{perfect matching} (or \textbf{complete matching}) is a matching
+which matches all vertices of the graph. That is, every vertex of
+the graph is incident to exactly one edge of the matching.
+\item A\textbf{ stable matching} is a matching that is perfect and stable.
+Stable means there is no element $A$ of the first matched set that
+prefers an element $B$ (that it's not matched to) of the second matched
+set, and at the same time $B$ also prefers $A$ over the one element
+it is currently matched with.
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,6070 @@
+#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 1
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Foundations of Computer Science: notes for UIC qual
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+This work is licensed under a 
+\bar under
+
+\begin_inset CommandInset href
+LatexCommand href
+name "Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License"
+target "http://creativecommons.org/licenses/by-nc-sa/3.0"
+
+\end_inset
+
+
+\bar default
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+Gugo
+\end_layout
+
+\begin_layout Subsection*
+Disclaimer
+\end_layout
+
+\begin_layout Standard
+These notes have been prepared with the 
+\series bold
+only
+\series default
+ purpose to help me pass the Computer Science qualifiying exam at the University
+ of Illinois at Chicago.
+ They are distributed as they are (including errors, typos, omissions, etc.)
+ to help other students pass this exam (and possibly relieving them from
+ part of the pain associated with such a process).
+ I take 
+\series bold
+no responsibility
+\series default
+ for the material contained in these notes (which means that you can't sue
+ me if you don't pass the qual!) Moreover, this pdf version is distributed
+ together with the original LaTeX (and LyX) sources hoping that someone
+ else will improve and correct them.
+ I mean in absolute no way to violate copyrights and/or take credit stealing
+ the work of others.
+ The ideas contained in these pages are 
+\series bold
+not mine
+\series default
+ but I've just aggregated information scattered all over the internet.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Set Theory (Basic concepts) 
+\end_layout
+
+\begin_layout Subsection
+Definitions
+\end_layout
+
+\begin_layout Itemize
+A 
+\emph on
+set
+\emph default
+ is an unordered collection of distinct objects.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+empty set
+\emph default
+ 
+\begin_inset Formula $\emptyset$
+\end_inset
+
+ is defined as 
+\begin_inset Formula $\emptyset=\{\nexists x:x\in\emptyset\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+universe set
+\emph default
+ 
+\begin_inset Formula $U$
+\end_inset
+
+ is defined as 
+\begin_inset Formula $U=\{\forall x:x\in U\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+intersection
+\emph default
+ of sets 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ is the set 
+\begin_inset Formula $A\cap B=\{x:x\in A\text{ and }x\in B\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+union
+\emph default
+ of sets 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ is the set 
+\begin_inset Formula $A\cup B=\{x:x\in A\text{ or }x\in B\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+complement
+\emph default
+ of set 
+\begin_inset Formula $A$
+\end_inset
+
+ is the set 
+\begin_inset Formula $\bar{A}=\{x:x\notin A\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+difference
+\emph default
+ of sets 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ is the set 
+\begin_inset Formula $A\backslash B=A\cap\bar{B}=\{x:x\in A\text{ and }x\notin B\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\emph on
+symmetric difference (XOR)
+\emph default
+ of sets 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ is the set 
+\begin_inset Formula $A\otimes B=(A\backslash B)\cup(B\backslash A)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Properties 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Properties"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Empty set: 
+\begin_inset Formula $A\cup\emptyset=A$
+\end_inset
+
+ and 
+\begin_inset Formula $A\cap\emptyset=\emptyset$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Universe set: 
+\begin_inset Formula $A\cup U=U$
+\end_inset
+
+ and 
+\begin_inset Formula $A\cap U=A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Idempotency: 
+\begin_inset Formula $A\cup A=A$
+\end_inset
+
+ and 
+\begin_inset Formula $A\cap A=A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Cummutative: 
+\begin_inset Formula $A\cup B=B\cup A$
+\end_inset
+
+ and 
+\begin_inset Formula $A\cap B=B\cap A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Associative: 
+\begin_inset Formula $A\cup(B\cup C)=(A\cup B)\cup C$
+\end_inset
+
+ and 
+\begin_inset Formula $A\cap(B\cap C)=(A\cap B)\cap C$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Distributive: 
+\begin_inset Formula $A\cup(B\cap C)=(A\cup B)\cap(B\cup C)$
+\end_inset
+
+ and 
+\begin_inset Formula $A\cap(B\cup C)=(A\cap B)\cup(B\cap C)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Absorption: 
+\begin_inset Formula $A\cup(A\cap B)=A$
+\end_inset
+
+ and 
+\begin_inset Formula $A\cap(A\cup B)=A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+DeMorgan: 
+\begin_inset Formula $\overline{A\cup B}=\bar{A}\cap\bar{B}$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{A\cap B}=\bar{A}\cup\bar{B}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Negation: 
+\begin_inset Formula $A\cup\bar{A}=U$
+\end_inset
+
+ and 
+\begin_inset Formula $A\cap\bar{A}=\emptyset$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Double negation: 
+\begin_inset Formula $\bar{\bar{A}}=A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Power set and partitions
+\end_layout
+
+\begin_layout Itemize
+We define the 
+\emph on
+power set
+\emph default
+ of a set 
+\begin_inset Formula $A$
+\end_inset
+
+ as the set of all subset of 
+\begin_inset Formula $A$
+\end_inset
+
+: 
+\begin_inset Formula $\mathcal{P}(A)=\{X:X\subseteq A\}$
+\end_inset
+
+.
+ The cardinality of such a set is: 
+\begin_inset Formula $\left|\mathcal{P}(A)\right|=2^{\left|A\right|}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+We say a collection 
+\begin_inset Formula $\alpha=\{A_{i}\}$
+\end_inset
+
+ of non-empty sets forms a 
+\emph on
+partition
+\emph default
+ of the set 
+\begin_inset Formula $A$
+\end_inset
+
+ if and only if:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $A_{i}\in\alpha\implies A_{i}\in\mathcal{P}(A)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+the sets are pairwise disjoint, that is, 
+\begin_inset Formula $A_{i},A_{j}\in\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $i\neq j$
+\end_inset
+
+ 
+\begin_inset Formula $\implies A_{i}\cap A_{j}=\emptyset$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\underset{A_{i}\in\alpha}{\bigcup}A_{i}=A$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Cartesian product
+\end_layout
+
+\begin_layout Standard
+The Cartesian product of two sets 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+, denoted 
+\begin_inset Formula $A\times B$
+\end_inset
+
+, is the set of all the 
+\emph on
+ordered
+\emph default
+ pairs such that the first element of the pair is an element of 
+\begin_inset Formula $A$
+\end_inset
+
+ and the second is an element of 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ More formally 
+\begin_inset Formula $A\times B=\{(a,b):a\in A\text{ and }b\in B\}$
+\end_inset
+
+ whose cardinality is 
+\begin_inset Formula $|A\times B|=|A|\cdot|B|$
+\end_inset
+
+ if 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ are finite.
+\end_layout
+
+\begin_layout Standard
+We denote an 
+\emph on
+n-fold
+\emph default
+ Cartesian product over a single set 
+\begin_inset Formula $A^{n}=A\times A\times\dots\times A$
+\end_inset
+
+ whose cardinality is 
+\begin_inset Formula $|A^{n}|=|A|^{n}$
+\end_inset
+
+ if A is finite.
+\end_layout
+
+\begin_layout Section
+Relations 
+\end_layout
+
+\begin_layout Standard
+An 
+\emph on
+n-ary
+\emph default
+ relation on sets 
+\begin_inset Formula $A_{1},\, A_{2},\,\dots,\, A_{n}$
+\end_inset
+
+ is a subset of 
+\begin_inset Formula $A_{1}\times A_{2}\times\dots\times A_{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+binary relation
+\emph default
+ 
+\begin_inset Formula $R$
+\end_inset
+
+ on two sets 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ is a subset of the Cartesian product 
+\begin_inset Formula $A\times B.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Properties of binary relations
+\end_layout
+
+\begin_layout Itemize
+A binary relation 
+\begin_inset Formula $R\subseteq A\times A$
+\end_inset
+
+ is 
+\emph on
+reflexive
+\emph default
+ if 
+\begin_inset Formula $aRa$
+\end_inset
+
+ for all 
+\begin_inset Formula $a\in A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+A relation 
+\begin_inset Formula $R$
+\end_inset
+
+ is 
+\emph on
+symmetric
+\emph default
+ if 
+\begin_inset Formula $aRb\implies bRa$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+A relation 
+\begin_inset Formula $R$
+\end_inset
+
+ is 
+\emph on
+transitive
+\emph default
+ if 
+\begin_inset Formula $aRb\wedge bRc\implies aRc$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+A binary relation 
+\begin_inset Formula $R$
+\end_inset
+
+ on a set 
+\begin_inset Formula $A$
+\end_inset
+
+ is 
+\emph on
+antisymmetric
+\emph default
+ if 
+\begin_inset Formula $aRb\wedge bRa\implies a=b$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+An example of relation that is neither symmetric nor antisymmetric is 
+\begin_inset Formula $x$
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+divides
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $y$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+: 6 divides 3 doesn't imply 3 divides 6; 3 divides -3 and -3 divides 3 doesn't
+ imply -3=3!
+\end_layout
+
+\begin_layout Subsection
+Types of binary relations
+\end_layout
+
+\begin_layout Subsubsection
+Equivalence relation
+\end_layout
+
+\begin_layout Standard
+A binary relation that is reflexive, symmetric and transitive is an 
+\emph on
+equivalence relation
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $R$
+\end_inset
+
+ is an equivalence relation on a set 
+\begin_inset Formula $A$
+\end_inset
+
+, then for 
+\begin_inset Formula $a\in A$
+\end_inset
+
+, the 
+\emph on
+equivalence class
+\emph default
+ of 
+\begin_inset Formula $a$
+\end_inset
+
+ is the set 
+\begin_inset Formula $[a]=\{b\in A:\, aRb\}$
+\end_inset
+
+, that is, the set of all elements equivalent to 
+\begin_inset Formula $a$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The equivalence classes of any equivalence relation 
+\begin_inset Formula $R$
+\end_inset
+
+ on a set 
+\begin_inset Formula $A$
+\end_inset
+
+ form a partition of 
+\begin_inset Formula $A$
+\end_inset
+
+, and any partition of 
+\begin_inset Formula $A$
+\end_inset
+
+ determines an equivalence relation on 
+\begin_inset Formula $A$
+\end_inset
+
+ for which the sets in the partition are the equivalence classes.
+\end_layout
+
+\begin_layout Subsubsection
+Partial order
+\end_layout
+
+\begin_layout Standard
+A binary relation that is reflexive, antisymmetric and transitive is a 
+\emph on
+partial order
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+A set on which a partial order relation is defined is called a 
+\emph on
+partially ordered set
+\emph default
+.
+ (poset)
+\end_layout
+
+\begin_layout Standard
+In a poset 
+\begin_inset Formula $A$
+\end_inset
+
+, there may be no single 
+\begin_inset Quotes eld
+\end_inset
+
+maximum
+\begin_inset Quotes erd
+\end_inset
+
+ element 
+\begin_inset Formula $a$
+\end_inset
+
+ such that 
+\begin_inset Formula $bRa$
+\end_inset
+
+ for all 
+\begin_inset Formula $b\in A$
+\end_inset
+
+.
+ Instead, the set may contain several 
+\emph on
+maximal
+\emph default
+ elements 
+\begin_inset Formula $a$
+\end_inset
+
+ such that for no 
+\begin_inset Formula $b\in A$
+\end_inset
+
+, where 
+\begin_inset Formula $b\neq a$
+\end_inset
+
+, is it the case that 
+\begin_inset Formula $aRb$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Total relation
+\end_layout
+
+\begin_layout Standard
+A binary relation 
+\begin_inset Formula $R$
+\end_inset
+
+ on a set 
+\begin_inset Formula $A$
+\end_inset
+
+ is a 
+\emph on
+total relation
+\emph default
+ if 
+\begin_inset Formula $\forall a,b\in A,\, aRb\vee bRa$
+\end_inset
+
+, that is, if every pairing of elements of 
+\begin_inset Formula $A$
+\end_inset
+
+ is related by 
+\begin_inset Formula $R$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Total order
+\end_layout
+
+\begin_layout Standard
+A binary relation that is both a partial order and a total relation is a
+ 
+\emph on
+total order
+\emph default
+.
+\end_layout
+
+\begin_layout Section
+Functions 
+\end_layout
+
+\begin_layout Standard
+Given two sets 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+, a function 
+\begin_inset Formula $f$
+\end_inset
+
+ is a binary relation on 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ such that 
+\begin_inset Formula $\forall a\in A,\exists!b\in B:\,(a,b)\in f$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The set 
+\begin_inset Formula $A$
+\end_inset
+
+ is called the 
+\emph on
+domain
+\emph default
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+ and the set 
+\begin_inset Formula $B$
+\end_inset
+
+ in called the 
+\emph on
+codomain
+\emph default
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Intuitively 
+\begin_inset Formula $f$
+\end_inset
+
+ assigns an element of 
+\begin_inset Formula $B$
+\end_inset
+
+ to 
+\emph on
+each
+\emph default
+ element of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ No element of 
+\emph on
+A
+\emph default
+ is assigned two different elements of 
+\emph on
+B
+\emph default
+, but the same element of 
+\emph on
+B
+\emph default
+ can be assigned to two different elements of 
+\emph on
+A
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $f:A\rightarrow B$
+\end_inset
+
+ is a function the 
+\emph on
+image
+\emph default
+ of a set 
+\begin_inset Formula $A'\subseteq A$
+\end_inset
+
+ under 
+\begin_inset Formula $f$
+\end_inset
+
+ is defined by 
+\begin_inset Formula $f(A')=\{b\in B:\, b=f(a)\, for\, some\, a\in A'\}$
+\end_inset
+
+.
+ The 
+\emph on
+range
+\emph default
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+ is the image of its domain, that is, 
+\begin_inset Formula $f(A)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Types of functions
+\end_layout
+
+\begin_layout Itemize
+A function is a 
+\emph on
+surjection
+\emph default
+ if its range is its codomain.
+ A surjection 
+\begin_inset Formula $f:A\rightarrow B$
+\end_inset
+
+ is sometimes described as 
+\emph on
+mapping
+\emph default
+ 
+\begin_inset Formula $A$
+\end_inset
+
+
+\emph on
+ onto 
+\emph default
+
+\begin_inset Formula $B$
+\end_inset
+
+ and 
+\begin_inset Formula $|B|=|f(A)|\leq|A|$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+A function 
+\begin_inset Formula $f:A\rightarrow B$
+\end_inset
+
+ is an 
+\emph on
+injection
+\emph default
+ if distinct arguments to 
+\begin_inset Formula $f$
+\end_inset
+
+ produce distinct values, that is, 
+\begin_inset Formula $a\neq a'\implies f(a)\neq f(a')$
+\end_inset
+
+.
+ An injection is sometimes called a 
+\emph on
+one-to-one
+\emph default
+ function and 
+\begin_inset Formula $|B|\geq|f(A)|=|A|$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+A function 
+\begin_inset Formula $f:A\rightarrow B$
+\end_inset
+
+ is a 
+\emph on
+bijection
+\emph default
+ if it's injective and surjective
+\emph on
+.
+ 
+\emph default
+A bijection is sometimes called a 
+\emph on
+one-to-one correspondence
+\emph default
+ or, when 
+\begin_inset Formula $B=A$
+\end_inset
+
+, 
+\emph on
+permutation
+\emph default
+ and 
+\begin_inset Formula $|B|=|f(A)|=|A|$
+\end_inset
+
+.
+ When a function 
+\begin_inset Formula $f$
+\end_inset
+
+ is bijective we define its inverse 
+\begin_inset Formula $f^{-1}$
+\end_inset
+
+ as 
+\begin_inset Formula $f^{-1}(b)=a\iff f(a)=b$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Counting functions
+\end_layout
+
+\begin_layout Itemize
+The set of all (possible) functions from 
+\begin_inset Formula $A$
+\end_inset
+
+ to 
+\begin_inset Formula $B$
+\end_inset
+
+ is written 
+\begin_inset Formula $B^{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $|B^{A}|=|B|^{|A|}$
+\end_inset
+
+.
+ This is obtained thinking that, for each element 
+\begin_inset Formula $a\in A$
+\end_inset
+
+, 
+\begin_inset Formula $f(a)$
+\end_inset
+
+ can be any value 
+\begin_inset Formula $b\in B$
+\end_inset
+
+.
+ Therefore we have 
+\begin_inset Formula $|B|$
+\end_inset
+
+ ways of choosing 
+\begin_inset Formula $b$
+\end_inset
+
+ for each value of 
+\begin_inset Formula $a$
+\end_inset
+
+ which leads to 
+\begin_inset Formula $|B^{A}|=\underset{|A|\, times}{\underbrace{|B|\cdot|B|\cdot\dots\cdot|B|}}=|B|^{|A|}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Boolean Functions
+\end_layout
+
+\begin_layout Standard
+A Boolean function is a function 
+\begin_inset Formula $f:\times^{n}\{0,1\}\rightarrow\{0,1\}$
+\end_inset
+
+.
+ In general the number of such Boolean functions is 
+\begin_inset Formula $2^{2^{n}}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Boolean functions are strictly related to Propositional Logic: see section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Propositional-Calculus"
+
+\end_inset
+
+ for more details.
+\end_layout
+
+\begin_layout Section
+Basic counting and combinatorics
+\end_layout
+
+\begin_layout Subsection
+Combinatorics
+\end_layout
+
+\begin_layout Subsubsection
+Counting subsets
+\end_layout
+
+\begin_layout Itemize
+How many 
+\emph on
+ordered subsets
+\emph default
+ of cardinality 
+\begin_inset Formula $k$
+\end_inset
+
+ can be obtained from a set of cardinality 
+\begin_inset Formula $n$
+\end_inset
+
+? (
+\emph on
+permutation
+\emph default
+s)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+n(n-1)\dots(n-k)=\frac{n!}{(n-k)!}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+What happens when 
+\begin_inset Formula $n=k$
+\end_inset
+
+ ? (
+\emph on
+permutation
+\emph default
+s)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\frac{n!}{0!}=n!=k!\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+What if the 
+\emph on
+permutation
+\emph default
+ is circular?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+(n-1)!\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+How many 
+\emph on
+subsets
+\emph default
+ of cardinality 
+\begin_inset Formula $k$
+\end_inset
+
+ can be obtained from a set of cardinality 
+\begin_inset Formula $n$
+\end_inset
+
+? (
+\emph on
+combinations
+\emph default
+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\frac{n!}{k!(n-k)!}=\left({n\atop k}\right)=\left({n\atop n-k}\right)\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Counting multisets (picking from 
+\begin_inset Quotes eld
+\end_inset
+
+infinite
+\begin_inset Quotes erd
+\end_inset
+
+ buckets)
+\end_layout
+
+\begin_layout Itemize
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+How many 
+\family default
+\series default
+\shape default
+\size default
+\emph on
+\bar default
+\noun default
+\color inherit
+ordered
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph on
+\bar default
+\noun default
+\color inherit
+multisets
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+ of cardinality
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
+ 
+\begin_inset Formula $k$
+\end_inset
+
+ can be obtained from a set of cardinality n? (or given 
+\begin_inset Formula $k$
+\end_inset
+
+ holes and 
+\begin_inset Formula $n$
+\end_inset
+
+ types, how many different ways do I have to distribute the types?)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+n^{k}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+How many 
+\family default
+\series default
+\shape default
+\size default
+\emph on
+\bar default
+\noun default
+\color inherit
+multisets
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+ of cardinality
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
+ 
+\begin_inset Formula $k$
+\end_inset
+
+ can be obtained from a set of cardinality 
+\begin_inset Formula $n$
+\end_inset
+
+? (or given 
+\begin_inset Formula $k$
+\end_inset
+
+ holes and 
+\begin_inset Formula $n$
+\end_inset
+
+ types, how many different ways do I have to put them in non considering
+ permutations?)
+\begin_inset Formula \[
+\left({n+k-1\atop n-1}\right)=\left({n+k-1\atop k}\right)=\left(\left({n\atop k}\right)\right)\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Given 
+\begin_inset Formula $k$
+\end_inset
+
+ holes and 
+\begin_inset Formula $n$
+\end_inset
+
+ types (or 
+\begin_inset Formula $k$
+\end_inset
+
+ indistinguishable objects and 
+\begin_inset Formula $n$
+\end_inset
+
+ bins) the number of different ways to distribute them so that there is
+ at least one in each bin is 
+\begin_inset Formula \[
+\left({k-1\atop n-1}\right)\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Multinomial coeffiecients (picking from 
+\begin_inset Quotes eld
+\end_inset
+
+finite
+\begin_inset Quotes erd
+\end_inset
+
+ buckets)
+\end_layout
+
+\begin_layout Itemize
+How many multisets of cardinality 
+\begin_inset Formula $n$
+\end_inset
+
+ can be obtained from a multiset of cardinality 
+\begin_inset Formula $n$
+\end_inset
+
+ where 
+\begin_inset Formula $k_{i}$
+\end_inset
+
+ are the multiplicities of each of the distinct elements? (
+\emph on
+multiset permutation
+\emph default
+) 
+\begin_inset Formula \[
+\frac{n!}{k_{1}!k_{2!}\dots k_{m}!}=\left({n\atop k_{1},k_{2}\dots,k_{m}}\right)\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Combinatorial principles
+\end_layout
+
+\begin_layout Subsubsection
+Rule of sum
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ are two 
+\emph on
+disjoint finite
+\emph default
+ sets, then 
+\begin_inset Formula $|A\cup B|=|A|+|B|$
+\end_inset
+
+.
+ Which means that the number of ways to choose one element from one of two
+ disjoint sets is the sum of the cardinalitied of he two sets.
+\end_layout
+
+\begin_layout Subsubsection
+Rule of product
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ are two
+\emph on
+ finite
+\emph default
+ sets, then 
+\begin_inset Formula $|A\times B|=|A|\cdot|B|$
+\end_inset
+
+.
+ Which means that the number of ways to choose an ordered pair is the number
+ of ways to choose the first element times the the number of ways to choose
+ the second element.
+\end_layout
+
+\begin_layout Subsubsection
+Inclusion-exclusion principle
+\end_layout
+
+\begin_layout Standard
+The inclusion-exclusion principle relates the size of the union of multiple
+ sets, the size of each set, and the size of each possible intersection
+ of the sets.
+ It could be thought of as the generalization of the rule of sum.
+\end_layout
+
+\begin_layout Standard
+In it's simplest version (for two sets) it states that if 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ are two sets, then 
+\begin_inset Formula \[
+|A\cup B|=|A|+|B|-|A\cap B|\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+from which we can conclude that 
+\begin_inset Formula $|A\cup B|\leq|A|+|B|.$
+\end_inset
+
+ If 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ are disjoint we have 
+\begin_inset Formula $|A\cup B|=|A|+|B|$
+\end_inset
+
+ and if 
+\begin_inset Formula $A\subseteq B$
+\end_inset
+
+ then 
+\begin_inset Formula $|A|\leq|B|$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Recursive formula for binomial coefficients 
+\end_layout
+
+\begin_layout Standard
+Binomial coefficients can be recursively defined as
+\begin_inset Formula \[
+\left({n\atop k}\right)=\left({n-1\atop k-1}\right)+\left({n-1\atop k}\right)\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with, as initial value
+\begin_inset Formula \begin{eqnarray*}
+\left({n\atop 0}\right)=1 &  & \forall n\in\mathbb{N}\\
+\left({0\atop k}\right)=0 &  & \forall k>0\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Generating function for binomial coefficients (binomial expansion)
+\end_layout
+
+\begin_layout Standard
+The generating function can be written as
+\begin_inset Formula \[
+(x+y)^{n}=\underset{k=0}{\overset{n}{\sum}}\left({n\atop k}\right)x^{k}y^{n-k}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and, substituting 
+\begin_inset Formula $y=1$
+\end_inset
+
+ we obtain
+\begin_inset Formula \[
+(1+x)^{n}=\underset{k=0}{\overset{n}{\sum}}\left({n\atop k}\right)x^{k}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and, in it's most particular case, substituting 
+\begin_inset Formula $x=y=1$
+\end_inset
+
+
+\begin_inset Formula \[
+2^{n}=\underset{k=0}{\overset{n}{\sum}}\left({n\atop k}\right)\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Proof Techniques 
+\end_layout
+
+\begin_layout Subsection
+Mathematical Induction
+\end_layout
+
+\begin_layout Standard
+Used to prove that a certain statement 
+\begin_inset Formula $P(n)$
+\end_inset
+
+ holds for every value of 
+\begin_inset Formula $n\geq b$
+\end_inset
+
+, where 
+\begin_inset Formula $n,b\in\mathbb{N}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Weak 
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Base case
+\emph default
+: show that 
+\begin_inset Formula $P(b)$
+\end_inset
+
+ is true.
+ (usually 
+\begin_inset Formula $b=0$
+\end_inset
+
+ or 
+\begin_inset Formula $b=1$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Inductive step
+\emph default
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\emph on
+Inductive hypothesis
+\emph default
+: assume 
+\begin_inset Formula $P(n)$
+\end_inset
+
+ holds for some 
+\begin_inset Formula $n\geq b$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Show that 
+\begin_inset Formula $P(n+1)$
+\end_inset
+
+ holds.
+ Usually this involves substituting 
+\begin_inset Formula $n+1$
+\end_inset
+
+ in 
+\begin_inset Formula $P(n)$
+\end_inset
+
+ to find 
+\begin_inset Formula $P(n+1)$
+\end_inset
+
+ and show that we can obtain 
+\begin_inset Formula $P(n+1)$
+\end_inset
+
+ from 
+\begin_inset Formula $P(n)$
+\end_inset
+
+ using the 
+\begin_inset Quotes eld
+\end_inset
+
+recursive definition
+\begin_inset Quotes erd
+\end_inset
+
+ of the statement we are trying to prove.
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Strong 
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Base case
+\emph default
+: Same as weak induction.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Inductive step
+\emph default
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\emph on
+Inductive hypothesis
+\emph default
+: assume 
+\begin_inset Formula $P(i)$
+\end_inset
+
+ holds 
+\begin_inset Formula $\forall n\in\mathbb{N}:b\leq i\leq n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Same as weak induction.
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Structural 
+\end_layout
+
+\begin_layout Standard
+Generalization of mathematical induction used to prove that a statement
+ 
+\begin_inset Formula $P(x)$
+\end_inset
+
+ holds on any instance 
+\begin_inset Formula $x$
+\end_inset
+
+ of some sort of recursively-defined structure 
+\begin_inset Formula $S$
+\end_inset
+
+ (like lists or trees).
+\end_layout
+
+\begin_layout Enumerate
+Define a well-founded partial order on the structure ("sublist" for lists
+ and "subtree" for trees).
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Base case
+\emph default
+: Show that 
+\begin_inset Formula $P$
+\end_inset
+
+ holds for all the minimal structures (empty list, tree root).
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Inductive step
+\emph default
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\emph on
+Inductive hypothesis
+\emph default
+: assume that 
+\begin_inset Formula $P$
+\end_inset
+
+ holds for the immediate substructures of a certain structure 
+\emph on
+S.
+\end_layout
+
+\begin_layout Enumerate
+Show that 
+\begin_inset Formula $P$
+\end_inset
+
+ must hold for 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ Usually this involves showing how 
+\begin_inset Formula $S$
+\end_inset
+
+ can be obtained from the immediate substructures applying some sort of
+ recursive rule.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Since every property must be proved separately, there may exist more than
+ one base case, and/or more than one inductive case, depending on how the
+ function or structure was constructed.
+ 
+\end_layout
+
+\begin_layout Subparagraph
+Example
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $F$
+\end_inset
+
+ be the set of fully parenthesized expressions in 
+\begin_inset Formula $x$
+\end_inset
+
+ defined recursively as follows:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\{x\}\in F$
+\end_inset
+
+, 
+\begin_inset Formula $\{0\}\in F$
+\end_inset
+
+, 
+\begin_inset Formula $\{1\}\in F$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $e_{1},e_{2}\in F$
+\end_inset
+
+ then 
+\begin_inset Formula $\{$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+'['
+\begin_inset Formula $e_{1}$
+\end_inset
+
+'
+\begin_inset Formula $+$
+\end_inset
+
+'
+\begin_inset Formula $e_{2}$
+\end_inset
+
+']'
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
+
+\begin_inset Formula $\}\in F$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $e_{1},e_{2}\in F$
+\end_inset
+
+ then 
+\begin_inset Formula $\{$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+'['
+\begin_inset Formula $e_{1}$
+\end_inset
+
+'
+\begin_inset Formula $*$
+\end_inset
+
+'
+\begin_inset Formula $e_{2}$
+\end_inset
+
+']'
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
+
+\begin_inset Formula $\}\in F$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $e_{1}\in F$
+\end_inset
+
+ then 
+\begin_inset Formula $\{$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+'-['
+\begin_inset Formula $e_{1}$
+\end_inset
+
+']'
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
+
+\begin_inset Formula $\}\in F$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Prove that every 
+\begin_inset Formula $e\in F$
+\end_inset
+
+ has the same number of left and right parentheses.
+\end_layout
+
+\begin_layout Standard
+\align center
+***
+\end_layout
+
+\begin_layout Standard
+Define 
+\begin_inset Formula $P(e)::=$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+ "
+\family default
+\series default
+\shape default
+\size default
+\emph on
+\bar default
+\noun default
+\color inherit
+expression e has the same number of left and right parentheses
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+".
+\end_layout
+
+\begin_layout List
+\labelwidthstring 00.00.0000
+Base
+\begin_inset space ~
+\end_inset
+
+case: 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $e=0,e=1,e=x$
+\end_inset
+
+ has 
+\begin_inset Formula $ $
+\end_inset
+
+no parentheses.
+\end_layout
+
+\begin_layout List
+\labelwidthstring 00.00.0000
+Inductive
+\begin_inset space ~
+\end_inset
+
+step: 
+\end_layout
+
+\begin_layout Itemize
+Assume 
+\begin_inset Formula $P(e_{1})$
+\end_inset
+
+ and 
+\begin_inset Formula $P(e_{2})$
+\end_inset
+
+ and prove 
+\begin_inset Formula $P([e_{1}+e_{2}])$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $P(e)$
+\end_inset
+
+ implies that 
+\begin_inset Formula $e$
+\end_inset
+
+ has 
+\begin_inset Formula $k_{e}$
+\end_inset
+
+ left parentheses and 
+\begin_inset Formula $k_{e}$
+\end_inset
+
+ right parentheses for some 
+\begin_inset Formula $k_{e}\in\mathbb{N}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Therefore 
+\begin_inset Formula $[e_{1}+e_{2}]$
+\end_inset
+
+ will have 
+\begin_inset Formula $k_{e_{1}}+k_{e_{2}}+1$
+\end_inset
+
+ right parenthese and 
+\begin_inset Formula $k_{e_{1}}+k_{e_{2}}+1$
+\end_inset
+
+ left parentheses.
+\end_layout
+
+\begin_layout Standard
+To properly conclude the demonstration we need to repeat the inductive step
+ on properties 3 and 4.
+\end_layout
+
+\begin_layout Standard
+\align right
+\begin_inset Formula $\square$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Proof by contradiction 
+\end_layout
+
+\begin_layout Standard
+To prove a statement 
+\begin_inset Formula $P$
+\end_inset
+
+ holds by contradiction we need to:
+\end_layout
+
+\begin_layout Enumerate
+Assume 
+\begin_inset Formula $P$
+\end_inset
+
+ doesn't hold.
+ (
+\begin_inset Formula $\neg P)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Show that this leads to some contradiction.
+ Usually this involves showing that:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Either 
+\begin_inset Formula $\neg P\implies\bot$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+or equivalently 
+\begin_inset Formula $\neg P\implies(Q\wedge\neg Q)$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+this technique is often used to prove correctness of greedy algorithms.
+\end_layout
+
+\begin_layout Section
+Summations and infinite series
+\end_layout
+
+\begin_layout Subsection
+Properties
+\end_layout
+
+\begin_layout Standard
+The value of a 
+\emph on
+finite
+\emph default
+ series is always well defined, and we can add its terms in any order.
+\end_layout
+
+\begin_layout Standard
+If the limit 
+\begin_inset Formula $\underset{n\rightarrow\infty}{\lim}\overset{n}{\underset{k=0}{\sum}}a_{k}$
+\end_inset
+
+ does not exists the series diverges; otherwise, it converges.
+ The terms of an infinite series cannot always be added in any order: we
+ can change such an order only if the series is 
+\emph on
+absolutely convergent
+\emph default
+, that is a series for which 
+\begin_inset Formula $\overset{n}{\underset{k=0}{\sum}}|a_{k}|$
+\end_inset
+
+ also converges.
+\end_layout
+
+\begin_layout Subsubsection
+Linearity
+\end_layout
+
+\begin_layout Standard
+All finite series are linear, which means 
+\begin_inset Formula \[
+\underset{k=1}{\overset{n}{\sum}}(ca_{k}+b_{k})=c\underset{k=1}{\overset{n}{\sum}}a_{k}+\underset{k=1}{\overset{n}{\sum}}b_{k}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $c$
+\end_inset
+
+ is any real number.
+ This also applies to infinite convergent series.
+ This property becomes really handy when manipulating and transforming summation
+s incorporating other linear operators (integration, differentiation, logarithm,...
+) and in particular asymptotic notation.
+\end_layout
+
+\begin_layout Subsubsection
+Products
+\end_layout
+
+\begin_layout Standard
+We can convert a formula with a product to a formula with a summation using
+ the identity
+\begin_inset Formula \[
+\lg\left(\underset{k=1}{\overset{n}{\prod}}a_{k}\right)=\underset{k=1}{\overset{n}{\sum}}\lg a_{k}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Common series
+\end_layout
+
+\begin_layout Standard
+Some closed form solutions that are particularly handy.
+\end_layout
+
+\begin_layout Subsubsection
+Arithmetic series
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\overset{n}{\underset{k=0}{\sum}}k=\frac{n(n+1)}{2}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\overset{n}{\underset{k=0}{\sum}}k^{2}=\frac{n(n+1)(2n+1)}{6}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\overset{n}{\underset{k=0}{\sum}}k^{3}=\frac{n^{2}(n+1)^{2}}{4}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $ $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Geometric series
+\end_layout
+
+\begin_layout Standard
+For real 
+\begin_inset Formula $x\neq1$
+\end_inset
+
+, we have
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\overset{n}{\underset{k=0}{\sum}}x^{k}=\frac{x^{n+1}-1}{x-1}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A particular case of the previous is 
+\begin_inset Formula $\sum_{k=0}^{n}2^{k}=2^{n+1}-1$
+\end_inset
+
+ when 
+\begin_inset Formula $x=2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+When the summation is infinite and 
+\begin_inset Formula $|x|<1$
+\end_inset
+
+, we have the infinite decreasing series
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\overset{\infty}{\underset{k=0}{\sum}}x^{k}=\frac{1}{1-x}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+of which a particular case is 
+\begin_inset Formula $\sum_{k=0}^{\infty}\frac{1}{2^{k}}=2$
+\end_inset
+
+ when 
+\begin_inset Formula $x=2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Harmonic series
+\end_layout
+
+\begin_layout Standard
+For positive integers 
+\begin_inset Formula $n$
+\end_inset
+
+, the 
+\emph on
+
+\begin_inset Formula $n$
+\end_inset
+
+
+\emph default
+th harmonic number is 
+\begin_inset Formula \[
+H_{n}=1+\frac{1}{2}+\frac{1}{3}+\dots+\frac{1}{n}=\underset{k=1}{\overset{n}{\sum}}\frac{1}{k}=\ln n+O(1)\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The infinite series 
+\begin_inset Formula $\underset{k=1}{\overset{\infty}{\sum}}\frac{1}{k}$
+\end_inset
+
+ it's an example of divergent series.
+\end_layout
+
+\begin_layout Subsubsection
+Telescoping series
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\underset{k=1}{\overset{n}{\sum}}(a_{k}-a_{k-1})=a_{n}-a_{0}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\underset{k=0}{\overset{n-1}{\sum}}(a_{k}-a_{k+1})=a_{0}-a_{n}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that sometime it is possible to rewrite a particular series as a telescopin
+g series.
+ As an example 
+\begin_inset Formula $\underset{k=1}{\overset{n-1}{\sum}}\frac{1}{k(k+1)}=\underset{k=1}{\overset{n-1}{\sum}}\left(\frac{1}{k}-\frac{1}{k+1}\right)=1-\frac{1}{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Other common series
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\underset{k=0}{\overset{n}{\sum}}1=n\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This may seem trivial but it's very handy to manipulate and transform summations.
+ 
+\end_layout
+
+\begin_layout Standard
+An example application of the previous is this is the series
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\underset{k=1}{\overset{n}{\sum}}\lg n=\lg n\cdot\underset{k=1}{\overset{n}{\sum}}1=n\lg n\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Propositional Calculus 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Propositional-Calculus"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It's the study of Boolean functions, where 1 plays the role of 
+\begin_inset Quotes eld
+\end_inset
+
+true
+\begin_inset Quotes erd
+\end_inset
+
+ and 0 the role of 
+\begin_inset Quotes eld
+\end_inset
+
+false
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Definitions
+\end_layout
+
+\begin_layout Description
+Statement
+\begin_inset space ~
+\end_inset
+
+variable: a Boolean variable
+\end_layout
+
+\begin_layout Description
+Statement
+\begin_inset space ~
+\end_inset
+
+form: a particular form of a Boolean function (e.g.
+ 
+\begin_inset Formula $p\wedge(\sim q\vee r)$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Description
+Equivalence
+\begin_inset space ~
+\end_inset
+
+of
+\begin_inset space ~
+\end_inset
+
+two
+\begin_inset space ~
+\end_inset
+
+statement
+\begin_inset space ~
+\end_inset
+
+forms: two statements forms are 
+\emph on
+logically equivalent
+\emph default
+ if they have the same truth table
+\end_layout
+
+\begin_layout Description
+Tautology
+\begin_inset space ~
+\end_inset
+
+(Contradiction): A statement form that represents the constant 1 function
+ is called 
+\emph on
+tautology
+\emph default
+ and is represented with the symbol 
+\begin_inset Formula $\top$
+\end_inset
+
+.
+ A statement form that represents the constant 0 function is called 
+\emph on
+contradiction
+\emph default
+ and is represented with the symbol 
+\begin_inset Formula $\bot$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Logic and sets
+\end_layout
+
+\begin_layout Standard
+Given a set 
+\begin_inset Formula $P$
+\end_inset
+
+, let the corresponding lower case letters 
+\begin_inset Formula $p$
+\end_inset
+
+ stand for the statement that 
+\begin_inset Formula $x\in P$
+\end_inset
+
+.
+ Substituting:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\neg$
+\end_inset
+
+ with 
+\begin_inset Formula $\sim$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\cup$
+\end_inset
+
+ with 
+\begin_inset Formula $\vee$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\cap$
+\end_inset
+
+ with 
+\begin_inset Formula $\wedge$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $U$
+\end_inset
+
+ with 
+\begin_inset Formula $\top$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\emptyset$
+\end_inset
+
+ with 
+\begin_inset Formula $\bot$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+we can use the same set properties listed in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Properties"
+
+\end_inset
+
+, that is there is a correspondence between set and logic notation.
+\end_layout
+
+\begin_layout Subsection
+Implication
+\end_layout
+
+\begin_layout Standard
+We define 
+\begin_inset Formula $p\implies q$
+\end_inset
+
+ to be the Boolean function, called implication, with the following truth
+ table
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $p$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $q$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $p\implies q$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is possible to write an equivalent statement form using only 
+\begin_inset Formula $(\sim,\vee)$
+\end_inset
+
+, This and several other facts about implication are summarized in the following
+ table.
+ 
+\begin_inset Formula $\sim q\implies\sim p$
+\end_inset
+
+ is called the 
+\emph on
+contrapositive
+\emph default
+, 
+\begin_inset Formula $q\implies p$
+\end_inset
+
+ is called the 
+\emph on
+converse
+\emph default
+ and
+\begin_inset Formula $\sim p\implies\sim q$
+\end_inset
+
+ is called the 
+\emph on
+inverse.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="9">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $p$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $q$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $p\implies q$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sim p\vee q$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sim(p\implies q)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $p\wedge\sim q$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sim q\implies\sim p$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $q\implies p$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sim p\implies\sim q$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $\subseteq$
+\end_inset
+
+ operator is the equivalent of 
+\begin_inset Formula $\implies$
+\end_inset
+
+ in the set notation as it can be shown with a simple Venn diagram.
+\end_layout
+
+\begin_layout Subsubsection
+Double implication
+\end_layout
+
+\begin_layout Standard
+We define 
+\begin_inset Formula $p\iff q$
+\end_inset
+
+ as the Boolean function, called 
+\emph on
+double implication
+\emph default
+, with the following truth table
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="4">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $p$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $q$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $p\iff q$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(p\implies q)\wedge(q\implies p)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Equivalence in English language
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $p\implies q$
+\end_inset
+
+ is normally written as 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+q if p
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The 
+\emph on
+if
+\emph default
+ part in 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+q
+\emph default
+ if and only if 
+\emph on
+p
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ where 
+\emph on
+p
+\emph default
+ is the 
+\emph on
+sufficient
+\emph default
+ condition for 
+\emph on
+q
+\emph default
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $p\Longleftarrow q$
+\end_inset
+
+ is normally written as 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+q only if p
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The 
+\emph on
+only if
+\emph default
+ part in 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+q
+\emph default
+ if and only if 
+\emph on
+p
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ where 
+\emph on
+p
+\emph default
+ is the 
+\emph on
+necessary
+\emph default
+ condition for 
+\emph on
+q
+\emph default
+.
+\end_layout
+
+\begin_layout Section
+First Order Logic (Predicate Calculus)
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+predicate
+\emph default
+ is any function whose codomain are statements that are either true or false.
+ There are two things to be careful about:
+\end_layout
+
+\begin_layout Itemize
+the codomain are statements 
+\emph on
+not
+\emph default
+ the truth value of the statements,
+\end_layout
+
+\begin_layout Itemize
+the domain is arbitrary.
+\end_layout
+
+\begin_layout Standard
+The truth set of a predicate 
+\begin_inset Formula $S$
+\end_inset
+
+ with domain 
+\begin_inset Formula $D$
+\end_inset
+
+ is the set of those 
+\begin_inset Formula $x\in D$
+\end_inset
+
+ for which 
+\begin_inset Formula $S(x)$
+\end_inset
+
+ is true.
+ It is written 
+\begin_inset Formula $\{x|S(x)\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Quantifiers
+\end_layout
+
+\begin_layout Itemize
+The phrase 
+\begin_inset Quotes eld
+\end_inset
+
+for all
+\begin_inset Quotes erd
+\end_inset
+
+ is called universal quantifier and is written 
+\begin_inset Formula $\forall$
+\end_inset
+
+.
+ 
+\begin_inset Formula $"\forall x\in D,S(x)"$
+\end_inset
+
+ is equivalent to saying that the truth set of 
+\begin_inset Formula $S(x)$
+\end_inset
+
+ contains the set 
+\begin_inset Formula $D$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The phrase 
+\begin_inset Quotes eld
+\end_inset
+
+for some
+\begin_inset Quotes erd
+\end_inset
+
+ is called existential quantifier and is written 
+\begin_inset Formula $\exists$
+\end_inset
+
+.
+ 
+\begin_inset Formula $"\exists x\in D,S(x)"$
+\end_inset
+
+ is equivalent to saying that the truth set 
+\begin_inset Formula $S(x)$
+\end_inset
+
+ contains at least one element of the set 
+\begin_inset Formula $D$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Algebraic rules for predicate logic
+\end_layout
+
+\begin_layout Standard
+In a formula, if a predicate doens't contain a varible that is bound to
+ a quantifier, then it can be moved in and out of the scope of the quantifier
+ without changing the truth value of the formula.
+\end_layout
+
+\begin_layout Subsubsection
+Negating quantifiers
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\forall x\in D,P(x)\iff\sim(\exists x\in D,\sim P(x))$
+\end_inset
+
+ which can be written also as 
+\begin_inset Formula $\sim(\forall x\in D,P(x))\iff\exists x\in D,\sim P(x)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\exists x\in D,P(x)\iff\sim(\forall x\in D,\sim P(x))$
+\end_inset
+
+ which can be written also as 
+\begin_inset Formula $\sim(\exists x\in D,P(x))\iff\forall x\in D,\sim P(x)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Whenevere there are more than one quantifier we have to negate the most
+ external one and then the second most external and so on until we reach
+ a quantifier-free part.
+ At this point we can apply the same rules of predicate logic.
+\end_layout
+
+\begin_layout Subsubsection
+Moving quantifiers
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\forall x\in D,(P(x)\wedge Q(x))\iff(\forall x\in D,P(x))\wedge(\forall x\in D,Q(x))$
+\end_inset
+
+.
+ We can't do this if we have 
+\begin_inset Formula $\exists$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\exists x\in D,(P(x)\vee Q(x))\iff(\exists x\in D,P(x))\vee(\exists x\in D,Q(x))$
+\end_inset
+
+.
+ We can't do this if we have 
+\begin_inset Formula $\forall$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+As long as quantifiers are not involved the same rules of predicate logic
+ can be used.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Standardized forms
+\end_layout
+
+\begin_layout Standard
+Any formula can be expressed using only 
+\begin_inset Formula $(\sim,\wedge)$
+\end_inset
+
+ or 
+\begin_inset Formula $(\sim,\vee)$
+\end_inset
+
+.
+ This leads to two standardized forms:
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Conjunctive Normal Form (CNF)
+\emph default
+: A formula is in CNF if it is a conjunction of clauses, where a clause
+ is a disjunction of literals, where a literal and its complement cannot
+ appear in the same clause.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Disjunctive Normal Form (DNF)
+\emph default
+: A formula is in DNF if it is a disjunction of clauses, where a clause
+ is a conjunction of literals.
+\end_layout
+
+\begin_layout Standard
+A formula that is the CNF equivalent of a formula with 
+\begin_inset Formula $n$
+\end_inset
+
+ clauses will have, in general, 
+\begin_inset Formula $O(2^{n})$
+\end_inset
+
+ clauses; that is, in some cases the conversion to CNF can lead to an exponentia
+l explosion of the formula.
+ The same is true for DNF.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Prenex normal form
+\emph default
+: A formula is in prenex normal form if it is written as a string of quantifiers
+ followed by a quantifier-free part (referred to as the matrix).
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Skolem normal form
+\emph default
+: A formula is in Skolem normal form if it is in conjunctive prenex normal
+ form with only universal first-order quantifiers.
+\end_layout
+
+\begin_layout Section
+Discrete probability 
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $U$
+\end_inset
+
+ be a 
+\emph on
+finite sample
+\emph default
+ space and 
+\begin_inset Formula $P:U\rightarrow\mathbb{R}$
+\end_inset
+
+ such that 
+\begin_inset Formula $P(t)\geq0,\forall t\in U$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum_{t\in U}P(t)=1$
+\end_inset
+
+, then 
+\begin_inset Formula $P$
+\end_inset
+
+ is called a 
+\emph on
+probability function
+\emph default
+ on 
+\begin_inset Formula $U$
+\end_inset
+
+ and the pair 
+\begin_inset Formula $(U,P)$
+\end_inset
+
+ is called a 
+\emph on
+probability space
+\emph default
+.
+ We extend this definition to subsets of 
+\begin_inset Formula $U$
+\end_inset
+
+ called 
+\emph on
+events
+\emph default
+: 
+\begin_inset Formula $E\subseteq U:P(E)=\sum_{t\in E}P(t)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Probability of disjoint events
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $X\subset U$
+\end_inset
+
+, 
+\begin_inset Formula $Y\subset U$
+\end_inset
+
+ and 
+\begin_inset Formula $X\cap Y=\emptyset$
+\end_inset
+
+ then 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $P(X\cup Y)=P(X)+P(Y)$
+\end_inset
+
+ and
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $P(X\cap Y)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+When events are 
+\emph on
+NOT
+\emph default
+ disjoint we can use Venn diagrams to calculate probability of events.
+ The following equivalences may me handy:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $P(\bar{A})=1-P(A)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $P(A\cap B)=P(A)-P(A-B)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Discrete probability distributions
+\end_layout
+
+\begin_layout Subsubsection
+Bernoulli
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $B(1,p)$
+\end_inset
+
+ represents an event whose probability is 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+e.g.
+ The probability of obtaining head (a success) when flipping a coin is 
+\begin_inset Formula $B(1,0.5)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Binomial
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $B(n,p)$
+\end_inset
+
+ represents the probability of obtaining exactly 
+\begin_inset Formula $k$
+\end_inset
+
+ successes in a series of 
+\begin_inset Formula $n$
+\end_inset
+
+ independent events each one with a probability 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The probability mass function (p.m.f.) is:
+\begin_inset Formula \[
+P(K=k)=\left({n\atop k}\right)p^{k}(1-p)^{n-k}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+e.g.
+ The probability of obtaining 
+\begin_inset Formula $k$
+\end_inset
+
+ heads when flipping a coin is 
+\begin_inset Formula $B(k,0.5)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Geometric
+\end_layout
+
+\begin_layout Standard
+Represents the number of Bernoulli trials before a success.
+\end_layout
+
+\begin_layout Standard
+The probability mass function is:
+\begin_inset Formula \[
+P(K=k)=p(1-p)^{k-1}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+e.g.
+ The probability that you need exactly 
+\begin_inset Formula $k$
+\end_inset
+
+ trials, each one with probability 
+\begin_inset Formula $p$
+\end_inset
+
+, before a success is the p.m.f.
+\end_layout
+
+\begin_layout Subsubsection
+Poisson
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Pois(\lambda)$
+\end_inset
+
+ represents the probability of a series of events occurring in a fixed amount
+ of time knowing they occur with a certain rate.
+\end_layout
+
+\begin_layout Standard
+The probability mass function is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+P(K=k)=\frac{\lambda^{k}}{k!}\cdot e^{-\lambda}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is the expected number of occurrences and 
+\begin_inset Formula $k$
+\end_inset
+
+ is the actual number of occurrences of an event - the probability of which
+ is given by the p.m.f.
+\end_layout
+
+\begin_layout Standard
+e.g.
+ The probability that there will be exactly 
+\begin_inset Formula $k$
+\end_inset
+
+ calls to a call-center in an hour, where the average calling rate is 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ calls/hour, is the p.m.f.
+\end_layout
+
+\begin_layout Subsubsection
+Hypergeometric
+\end_layout
+
+\begin_layout Standard
+Represents the number of successes on 
+\begin_inset Formula $n$
+\end_inset
+
+ draws from a population without replacement 
+\end_layout
+
+\begin_layout Standard
+The probability mass function is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+P(K=k)=\frac{\left({m\atop k}\right)\left({N-m\atop n-k}\right)}{\left({N\atop m}\right)}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $m$
+\end_inset
+
+ is the possible number of successes, 
+\begin_inset Formula $n$
+\end_inset
+
+ is the number of draws, 
+\begin_inset Formula $N$
+\end_inset
+
+ is the cardinality of the population and 
+\begin_inset Formula $k$
+\end_inset
+
+ is the number of successes - the probability of which is given by the p.m.f.
+\end_layout
+
+\begin_layout Standard
+e.g.
+ The probability of extracting exactly 
+\begin_inset Formula $k$
+\end_inset
+
+ white marbles (i.e.
+ having 
+\begin_inset Formula $k$
+\end_inset
+
+ successes) drawing 
+\begin_inset Formula $n$
+\end_inset
+
+ without replacement from an urn containing 
+\begin_inset Formula $N$
+\end_inset
+
+ marbles in total, 
+\begin_inset Formula $m$
+\end_inset
+
+ of which are white is the p.m.f.
+\end_layout
+
+\begin_layout Section
+Graphs
+\end_layout
+
+\begin_layout Subsection
+Definitions
+\end_layout
+
+\begin_layout Standard
+The following definitions may refer to directed graphs (D), undirected graphs
+ (U) or both (B).
+\end_layout
+
+\begin_layout Subsubsection
+Basic definitions
+\end_layout
+
+\begin_layout Itemize
+(B) Usually 
+\begin_inset Formula $n=|V|$
+\end_inset
+
+ and 
+\begin_inset Formula $m=|E|$
+\end_inset
+
+.
+ In any graph, 
+\begin_inset Formula $m\leq n^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+(D) A 
+\series bold
+directed graph
+\series default
+ 
+\begin_inset Formula $G$
+\end_inset
+
+ is a pair 
+\begin_inset Formula $(V,E)$
+\end_inset
+
+ where 
+\begin_inset Formula $V$
+\end_inset
+
+ is a finite set (called the vertex set) and 
+\begin_inset Formula $E$
+\end_inset
+
+ is a binary relation on 
+\begin_inset Formula $V$
+\end_inset
+
+ and is called the edge set of 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+(U) In an 
+\series bold
+undirected graph
+\series default
+ 
+\begin_inset Formula $G=(V,E)$
+\end_inset
+
+ the edge set 
+\begin_inset Formula $E$
+\end_inset
+
+ consists of unordered pairs of 
+\emph on
+distinct
+\emph default
+ vertices.
+\end_layout
+
+\begin_layout Itemize
+(D)
+\series bold
+ Self-loops
+\series default
+ are edges from a vertex to itself and are only possible in directed graphs.
+\end_layout
+
+\begin_layout Itemize
+(D) A directed graph with no self-loops is 
+\series bold
+simple
+\series default
+.
+\end_layout
+
+\begin_layout Itemize
+(D) If 
+\begin_inset Formula $(u,v)$
+\end_inset
+
+ is an edge in a graph 
+\begin_inset Formula $G=(V,E)$
+\end_inset
+
+, we say that the vertex 
+\begin_inset Formula $v$
+\end_inset
+
+ is 
+\series bold
+adjacent
+\series default
+ to vertex 
+\begin_inset Formula $u$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+(D) In a directed graph 
+\begin_inset Formula $G$
+\end_inset
+
+, a 
+\series bold
+neighbor
+\series default
+ of a vertex 
+\begin_inset Formula $u$
+\end_inset
+
+ is any vertex that is adjacent to 
+\begin_inset Formula $u$
+\end_inset
+
+ in the undirected version of 
+\begin_inset Formula $G$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+(U) In undirected graphs 
+\series bold
+adjacency
+\series default
+ relation is symmetric.
+\end_layout
+
+\begin_layout Itemize
+(U) In an undirected graph, 
+\begin_inset Formula $u$
+\end_inset
+
+ and 
+\begin_inset Formula $v$
+\end_inset
+
+ are 
+\series bold
+neighbors
+\series default
+ if they are adjacent.
+\end_layout
+
+\begin_layout Subsubsection
+Degree
+\end_layout
+
+\begin_layout Itemize
+(D) The 
+\series bold
+degree
+\series default
+ of a vertex in a directed graph is its 
+\series bold
+in-degree
+\series default
+ plus its 
+\series bold
+out-degree
+\series default
+.
+\end_layout
+
+\begin_layout Itemize
+(U) The 
+\series bold
+degree
+\series default
+ of a vertex in an undirected graph is the number of edge incident on it.
+\end_layout
+
+\begin_layout Itemize
+(B) The 
+\emph on
+degree
+\emph default
+ of a vertex 
+\emph on
+
+\begin_inset Formula $v$
+\end_inset
+
+
+\emph default
+ is denoted 
+\begin_inset Formula $\deg(v)$
+\end_inset
+
+.
+ The maximum degree of a graph 
+\begin_inset Formula $G$
+\end_inset
+
+, denoted by 
+\begin_inset Formula $\Delta(G)$
+\end_inset
+
+, and the minimum degree of a graph, denoted by 
+\begin_inset Formula $\delta(G)$
+\end_inset
+
+, are the maximum and minimum degree of its vertices.
+\end_layout
+
+\begin_layout Itemize
+(B) A vertex whose degree is 0 is 
+\series bold
+isolated
+\series default
+.
+\end_layout
+
+\begin_layout Itemize
+(B) In a graph 
+\begin_inset Formula $G=(V,E)$
+\end_inset
+
+, 
+\begin_inset Formula $\sum_{v\in V}d_{v}=2\cdot|E|$
+\end_inset
+
+ where 
+\begin_inset Formula $d_{v}$
+\end_inset
+
+ is the degree of vertex 
+\begin_inset Formula $v\in V$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Paths and cycles
+\end_layout
+
+\begin_layout Itemize
+(B) In a graph 
+\begin_inset Formula $G=(V,E)$
+\end_inset
+
+, a 
+\series bold
+path
+\series default
+ of length 
+\begin_inset Formula $k$
+\end_inset
+
+ from a vertex 
+\begin_inset Formula $u$
+\end_inset
+
+ to a vertex 
+\begin_inset Formula $u'$
+\end_inset
+
+ it's a sequence 
+\begin_inset Formula $\left\langle v_{0},v_{1},v_{2},\dots,v_{k}\right\rangle $
+\end_inset
+
+ of vertices such that 
+\begin_inset Formula $u=v_{0},\, u'=v_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $(v_{i-1},v_{i})\in E$
+\end_inset
+
+ for 
+\begin_inset Formula $i=1,2,\dots,k$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+(B) The 
+\series bold
+length
+\series default
+ of the 
+\series bold
+path
+\series default
+ is the number of edges in the path: therefore the path contains 
+\begin_inset Formula $k$
+\end_inset
+
+ edges and 
+\begin_inset Formula $k+1$
+\end_inset
+
+ vertices.
+\end_layout
+
+\begin_layout Itemize
+(B) If there is a path 
+\begin_inset Formula $p$
+\end_inset
+
+ from 
+\begin_inset Formula $u$
+\end_inset
+
+ to 
+\begin_inset Formula $u'$
+\end_inset
+
+ we say that 
+\begin_inset Formula $u'$
+\end_inset
+
+ is 
+\series bold
+reachable
+\series default
+ from 
+\begin_inset Formula $u$
+\end_inset
+
+ via 
+\begin_inset Formula $p$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+(B) A 
+\series bold
+trail
+\series default
+ is a path in which all edges are distinct.
+\end_layout
+
+\begin_layout Itemize
+(B) A 
+\series bold
+simple path
+\series default
+ is a path where all vertices (and thus all edges) are distinct.
+\end_layout
+
+\begin_layout Itemize
+(B) Two 
+\series bold
+paths
+\series default
+ are 
+\series bold
+independent
+\series default
+ (alternatively, 
+\series bold
+internally vertex-disjoint
+\series default
+) if they do not have any internal vertex in common.
+\end_layout
+
+\begin_layout Itemize
+(B) A 
+\series bold
+subpath
+\series default
+ of a path is a contiguous subsequence of its vertices.
+\end_layout
+
+\begin_layout Itemize
+(D) A 
+\series bold
+cycle
+\series default
+ is a path 
+\begin_inset Formula $\left\langle v_{0},v_{1},v_{2},\dots,v_{k}\right\rangle $
+\end_inset
+
+ where 
+\begin_inset Formula $v_{0}=v_{k}$
+\end_inset
+
+ and the path contains at least one edge.
+ (a self-loop is a cycle of length 1)
+\end_layout
+
+\begin_layout Itemize
+(U) A 
+\series bold
+cycle
+\series default
+ is a path 
+\begin_inset Formula $\left\langle v_{0},v_{1},v_{2},\dots,v_{k}\right\rangle $
+\end_inset
+
+ where 
+\begin_inset Formula $v_{0}=v_{k}$
+\end_inset
+
+ and the path contains at least 3 edges.
+\end_layout
+
+\begin_layout Itemize
+(B) A 
+\series bold
+simple cycle
+\series default
+ is a cycle where all vertices are distinct.
+\end_layout
+
+\begin_layout Itemize
+(B) A graph with no cycles is 
+\series bold
+acyclic
+\series default
+.
+\end_layout
+
+\begin_layout Subsubsection
+Connectivity
+\end_layout
+
+\begin_layout Itemize
+(B) The 
+\series bold
+connected components
+\series default
+ of a graph are the equivalence classes of vertices under the 
+\begin_inset Quotes eld
+\end_inset
+
+it's reachable from
+\begin_inset Quotes erd
+\end_inset
+
+ relation.
+\end_layout
+
+\begin_layout Itemize
+(U) An undirected graph is 
+\series bold
+connected
+\series default
+ if it has 
+\emph on
+exactly one
+\emph default
+ connected component.
+ In any connected, undirected graph 
+\begin_inset Formula $|E|\geq|V|-1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+(D) A directed graph is
+\series bold
+ strongly connected
+\series default
+ if every two vertices are reachable from each other.
+ The 
+\emph on
+strongly connected components 
+\emph default
+of a directed graph are the equivalence classes of vertices under the 
+\begin_inset Quotes eld
+\end_inset
+
+are mutually reachable
+\begin_inset Quotes erd
+\end_inset
+
+ relation.
+ A directed graph is strongly connected if it has 
+\emph on
+exactly one
+\emph default
+ strongly connected component
+\end_layout
+
+\begin_layout Itemize
+(U) An 
+\series bold
+Eulerian circuit
+\series default
+ is a cycle in an undirected graph which visits 
+\emph on
+each edge exactly once
+\emph default
+ and also returns to the starting vertex.
+\end_layout
+
+\begin_layout Itemize
+(U) A 
+\series bold
+Hamiltonian cycle
+\series default
+ is a cycle in an undirected graph which visits 
+\emph on
+each vertex exactly once
+\emph default
+ and also returns to the starting vertex.
+\end_layout
+
+\begin_layout Subsubsection
+Graph transformations
+\end_layout
+
+\begin_layout Itemize
+(B) We say that a graph 
+\begin_inset Formula $G'=(V',E')$
+\end_inset
+
+ is a 
+\series bold
+subgraph
+\series default
+ of 
+\begin_inset Formula $G=(V,E)$
+\end_inset
+
+ if 
+\begin_inset Formula $V'\subseteq V$
+\end_inset
+
+ and 
+\begin_inset Formula $E'\subseteq E$
+\end_inset
+
+.
+ Given a set 
+\begin_inset Formula $V'\subseteq V$
+\end_inset
+
+ the subgraph of 
+\begin_inset Formula $G$
+\end_inset
+
+ 
+\series bold
+induced
+\series default
+ by 
+\begin_inset Formula $V'$
+\end_inset
+
+ is the graph 
+\begin_inset Formula $G'=(V',E')$
+\end_inset
+
+, where 
+\begin_inset Formula $E'=\{(u,v)\in E:u,v\in V'\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+(B) A 
+\series bold
+cut
+\series default
+ is a partition of the vertices of a graph into two disjoint subsets.
+ The 
+\series bold
+cut-set
+\series default
+ of the cut is the set of edges whose end points are in different subsets
+ of the partition.
+ Edges are said to be 
+\series bold
+crossing
+\series default
+ the cut if they are in its cut-set.
+\end_layout
+
+\begin_layout Itemize
+(U) The 
+\series bold
+contraction
+\series default
+ of an undirected graph 
+\begin_inset Formula $G=(V,E)$
+\end_inset
+
+ by an edge 
+\begin_inset Formula $e=(u,v)$
+\end_inset
+
+ is a graph 
+\begin_inset Formula $G'=(V',E')$
+\end_inset
+
+, where 
+\begin_inset Formula $V'=V-\{u,v\}\cup\{x\}$
+\end_inset
+
+ where 
+\begin_inset Formula $x$
+\end_inset
+
+ is a new vertex.
+ The set of edges 
+\begin_inset Formula $E'$
+\end_inset
+
+ is formed from 
+\begin_inset Formula $E$
+\end_inset
+
+ by first deleting the edge 
+\begin_inset Formula $(u,v)$
+\end_inset
+
+ and, for each vertex 
+\begin_inset Formula $w$
+\end_inset
+
+ incident on 
+\begin_inset Formula $u$
+\end_inset
+
+ or 
+\begin_inset Formula $v$
+\end_inset
+
+, deleting whichever of 
+\begin_inset Formula $(u,w)$
+\end_inset
+
+ or 
+\begin_inset Formula $(v,w)$
+\end_inset
+
+ is in 
+\begin_inset Formula $E$
+\end_inset
+
+ and then adding the new edge 
+\begin_inset Formula $(x,w)$
+\end_inset
+
+.
+ This will produce a graph 
+\begin_inset Formula $G'$
+\end_inset
+
+ where 
+\begin_inset Formula $u$
+\end_inset
+
+ and 
+\begin_inset Formula $v$
+\end_inset
+
+ are 
+\begin_inset Quotes eld
+\end_inset
+
+contracted
+\begin_inset Quotes erd
+\end_inset
+
+ into a single vertex 
+\begin_inset Formula $x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+(U) The 
+\series bold
+directed version
+\series default
+ of an undirected graph 
+\begin_inset Formula $G$
+\end_inset
+
+ is the directed graph 
+\begin_inset Formula $G'$
+\end_inset
+
+ obtained from 
+\begin_inset Formula $G$
+\end_inset
+
+ replacing each undirected edge 
+\begin_inset Formula $(u,v)$
+\end_inset
+
+ with the two directed edges 
+\begin_inset Formula $(u,v)$
+\end_inset
+
+ and 
+\begin_inset Formula $(v,u)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+(D) The 
+\series bold
+undirected version
+\series default
+ of a directed graph 
+\begin_inset Formula $G$
+\end_inset
+
+ is the undirected graph 
+\begin_inset Formula $G'$
+\end_inset
+
+ obtained from 
+\begin_inset Formula $G$
+\end_inset
+
+ by removing self-loops and 
+\begin_inset Quotes eld
+\end_inset
+
+directions from edges
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+(D) The 
+\series bold
+transpose
+\series default
+ of a directed graph 
+\begin_inset Formula $G=(V,E)$
+\end_inset
+
+ is the graph 
+\begin_inset Formula $G=(V,E^{T})$
+\end_inset
+
+, where 
+\begin_inset Formula $E^{T}=\{(v,u)\in V\times V:(u,v)\in E\}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $G^{T}$
+\end_inset
+
+ is 
+\begin_inset Formula $G$
+\end_inset
+
+ with all its edges reversed.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Graph shapes
+\end_layout
+
+\begin_layout Itemize
+(B) Two graphs 
+\begin_inset Formula $G=(V,E)$
+\end_inset
+
+ and 
+\begin_inset Formula $G'=(V',E')$
+\end_inset
+
+ are 
+\series bold
+isomorphic
+\series default
+ if there exists a 
+\emph on
+bijection
+\emph default
+ 
+\begin_inset Formula $f:V\rightarrow V'$
+\end_inset
+
+ such that 
+\begin_inset Formula $(u,v)\in E\iff(f(u),f(v))\in E'$
+\end_inset
+
+.
+ In other words, we can 
+\begin_inset Quotes eld
+\end_inset
+
+relabel
+\begin_inset Quotes erd
+\end_inset
+
+ the vertices of 
+\begin_inset Formula $G$
+\end_inset
+
+ to be vertices of 
+\begin_inset Formula $G'$
+\end_inset
+
+ maintaining the corresponding edges in 
+\begin_inset Formula $G$
+\end_inset
+
+ and 
+\begin_inset Formula $G'$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+(U) A 
+\series bold
+complete graph
+\series default
+ is an undirected graph 
+\begin_inset Formula $G=(V,E)$
+\end_inset
+
+ in which 
+\emph on
+every pair
+\emph default
+ of vertices is adjacent.
+ Also, 
+\begin_inset Formula $|E|=\frac{n(n-1)}{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+(U) A 
+\series bold
+clique
+\series default
+ in an undirected graph 
+\begin_inset Formula $G=(V,E)$
+\end_inset
+
+ is a subset of the vertex set
+\begin_inset Formula $C\subseteq V$
+\end_inset
+
+, such that for every two vertices in 
+\begin_inset Formula $C$
+\end_inset
+
+, there exists an edge connecting the two.
+ This is equivalent to saying that the subgraph induced by 
+\begin_inset Formula $C$
+\end_inset
+
+ is complete (in some cases, the term clique may also refer to the subgraph
+ itself).
+\end_layout
+
+\begin_layout Itemize
+(U) A 
+\series bold
+bipartite graph
+\series default
+ is an undirected graph 
+\begin_inset Formula $G=(V,E)$
+\end_inset
+
+ in which 
+\begin_inset Formula $V$
+\end_inset
+
+ can be partitioned into two sets 
+\begin_inset Formula $V_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $V_{2}$
+\end_inset
+
+ such that 
+\begin_inset Formula $(u,v)\in E\implies(u\in V_{1}\wedge v\in V_{2})\vee(u\in V_{2}\wedge v\in V_{1})$
+\end_inset
+
+.
+ Also, 
+\begin_inset Formula $G$
+\end_inset
+
+ is bipartite if and only if every cycle has 
+\emph on
+even
+\emph default
+ length.
+\end_layout
+
+\begin_layout Subsection
+Trees
+\end_layout
+
+\begin_layout Subsubsection
+Definitions
+\end_layout
+
+\begin_layout Itemize
+An acyclic, undirected graph is a 
+\series bold
+forest
+\series default
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+A connected, acyclic, undirected graph is a 
+\series bold
+(free) tree
+\series default
+.
+\end_layout
+
+\begin_layout Itemize
+A 
+\series bold
+spanning tree
+\series default
+ 
+\begin_inset Formula $T$
+\end_inset
+
+ of a connected, undirected graph 
+\begin_inset Formula $G=(V,E)$
+\end_inset
+
+ is a subgraph of 
+\begin_inset Formula $G$
+\end_inset
+
+ such that 
+\begin_inset Formula $T=(V,E')$
+\end_inset
+
+; that is a tree 
+\begin_inset Quotes eld
+\end_inset
+
+covering
+\begin_inset Quotes erd
+\end_inset
+
+ all vertices of 
+\begin_inset Formula $G$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Properties
+\end_layout
+
+\begin_layout Standard
+The following are all equivalent.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $G$
+\end_inset
+
+ is a tree.
+\end_layout
+
+\begin_layout Itemize
+Any two vertices in a tree are connected by a unique simple path.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $G$
+\end_inset
+
+ is connected but if you remove a single edge from 
+\begin_inset Formula $E$
+\end_inset
+
+ the resulting graph becomes disconnected.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $G$
+\end_inset
+
+ is acyclic but if you add a single edge to 
+\begin_inset Formula $E$
+\end_inset
+
+ then the resulting graph contains a cycle.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $|E|=|V|-1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Rooted trees
+\end_layout
+
+\begin_layout Itemize
+We call any node 
+\begin_inset Formula $y$
+\end_inset
+
+ on the unique single path from the root 
+\begin_inset Formula $r$
+\end_inset
+
+ to 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\series bold
+ancestor
+\series default
+ of 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $y$
+\end_inset
+
+ is an ancestor of 
+\begin_inset Formula $x$
+\end_inset
+
+, then 
+\begin_inset Formula $x$
+\end_inset
+
+ is a 
+\series bold
+descendant
+\series default
+ of 
+\begin_inset Formula $y$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\series bold
+subtree rooted at 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+
+\series default
+ is the tree induced by descendant of 
+\begin_inset Formula $x$
+\end_inset
+
+, rooted at 
+\begin_inset Formula $x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\series bold
+degree
+\series default
+ of a node 
+\begin_inset Formula $x$
+\end_inset
+
+ in a rooted tree
+\begin_inset Formula $T$
+\end_inset
+
+ equals the number of children of a node.
+\end_layout
+
+\begin_layout Itemize
+The 
+\series bold
+depth
+\series default
+ of a node 
+\begin_inset Formula $x$
+\end_inset
+
+ is the length of the simple path from the root 
+\begin_inset Formula $r$
+\end_inset
+
+ to 
+\begin_inset Formula $x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+A level of a tree consists of all nodes at the same depth.
+\end_layout
+
+\begin_layout Itemize
+The 
+\series bold
+height
+\series default
+ of a node 
+\begin_inset Formula $x$
+\end_inset
+
+ in a rooted tree is the number of edges on the longest simple 
+\emph on
+downward
+\emph default
+ (don't go back to the root) path from 
+\begin_inset Formula $x$
+\end_inset
+
+ to a leaf and the height of a tree is the height of its root.
+\end_layout
+
+\begin_layout Itemize
+An 
+\series bold
+ordered tree
+\series default
+ is a rooted tree in which the children of each node are ordered.
+\end_layout
+
+\begin_layout Subsubsection
+Binary and positional trees
+\end_layout
+
+\begin_layout Itemize
+A binary tree 
+\begin_inset Formula $T$
+\end_inset
+
+ is a structure defined on a finite set of nodes that either
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+contains no nodes, or
+\end_layout
+
+\begin_layout Itemize
+is composed of three disjoint sets of nodes, a root node, a binary tree
+ called its 
+\emph on
+left subtree
+\emph default
+, and a binary tree called its 
+\emph on
+right subtree
+\emph default
+.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+This implies that a binary tree is an ordered tree (at least, but there
+ is more).
+ 
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+A 
+\series bold
+full binary tree
+\series default
+ is a binary tree where each node is either a leaf or has degree exactly
+ 2.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+The 
+\series bold
+number of leaves
+\series default
+ in a full binary tree is one more the number of internal nodes.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+A 
+\series bold
+complete binary
+\series default
+ tree is a binary tree in which every level, 
+\emph on
+except possibly the last
+\emph default
+, is completely filled, and all nodes are as far 
+\emph on
+left
+\emph default
+ as possible.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+The 
+\series bold
+height
+\series default
+ in a complete binary tree with 
+\begin_inset Formula $n$
+\end_inset
+
+ leaves is 
+\begin_inset Formula $\left\lceil \log n\right\rceil $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+If 
+\series bold
+all the 
+\begin_inset Formula $h$
+\end_inset
+
+ levels
+\series default
+ are completely filled then:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+The number of leaves is 
+\begin_inset Formula $2^{h}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The number of internal nodes is 
+\begin_inset Formula $2^{h}-1$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+Full VS complete binary trees:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+All nodes that are not leaves have two children in a full binary tree, this
+ is not true for complete binary trees because there can be a node with
+ just the left children (the last one that has been filled)
+\end_layout
+
+\begin_layout Itemize
+A complete binary tree becomes a full binary tree every time all nodes have
+ exactly two children (including the last one that has been filled)
+\end_layout
+
+\begin_layout Itemize
+A full binary tree has no shape restriction (can have 
+\begin_inset Quotes eld
+\end_inset
+
+holes
+\begin_inset Quotes erd
+\end_inset
+
+ in the middle) while a complete binary tree does.
+\end_layout
+
+\begin_layout Itemize
+In a complete binary tree all the leaves must be on level 
+\begin_inset Formula $h$
+\end_inset
+
+ or 
+\begin_inset Formula $h-1$
+\end_inset
+
+ while this is not true for full binary trees (can have deep left/right
+ side and very shallow right/left side)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+The minimum height of a binary tree with 
+\begin_inset Formula $n$
+\end_inset
+
+ nodes is 
+\begin_inset Formula $\left\lfloor \log n\right\rfloor $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Weights in a graph
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $G=(V,E)$
+\end_inset
+
+ be a simple graph and let 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ be a function from 
+\begin_inset Formula $E$
+\end_inset
+
+ to the 
+\emph on
+positive
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+We must be careful because sometime this is not always true and there are
+ cycles of negative length for which some algorithms don't work.
+ 
+\end_layout
+
+\end_inset
+
+
+\emph default
+ real numbers.
+ We call 
+\begin_inset Formula $\lambda(e)$
+\end_inset
+
+ the 
+\series bold
+weight
+\series default
+ of the edge 
+\begin_inset Formula $e.$
+\end_inset
+
+ If 
+\begin_inset Formula $H=(V',E')$
+\end_inset
+
+ is a subgraph of 
+\begin_inset Formula $G$
+\end_inset
+
+, then 
+\begin_inset Formula $\lambda(H)$
+\end_inset
+
+, the weight of 
+\begin_inset Formula $H$
+\end_inset
+
+, is the sum of 
+\begin_inset Formula $\lambda(e')$
+\end_inset
+
+ over all 
+\begin_inset Formula $e'\in E'$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+A 
+\series bold
+minimum weight spanning tree
+\series default
+ for a connected graph 
+\begin_inset Formula $G$
+\end_inset
+
+ is a spanning tree such that 
+\begin_inset Formula $\lambda(T)\leq\lambda(T')$
+\end_inset
+
+ whenever 
+\begin_inset Formula $T'$
+\end_inset
+
+ is another spanning tree.
+\end_layout
+
+\begin_layout Subsection
+Graph coloring
+\end_layout
+
+\begin_layout Standard
+Given an undirected graph 
+\begin_inset Formula $G=(V,E)$
+\end_inset
+
+ a 
+\series bold
+graph coloring
+\series default
+ is a way of coloring the vertices of a graph such that no two adjacent
+ vertices share the same color; this is called a vertex coloring.
+ A coloring using at most 
+\begin_inset Formula $k$
+\end_inset
+
+ colors is called a (proper) 
+\begin_inset Formula $k$
+\end_inset
+
+-coloring.
+ The smallest number of colors needed to color a graph 
+\begin_inset Formula $G$
+\end_inset
+
+ is called its chromatic number, 
+\begin_inset Formula $\chi(G)$
+\end_inset
+
+.
+ Some facts about graph coloring follow:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $1\leq\chi(G)\leq n$
+\end_inset
+
+, since assigning distinct colors to distinct vertices always yields a proper
+ coloring.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\chi(G)\leq\Delta(G)+1$
+\end_inset
+
+, since it is possible to devise a greedy algorithm that produces such a
+ coloring.
+ 
+\end_layout
+
+\begin_layout Itemize
+Since complete graphs have 
+\begin_inset Formula $\Delta(G)=n-1$
+\end_inset
+
+ and 
+\begin_inset Formula $\chi(G)=n$
+\end_inset
+
+, and odd cycles have 
+\begin_inset Formula $\Delta(G)=2$
+\end_inset
+
+ and 
+\begin_inset Formula $\chi(G)=3$
+\end_inset
+
+, for these graphs this bound is the best possible.
+\end_layout
+
+\begin_layout Itemize
+A graph can be colored with 
+\series bold
+1 color
+\series default
+ if and only if 
+\begin_inset Formula $E=\emptyset$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Determining if a graph can be colored with 
+\series bold
+2 colors
+\series default
+ is equivalent to determining whether or not the graph is bipartite, and
+ thus computable in linear time using breadth-first search.
+\end_layout
+
+\begin_layout Itemize
+Generally deciding if a given graph admits a 
+\begin_inset Formula $k$
+\end_inset
+
+-coloring is NP-complete.
+\end_layout
+
+\begin_layout Subsection
+Matchings
+\end_layout
+
+\begin_layout Standard
+Given an undirected graph 
+\emph on
+G = (V,E)
+\emph default
+, a 
+\series bold
+matching
+\series default
+ 
+\begin_inset Formula $M$
+\end_inset
+
+ in 
+\begin_inset Formula $G$
+\end_inset
+
+ is a set of pairwise non-adjacent edges; that is, no two edges share a
+ common vertex.
+\end_layout
+
+\begin_layout Itemize
+A vertex is 
+\series bold
+matched
+\series default
+ (or 
+\series bold
+saturated
+\series default
+) if it is incident to an edge in the matching.
+ Otherwise the vertex is 
+\series bold
+unmatched
+\series default
+.
+\end_layout
+
+\begin_layout Itemize
+A 
+\series bold
+perfect matching
+\series default
+ (or 
+\series bold
+complete matching
+\series default
+) is a matching which matches all vertices of the graph.
+ That is, every vertex of the graph is incident to exactly one edge of the
+ matching.
+\end_layout
+
+\begin_layout Itemize
+A
+\series bold
+ stable matching
+\series default
+ is a matching that is perfect and stable.
+ Stable means there is no element 
+\begin_inset Formula $A$
+\end_inset
+
+ of the first matched set that prefers an element 
+\begin_inset Formula $B$
+\end_inset
+
+ (that it's not matched to) of the second matched set, and at the same time
+ 
+\begin_inset Formula $B$
+\end_inset
+
+ also prefers 
+\begin_inset Formula $A$
+\end_inset
+
+ over the one element it is currently matched with.
+\end_layout
+
+\end_body
+\end_document

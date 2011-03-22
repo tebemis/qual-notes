@@ -1,0 +1,1186 @@
+#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 1
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Software Engineering: notes for UIC qual
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+This work is licensed under a 
+\bar under
+
+\begin_inset CommandInset href
+LatexCommand href
+name "Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License"
+target "http://creativecommons.org/licenses/by-nc-sa/3.0"
+
+\end_inset
+
+
+\bar default
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+Gugo
+\end_layout
+
+\begin_layout Subsection*
+Disclaimer
+\end_layout
+
+\begin_layout Standard
+These notes have been prepared with the 
+\series bold
+only
+\series default
+ purpose to help me pass the Computer Science qualifiying exam at the University
+ of Illinois at Chicago.
+ They are distributed as they are (including errors, typos, omissions, etc.)
+ to help other students pass this exam (and possibly relieving them from
+ part of the pain associated with such a process).
+ I take 
+\series bold
+no responsibility
+\series default
+ for the material contained in these notes (which means that you can't sue
+ me if you don't pass the qual!) Moreover, this pdf version is distributed
+ together with the original LaTeX (and LyX) sources hoping that someone
+ else will improve and correct them.
+ I mean in absolute no way to violate copyrights and/or take credit stealing
+ the work of others.
+ The ideas contained in these pages are 
+\series bold
+not mine
+\series default
+ but I've just aggregated information scattered all over the internet.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Software lifecycles
+\end_layout
+
+\begin_layout Subsection
+Software release lifecycle
+\end_layout
+
+\begin_layout Standard
+The software release life cycle is composed of discrete phases that describe
+ the software's maturity as it advances from planning and development to
+ release and support phases.
+\end_layout
+
+\begin_layout Description
+Pre-alpha: refers to all activities performed during the software project
+ prior to system testing.
+ These activities can include requirements analysis, software design, software
+ development and unit testing.There are several types of pre-alpha versions:
+ development releases, nightly builds, milestones, etc.
+ 
+\end_layout
+
+\begin_layout Description
+Alpha: in this phase, developers generally test the software using white
+ box techniques.
+ Additional validation is then performed using black box or gray box techniques,
+ by another testing team.
+ Moving to black box testing inside the organization is known as alpha release.
+ Alpha software can be unstable and could cause crashes or data loss.
+ The alpha phase usually ends with a 
+\emph on
+feature freeze
+\emph default
+, indicating that no more features will be added to the software.
+ At this time, the software is said to be feature complete.
+\end_layout
+
+\begin_layout Description
+Beta: in this phase, pilot testing is performed by a limited number of end
+ users in the target environment.
+ The users of a beta version are called beta testers.
+ They are usually customers or prospective customers of the organization
+ that develops the software, willing to test the software for free or for
+ a reduced price.
+ 
+\end_layout
+
+\begin_layout Description
+Release
+\begin_inset space ~
+\end_inset
+
+Candidate: The term release candidate (RC) refers to a version with potential
+ to be a final product, ready to release unless fatal bugs emerge.
+ In this stage of product stabilization, all product features have been
+ designed, coded and tested through one or more beta cycles with no known
+ showstopper-class bug.
+\end_layout
+
+\begin_layout Description
+RTM: The term "release to manufacturing" or "release to marketing" (both
+ abbreviated RTM), also known as "gold", is a term used to indicate that
+ the software has reached a point that it is ready to or has been delivered
+ or provided to the customer.
+ RTM happens prior to general availability (GA) when the product is released
+ to the public.
+\end_layout
+
+\begin_layout Description
+GA: General Availability or General Acceptance (both abbreviated GA) is
+ the point where all necessary commercialization activities have been completed
+ and the software has been made available to the general market
+\end_layout
+
+\begin_layout Subsection
+Development lifecycles
+\end_layout
+
+\begin_layout Itemize
+Waterfall model: it's an activity-centered life cycle that prescribes sequential
+ executions of subsets of the development processes and management processes
+\end_layout
+
+\begin_layout Itemize
+v-Model: it's a modification of the waterfall model that makes explicit
+ the dependency between development activities and verification activities.
+\end_layout
+
+\begin_layout Itemize
+Spiral model: is an activity-centered life cycle model that was devised
+ to address the source of weaknesses in the waterfall model, in particular
+ to accommodate infrequent change during the software development.
+ This model focuses on addressing risks incrementally, in order of priority.
+\end_layout
+
+\begin_layout Itemize
+Unified Software Development Process: distinguishes important time ranges
+ in software development called cycles.
+ (birth, childhood, adulthood, retirement, death) Each cycle has four phases:
+ Inception, Elaboration, Construction, Transition.
+\end_layout
+
+\begin_layout Itemize
+Issue-based model: based on solving issues that are generated progressively.
+ 
+\end_layout
+
+\begin_layout Itemize
+Agile software development: it is a group of software development methodologies
+ based on iterative and incremental development, where requirements and
+ solutions evolve through collaboration between self-organizing, cross-functiona
+l teams.
+ 
+\end_layout
+
+\begin_layout Section
+Requirements elicitation
+\end_layout
+
+\begin_layout Subsection
+Functional Requirements
+\end_layout
+
+\begin_layout Standard
+Functional requirements describe the behavior and the interactions of the
+ system with its environment independently of its implementation.
+ The environment includes the user and any other external system with which
+ the system interacts.
+ 
+\end_layout
+
+\begin_layout Subsection
+Nonfunctional Requirements
+\end_layout
+
+\begin_layout Standard
+Nonfictional requirements describe aspects of the system that are not directly
+ related to the functional behavior.
+ Nonfictional requirements include a broad variety of requirements that
+ apply to many different aspects of the system.
+ Some nonfunctional requirements categories are: usability, reliability,
+ performance, supportability, constraints (implementation requirements,
+ legal categories,...).
+\end_layout
+
+\begin_layout Subsection
+Analysis
+\end_layout
+
+\begin_layout Standard
+Once the requirement elicitation activity is over the development team focuses
+ on the analysis phase.
+ Analysis focuses on producing a model of the system, called 
+\emph on
+analysis model
+\emph default
+, that is correct, complete, consistent and verifiable.
+ The two are different since during this phase the developers focus on structuri
+ng and formalizing the requirements elicited from users.
+ Doing so leads to new insight and the discovery of errors in the requirements.
+ 
+\end_layout
+
+\begin_layout Standard
+The analysis model is composed of three parts: the 
+\emph on
+functional model
+\emph default
+, represented by use cases and scenarios, the 
+\emph on
+analysis object model
+\emph default
+, represented by class and object diagrams, and the 
+\emph on
+dynamic model
+\emph default
+, represented by state machine and sequence diagrams.
+ 
+\end_layout
+
+\begin_layout Subsection
+RAD
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+Requirement Analysis Document
+\emph default
+ (
+\emph on
+RAD
+\emph default
+) is the result of the requirements elicitation (and analysis) activities.
+ This document completely describes the system in terms of functional and
+ nonfunctional requirements.
+ The first part of the document is written during the requirement elicitation
+ phase while the second part is completed during the analysis phase.
+\end_layout
+
+\begin_layout Section
+Design
+\end_layout
+
+\begin_layout Subsection
+Design principles
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Coupling
+\emph default
+ is the number of dependencies between two subsystems.
+ If two subsystems are loosely coupled, they are relatively independent,
+ so modifications to one will have little impact on the other.
+ If two subsystems are strongly coupled, modifications to one subsystem
+ is likely to have impact on the other.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Cohesion
+\emph default
+ is the number of dependencies within a subsystem.
+ If a subsystem contains many objects that are related to each other and
+ perform similar task, its cohesion is high.
+ If a subsystem contains a number of unrelated objects, its cohesion is
+ low.
+ 
+\end_layout
+
+\begin_layout Standard
+When designing a system a good property is that subsystems are as loosely
+ coupled as possible (
+\emph on
+minimize coupling
+\emph default
+) and as highly cohese as possible (
+\emph on
+maximize cohesion
+\emph default
+).
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Layering
+\emph default
+ allows systems to be organized as a hierarchy of subsystems, each providing
+ higher-level services to the subsystems above it by using lower-level services
+ from subsystems below it.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Partitioning
+\emph default
+ organizes subsystems as peers that mutually provide different services
+ to each other.
+\end_layout
+
+\begin_layout Subsubsection
+Different purposed for classes and inheritance
+\end_layout
+
+\begin_layout Standard
+Class hierarchies and polymorphism can be used to model both the application
+ domain and the solution domain.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Application objects
+\emph default
+, also called 
+\emph on
+domain objects
+\emph default
+, represents concepts of the domain that are relevant to the system.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Solution objects
+\emph default
+ represent components that do not have a counterpart in the application
+ domain, such as persistent data stores, user interface objects, or middleware.
+\end_layout
+
+\begin_layout Standard
+In the same way inheritance can be used both to classify analysis object
+ into taxonomies or to reduce redundancy and enhance extensibility of the
+ software product.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Specification inheritance
+\emph default
+ consists of the classification of concepts into type hierarchies.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Implementation inheritance
+\emph default
+, instead, is the use of inheritance for the sole purpose of reusing code.
+ Usually 
+\emph on
+delegation
+\emph default
+ (i.e.
+ implementing an operation in a certain class by resending a message to
+ another class) is a preferable mechanism to achieve reuse.
+\end_layout
+
+\begin_layout Subsection
+Architectural styles
+\end_layout
+
+\begin_layout Description
+Model-View-Controller: View renders data, observing Model, and you can have
+ multiple.
+ Controller receives user input and makes modifications to Model.
+ 
+\end_layout
+
+\begin_layout Description
+Repository: Independent component interact only through the repository.
+\end_layout
+
+\begin_layout Description
+Multi-tier
+\begin_inset space ~
+\end_inset
+
+architecture: Each tier is dedicated to a purpose.
+ Usually interface, application logic and storage.
+\end_layout
+
+\begin_layout Description
+Pipes
+\begin_inset space ~
+\end_inset
+
+and
+\begin_inset space ~
+\end_inset
+
+filters: Subsystems process data received as inputs and send results to
+ other subsystems via a set of outputs.
+\end_layout
+
+\begin_layout Description
+Client-Server: the server provides services to a client which requires them.
+\end_layout
+
+\begin_layout Description
+Peer-to-peer: generalization of client server where subsystems are both.
+\end_layout
+
+\begin_layout Subsection
+Design patterns
+\end_layout
+
+\begin_layout Standard
+In object-oriented development, 
+\emph on
+design patterns
+\emph default
+ are template solutions that developers have refined over time to solve
+ a range of recurring problems.
+\end_layout
+
+\begin_layout Subsubsection
+Creational patterns (5)
+\end_layout
+
+\begin_layout Standard
+These patterns have to do with class instantiation.
+ They can be further divided into class-creation patterns and object-creational
+ patterns.
+ While class-creation patterns use inheritance effectively in the instantiation
+ process, object-creation patterns use delegation to get the job done.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Abstract Factory
+\emph default
+ groups object factories that have a common theme.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Builder
+\emph default
+ constructs complex objects by separating construction and representation.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Factory method
+\emph default
+ creates objects without specifying the exact class to create.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Prototype
+\emph default
+ creates objects by cloning an existing object.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Singleton
+\emph default
+ restricts object creation for a class to only one instance.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Structural patterns (7)
+\end_layout
+
+\begin_layout Standard
+These concern class and object composition.
+ They use inheritance to compose interfaces and define ways to compose objects
+ to obtain new functionality.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Adapter
+\emph default
+ allows classes with incompatible interfaces to work together by wrapping
+ its own interface around that of an already existing class.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Bridge
+\emph default
+ decouples an abstraction from its implementation so that the two can vary
+ independently.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Composite
+\emph default
+ composes zero-or-more similar objects so that they can be manipulated as
+ one object.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Decorator
+\emph default
+ dynamically adds/overrides behaviour in an existing method of an object.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Facade
+\emph default
+ provides a simplified interface to a large body of code.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Flyweight
+\emph default
+ reduces the cost of creating and manipulating a large number of similar
+ objects.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Proxy
+\emph default
+ provides a placeholder for another object to control access, reduce cost,
+ and reduce complexity.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Behavioral patterns (11)
+\end_layout
+
+\begin_layout Standard
+Most of these design patterns are specifically concerned with communication
+ between objects.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Chain of responsibility
+\emph default
+ delegates commands to a chain of processing objects.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Command
+\emph default
+ creates objects which encapsulate actions and parameters.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Interpreter
+\emph default
+ implements a specialized language.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Iterator
+\emph default
+ accesses the elements of an object sequentially without exposing its underlying
+ representation.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Mediator
+\emph default
+ allows loose coupling between classes by being the only class that has
+ detailed knowledge of their methods.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Memento
+\emph default
+ provides the ability to restore an object to its previous state (undo).
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Observer
+\emph default
+ is a publish/subscribe pattern which allows a number of observer objects
+ to see an event.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+State
+\emph default
+ allows an object to alter its behavior when its internal state changes.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Strategy
+\emph default
+ allows one of a family of algorithms to be selected on-the-fly at runtime.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Template method
+\emph default
+ defines the skeleton of an algorithm as an abstract class, allowing its
+ subclasses to provide concrete behavior.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Visitor
+\emph default
+ separates an algorithm from an object structure by moving the hierarchy
+ of methods into one object.
+\end_layout
+
+\begin_layout Section
+Testing
+\end_layout
+
+\begin_layout Subsection
+Testing concepts
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+fault
+\emph default
+ (also known as a 
+\emph on
+bug
+\emph default
+ or 
+\emph on
+defect
+\emph default
+) is a design or coding mistake that may cause abnormal component behavior.
+\end_layout
+
+\begin_layout Standard
+An 
+\emph on
+erroneous state
+\emph default
+ is the manifestation of a fault during the execution of the system.
+ An erroneous state is caused by one or more faults and can trigger a failure.
+ 
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+failure
+\emph default
+ is a deviation between the specification and the actual behavior.
+ A failure is triggered by one or more erroneous states.
+ Note that not all erroneous states trigger a failure!
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+test
+\emph default
+ 
+\emph on
+case
+\emph default
+ is a set of inputs and expected results that exercises a component with
+ the purpose of causing failures and detecting faults.
+\end_layout
+
+\begin_layout Subsubsection
+Verification and Validation (V&V)
+\end_layout
+
+\begin_layout Description
+Verification: The process of evaluating software to determine whether the
+ products of a given development phase satisfy the conditions imposed at
+ the start of that phase.
+ Synthesized by the phrase: 
+\begin_inset Quotes eld
+\end_inset
+
+Have we made what we were trying to make?
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Often an internal process.
+\end_layout
+
+\begin_layout Description
+Validation: The process of evaluating software during or at the end of the
+ development process to determine whether it satisfies specified requirements.
+ Synthesized by the phrase: 
+\begin_inset Quotes eld
+\end_inset
+
+Are we trying to make the right thing?
+\begin_inset Quotes erd
+\end_inset
+
+ Often a process that involves users.
+\end_layout
+
+\begin_layout Subsection
+Component inspection
+\end_layout
+
+\begin_layout Standard
+The purpose of component inspection is to find faults in a component by
+ reviewing its source code in a formal meeting.
+ It is very time consuming but generally more effective than testing in
+ uncovering faults.
+ It is used as a complement to testing in safety-critical projects.
+ 
+\end_layout
+
+\begin_layout Subsection
+Unit testing
+\end_layout
+
+\begin_layout Standard
+Unit testing focuses on the building blocks of the software system, that
+ is, objects and subsystems.
+ There are three motivations behind focusing on these building blocks: it
+ reduces complexity of overall test activities, it makes easier to the pinpoint
+ and correct faults and allows parallelism of testing activities.
+\end_layout
+
+\begin_layout Subsubsection
+Equivalence testing
+\end_layout
+
+\begin_layout Standard
+This black-box technique minimizes the number of test cases.
+ The possible inputs are partitioned in equivalence classes, and a test
+ case is selected as a representative for each class.
+ The assumption behind equivalence testing is that the system behaves in
+ similar ways for all members of a class.
+\end_layout
+
+\begin_layout Subsubsection
+Boundary testing
+\end_layout
+
+\begin_layout Standard
+This special case of equivalence testing focuses on the conditions at the
+ boundary of the equivalence classes.
+ The assumption behind boundary testing is that developers often overlook
+ special cases at the boundary of the equivalence classes.
+\end_layout
+
+\begin_layout Standard
+A disadvantage of these techniques is that they do not explore combinations
+ of input data.
+\end_layout
+
+\begin_layout Subsubsection
+Path testing
+\end_layout
+
+\begin_layout Standard
+This white box technique identifies faults in the implementation of a component.
+ The assumption behind path testing is that, by exercising all possible
+ paths through the code at least once, most fault will trigger failures.
+ The identification of paths requires knowledge of the source code and data
+ structures.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Cyclomatic complexity
+\end_layout
+
+\begin_layout Standard
+It can be shown that the minimum number of tests necessary to cover all
+ edges (branches) is equal to the number of independent paths through the
+ flow graph of a particular program.
+ This is defined as the 
+\emph on
+cyclomatic complexity
+\emph default
+ (
+\emph on
+CC
+\emph default
+) of a graph.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $CC=|E|−|V|+2P$
+\end_inset
+
+ where 
+\begin_inset Formula $|E|$
+\end_inset
+
+ is the number of edges of the graph, 
+\begin_inset Formula $|V|$
+\end_inset
+
+ is the number of nodes of the graph and 
+\begin_inset Formula $P$
+\end_inset
+
+ is the number of connected components.
+\end_layout
+
+\begin_layout Subsubsection
+State-based testing
+\end_layout
+
+\begin_layout Standard
+State-based testing focuses on object-oriented systems and compares the
+ resulting state of the system with the expected state.
+ In the context of a class, state-based testing consists of deriving test
+ cases from the UML state machine diagram for the class.
+ 
+\end_layout
+
+\begin_layout Subsection
+Integration testing
+\end_layout
+
+\begin_layout Standard
+Integration testing detects faults that have been not been detected during
+ unit testing by focusing on small groups s of components.
+ Two or more components are integrated and tested, and when no new faults
+ are revealed, additional components are added to the group.
+ This procedure allows the testing of increasingly more complex parts of
+ the system while keeping the location of potential faults relatively small.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Horizontal integration testing strategies
+\end_layout
+
+\begin_layout Standard
+Integrates components according to layers.
+ 
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+big bang
+\emph default
+ strategy assumes that all components are first tested individually and
+ then tested together as a single system.
+ 
+\end_layout
+
+\begin_layout Standard
+The
+\emph on
+ bottom-up testing strategy 
+\emph default
+first tests each component of the bottom layer individually, and then integrates
+ them with components of the next layer up.
+ A major advantage of this technique is that no stubs are needed.
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+top-down testing strategy
+\emph default
+ unit tests components of the top layer first, and then integrates the component
+s of the next layer down.
+ The advantage of this technique is that interface faults can be more easily
+ found.
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+sandwich testing strategy
+\emph default
+ combines the previous two.
+\end_layout
+
+\begin_layout Subsubsection
+Vertical integration testing strategies
+\end_layout
+
+\begin_layout Standard
+Integrates components according to functions.
+ It focuses on early integration.
+ For a given use case, the needed parts of each component, such the user
+ interface, business logic, middleware and storage, are identified and developed
+ in parallel and integration tested.
+ This technique is used very often by agile methodologies.
+\end_layout
+
+\begin_layout Subsubsection
+Regression testing
+\end_layout
+
+\begin_layout Standard
+Object-oriented development is an iterative process.
+ When modifying a component, developers design new unit tests exercising
+ the new feature under consideration.
+ However, they should not assume that the rest of the system will work with
+ the modified component, since the modification could introduce side effects
+ or reveal previously hidden faults in other components.
+ Integration tests that are rerun on the system to detect such failures
+ are called 
+\emph on
+regression tests
+\emph default
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+System testing
+\end_layout
+
+\begin_layout Standard
+Once the components have been integrated, system testing ensures that the
+ complete system complies with the functional and non functional requirements.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Functional testing
+\emph default
+ finds differences between the functional requirements and the system.
+ It is a black-box technique since test cases are derived from the use case
+ model.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Performance testing
+\emph default
+ finds differences between the design goals selected during system design
+ and the system.
+ Because the design goals are derived from he nonfunctional requirements,
+ the test cases can be derived from the RAD.
+ The following tests are performed: stress testing, volume testing, security
+ testing, timing testing, recovery testing.
+\end_layout
+
+\begin_layout Itemize
+During 
+\emph on
+pilot testing
+\emph default
+ the system is installed and used by a selected group of users.
+ Users exercise the system and if it had been permanently installed.
+ 
+\end_layout
+
+\begin_layout Itemize
+In 
+\emph on
+acceptance testing
+\emph default
+ the customer performs usability, functional and performance tests in the
+ target environment.
+ After acceptance testing, the client reports to the project manager which
+ requirements are not satisfied.
+ 
+\end_layout
+
+\begin_layout Subsection
+Types of testing
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Black box testing
+\emph default
+: tests the functionality of the system without knowing the internal structure
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+White box testing
+\emph default
+: a complete knowledge of the internal structure of the system is used during
+ the testing process
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Gray box testing
+\emph default
+: some knowledge of the internal structure of the system is used to write
+ better test cases but then the system is tested as a black box
+\end_layout
+
+\begin_layout Subsection
+White testing examples
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Statement Coverage criteria
+\emph default
+: all lines of code are executed.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Decision Coverage criteria
+\emph default
+: all branch statements must be executed (both conditions).
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Condition Coverage criteria
+\emph default
+: all conditions (in branch statements, loops,...) must be executed.
+\end_layout
+
+\begin_layout Section
+Formal methods
+\end_layout
+
+\begin_layout Standard
+TODO
+\end_layout
+
+\end_body
+\end_document
