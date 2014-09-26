@@ -1,5 +1,5 @@
-#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
-\lyxformat 345
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
 \begin_document
 \begin_header
 \textclass article
@@ -7,18 +7,26 @@
 \usepackage{clrscode3e}
 \end_preamble
 \use_default_options true
+\maintain_unincluded_children false
 \language english
+\language_package default
 \inputencoding auto
+\fontencoding global
 \font_roman default
 \font_sans default
 \font_typewriter default
+\font_math auto
 \font_default_family default
+\use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
-
 \graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
 \float_placement H
 \paperfontsize default
 \spacing single
@@ -34,11 +42,29 @@
 \pdf_pdfusetitle true
 \papersize default
 \use_geometry true
-\use_amsmath 1
-\use_esint 1
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
 \cite_engine basic
+\cite_engine_type default
+\biblio_style plain
 \use_bibtopic false
+\use_indices false
 \paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
 \leftmargin 1in
 \topmargin 1in
 \rightmargin 1in
@@ -46,47 +72,33 @@
 \secnumdepth 3
 \tocdepth 1
 \paragraph_separation indent
-\defskip medskip
+\paragraph_indentation default
 \quotes_language english
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
 \tracking_changes false
 \output_changes false
-\author "" 
-\author "" 
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
 \end_header
 
 \begin_body
 
 \begin_layout Title
-Algorithms and Data Structures: notes for UIC qual
+Algorithms and Data Structures
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-This work is licensed under a 
-\bar under
-
-\begin_inset CommandInset href
-LatexCommand href
-name "Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License"
-target "http://creativecommons.org/licenses/by-nc-sa/3.0"
-
-\end_inset
-
-
-\bar default
-.
+This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
+ike 3.0 Unported License
 \end_layout
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Author
-Gugo
 \end_layout
 
 \begin_layout Subsection*
@@ -291,9 +303,11 @@ For a given function
 \end_inset
 
  the set of functions 
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 \Theta(g(n)) & = & \{(f(n):\text{ there exist positive constants c_{1},c_{2} and n_{0} such that}\\
- &  & 0\leq c_{1}g(n)\leq f(n)\leq c_{2}g(n)\text{ for all }n\geq n_{0}\}\end{eqnarray*}
+ &  & 0\leq c_{1}g(n)\leq f(n)\leq c_{2}g(n)\text{ for all }n\geq n_{0}\}
+\end{eqnarray*}
 
 \end_inset
 
@@ -341,9 +355,11 @@ For a given function
 \end_inset
 
  the set of functions 
-\begin_inset Formula \begin{eqnarray*}
-O(g(n)) & = & \{(f(n):\text{ there exist positive constants \ensuremath{c} and n_{0} such that}\\
- &  & 0\leq f(n)\leq cg(n)\, for\, all\, n\geq n_{0}\}\end{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
+O(g(n)) & = & \{(f(n):\text{ there exist positive constants \ensuremath{c}and n_{0} such that}\\
+ &  & 0\leq f(n)\leq cg(n)\, for\, all\, n\geq n_{0}\}
+\end{eqnarray*}
 
 \end_inset
 
@@ -434,9 +450,11 @@ For a given function
 \end_inset
 
  the set of functions 
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 \Omega(g(n)) & = & \{(f(n):\text{ there exist positive constants \ensuremath{c}and n_{0} such that}\\
- &  & 0\leq cg(n)\leq f(n)\, for\, all\, n\geq n_{0}\}\end{eqnarray*}
+ &  & 0\leq cg(n)\leq f(n)\, for\, all\, n\geq n_{0}\}
+\end{eqnarray*}
 
 \end_inset
 
@@ -545,8 +563,10 @@ For any two functions
 \end_inset
 
 , we have 
-\begin_inset Formula \[
-f(n)=\Theta(g(n))\iff f(n)=O(g(n))\, and\, f(n)=\Omega(g(n))\]
+\begin_inset Formula 
+\[
+f(n)=\Theta(g(n))\iff f(n)=O(g(n))\, and\, f(n)=\Omega(g(n))
+\]
 
 \end_inset
 
@@ -586,9 +606,11 @@ For a given function
 \end_inset
 
  the set of functions 
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 o(g(n)) & = & \{(f(n)\,:\,\forall c>0,\,\exists n_{0}>0:\\
- &  & 0\leq f(n)<cg(n)\text{ for all }n\geq n_{0}\}\end{eqnarray*}
+ &  & 0\leq f(n)<cg(n)\text{ for all }n\geq n_{0}\}
+\end{eqnarray*}
 
 \end_inset
 
@@ -634,8 +656,10 @@ Intuitively the function
 \end_inset
 
  approaches infinity; that is, 
-\begin_inset Formula \[
-\underset{n\rightarrow\infty}{\lim}\frac{f(n)}{g(n)}=0\]
+\begin_inset Formula 
+\[
+\underset{n\rightarrow\infty}{\lim}\frac{f(n)}{g(n)}=0
+\]
 
 \end_inset
 
@@ -663,9 +687,11 @@ For a given function
 \end_inset
 
  the set of functions 
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 \omega(g(n)) & = & \{(f(n)\,:\,\forall c>0,\,\exists n_{0}>0:\\
- &  & 0\leq cg(n)<f(n)\text{ for all }n\geq n_{0}\}\end{eqnarray*}
+ &  & 0\leq cg(n)<f(n)\text{ for all }n\geq n_{0}\}
+\end{eqnarray*}
 
 \end_inset
 
@@ -710,8 +736,10 @@ The relation
 \end_inset
 
  implies that
-\begin_inset Formula \[
-\underset{n\rightarrow\infty}{\lim}\frac{f(n)}{g(n)}=\infty\]
+\begin_inset Formula 
+\[
+\underset{n\rightarrow\infty}{\lim}\frac{f(n)}{g(n)}=\infty
+\]
 
 \end_inset
 
@@ -768,8 +796,10 @@ Floors and ceilings
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-x-1<\lfloor x\rfloor\leq x\leq\lceil x\rceil<x+1\]
+\begin_inset Formula 
+\[
+x-1<\lfloor x\rfloor\leq x\leq\lceil x\rceil<x+1
+\]
 
 \end_inset
 
@@ -777,8 +807,10 @@ x-1<\lfloor x\rfloor\leq x\leq\lceil x\rceil<x+1\]
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-\lceil n/2\rceil+\lfloor n/2\rfloor=n\]
+\begin_inset Formula 
+\[
+\lceil n/2\rceil+\lfloor n/2\rfloor=n
+\]
 
 \end_inset
 
@@ -914,11 +946,14 @@ If the base is strictly greater than one then
 
 \begin_layout Standard
 Note how:
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 log_{b}a\,\begin{cases}
 >1 & \text{if }a>b\\
 =1 & \text{if }a=b\\
-<1 & \text{if }a<b\end{cases}\]
+<1 & \text{if }a<b
+\end{cases}
+\]
 
 \end_inset
 
@@ -957,8 +992,10 @@ Iterated logarithm
 \begin_layout Standard
 The iterated logarithm is a very slowly growing function that it is defined
  as 
-\begin_inset Formula \[
-\lg^{*}n=\min\{i\geq0:\lg^{(i)}n\leq1\}\]
+\begin_inset Formula 
+\[
+\lg^{*}n=\min\{i\geq0:\lg^{(i)}n\leq1\}
+\]
 
 \end_inset
 
@@ -996,8 +1033,10 @@ A weak upperbound on the factorial function is
 
 \begin_layout Standard
 Stirling's approximation:
-\begin_inset Formula \[
-n!=\sqrt{2\pi n}\left(\frac{n}{e}\right)^{n}\left(1+\Theta\left(\frac{1}{n}\right)\right)\]
+\begin_inset Formula 
+\[
+n!=\sqrt{2\pi n}\left(\frac{n}{e}\right)^{n}\left(1+\Theta\left(\frac{1}{n}\right)\right)
+\]
 
 \end_inset
 
@@ -1022,10 +1061,13 @@ For integers
 \end_inset
 
  as
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 A_{k}(j)=\begin{cases}
 j+1 & \text{if }k=0\\
-A_{k-1}^{(j+1)}(j) & \text{if }k\geq1\end{cases}\]
+A_{k-1}^{(j+1)}(j) & \text{if }k\geq1
+\end{cases}
+\]
 
 \end_inset
 
@@ -1090,8 +1132,10 @@ We define the inverse of the function
 \end_inset
 
 , by
-\begin_inset Formula \[
-\alpha(n)=\min\{k:A_{k}(1)\geq n\}\]
+\begin_inset Formula 
+\[
+\alpha(n)=\min\{k:A_{k}(1)\geq n\}
+\]
 
 \end_inset
 
@@ -1120,13 +1164,16 @@ In words,
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \alpha(n)=\begin{cases}
 0 & \text{for }0\leq n\leq2\\
 1 & \text{for }n=3\\
 2 & \text{for }4\leq n\leq7\\
 3 & \text{for }8\leq n\leq2027\\
-4 & \text{for }2027\leq n\leq A_{4}(1)\end{cases}\]
+4 & \text{for }2027\leq n\leq A_{4}(1)
+\end{cases}
+\]
 
 \end_inset
 
@@ -1206,8 +1253,10 @@ Let
 \end_inset
 
  be defined on the nonnegative integers by the recurrence
-\begin_inset Formula \[
-T(n)=aT(n/b)+f(n)\]
+\begin_inset Formula 
+\[
+T(n)=aT(n/b)+f(n)
+\]
 
 \end_inset
 
@@ -1396,11 +1445,14 @@ Assuming
 \end_inset
 
  we obtain: 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 T(n)=aT(n/b)+cn^{k}=\begin{cases}
 \Theta(n^{\log_{a}b}) & if\, a>b^{k}\\
 \Theta(n^{k}\log n) & if\, a=b^{k}\\
-\Theta(n^{k}) & if\, a<b^{k}\end{cases}\]
+\Theta(n^{k}) & if\, a<b^{k}
+\end{cases}
+\]
 
 \end_inset
 
@@ -1583,9 +1635,9 @@ status collapsed
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features>
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1683,7 +1735,7 @@ Delete
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Operations cost in array based implementation
@@ -1730,9 +1782,9 @@ status collapsed
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features>
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1830,7 +1882,7 @@ Delete
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Operations cost in linked list based implementation
@@ -1893,9 +1945,9 @@ status collapsed
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features>
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1993,7 +2045,7 @@ Pop
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Cost of operations (both array and linked list based implementation)
@@ -2047,9 +2099,9 @@ status collapsed
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features>
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -2147,7 +2199,7 @@ Dequeue
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Cost of operations (both array and linked list based implementations)
@@ -2340,9 +2392,9 @@ status collapsed
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="2">
-<features>
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -2463,7 +2515,7 @@ Build
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Cost of operations
@@ -2936,9 +2988,9 @@ status collapsed
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="2">
-<features>
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -3059,7 +3111,7 @@ Build
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Cost of operations
@@ -3797,9 +3849,9 @@ status collapsed
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="2">
-<features>
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -3920,7 +3972,7 @@ Prec./Succ.
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Cost of operations
@@ -4035,9 +4087,9 @@ status collapsed
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="2">
-<features>
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -4158,7 +4210,7 @@ Prec./Succ.
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Cost of operations
@@ -5587,9 +5639,9 @@ status collapsed
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="2">
-<features>
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -5687,7 +5739,7 @@ Find-Set
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption
+\begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Cost of operations
@@ -7791,11 +7843,14 @@ We can define
 .
  The optimal substructure of the LCS problem gives the recursive formula
  
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 c[i,j]=\begin{cases}
 0 & \text{if \ensuremath{i=0}or \ensuremath{j=0}}\\
 c[i-1,j-1]+1 & \text{if \ensuremath{i,j>0}and \ensuremath{z_{i}=y_{j}}}\\
-max(c[i,j-1],c[i-1,j]) & \text{if \ensuremath{i,j>0}and \ensuremath{z_{i}\neq y_{j}}}\end{cases}\]
+max(c[i,j-1],c[i-1,j]) & \text{if \ensuremath{i,j>0}and \ensuremath{z_{i}\neq y_{j}}}
+\end{cases}
+\]
 
 \end_inset
 
@@ -8569,11 +8624,14 @@ If
 \end_inset
 
  we can formalize the previous statement as
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 c[i,w]=\begin{cases}
 0 & \text{if }i=0\text{ or }w=0\\
 c[i-1,w] & \text{if }w_{i}>w\\
-\max(v_{i}+c[i-1,w-w_{i}],c[i-1,w]) & \text{if }i>1\text{ and }w\geq w_{i}\end{cases}\]
+\max(v_{i}+c[i-1,w-w_{i}],c[i-1,w]) & \text{if }i>1\text{ and }w\geq w_{i}
+\end{cases}
+\]
 
 \end_inset
 
@@ -10093,10 +10151,13 @@ representation
 \end_inset
 
  such that 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 a_{ij}=\begin{cases}
 1 & \text{if }(i,j)\in E\\
-0 & \text{otherwise}\end{cases}\]
+0 & \text{otherwise}
+\end{cases}
+\]
 
 \end_inset
 
@@ -12854,10 +12915,13 @@ shortest-path weight
 \end_inset
 
  by 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \delta(u,v)=\begin{cases}
 \min\{w(p):u\overset{p}{\rightsquigarrow}v\} & \text{if there is a path form \ensuremath{u}to \ensuremath{v}}\\
-\infty & \text{otherwise}\end{cases}\]
+\infty & \text{otherwise}
+\end{cases}
+\]
 
 \end_inset
 
@@ -13960,11 +14024,14 @@ Unlike the majority of graph algorithms, Floyd-Warshall algorithm assumes
 \end_inset
 
  representing the edge weights and defined as follows
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 w_{ij}=\begin{cases}
 0 & \text{if }i=j\\
 w(i,j) & \text{if }i\neq j\text{ and }(i,j)\in E\\
-\infty & \text{if }i\neq j\text{ and }(i,j)\notin E\end{cases}\]
+\infty & \text{if }i\neq j\text{ and }(i,j)\notin E
+\end{cases}
+\]
 
 \end_inset
 
@@ -14276,10 +14343,13 @@ be the weights of a shortest path from vertex
 \end_inset
 
  recursively by
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 d_{ij}^{(k)}=\begin{cases}
 w_{ij} & \text{if }k=0\\
-\min(d_{ij}^{(k)},d_{ik}^{(k-1)}+d_{kj}^{(k-1)}) & \text{if }k\geq1\end{cases}\]
+\min(d_{ij}^{(k)},d_{ik}^{(k-1)}+d_{kj}^{(k-1)}) & \text{if }k\geq1
+\end{cases}
+\]
 
 \end_inset
 
@@ -14581,11 +14651,11 @@ quicker
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="14" columns="4">
-<features>
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
@@ -15337,13 +15407,13 @@ Linear data structures
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="7" columns="6">
-<features>
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
@@ -15831,15 +15901,15 @@ Trees
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="8">
-<features>
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
@@ -16309,12 +16379,12 @@ Disjoint-set data structure
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="5">
-<features>
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
@@ -16493,13 +16563,13 @@ Complexities of the main sorting and selection algorithms.
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="7" columns="6">
-<features>
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
@@ -16989,11 +17059,11 @@ Therefore
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="13" columns="4">
-<features>
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text

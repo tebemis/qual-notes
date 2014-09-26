@@ -1,21 +1,29 @@
-#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
-\lyxformat 345
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
 \begin_document
 \begin_header
 \textclass article
 \use_default_options true
+\maintain_unincluded_children false
 \language english
+\language_package default
 \inputencoding auto
+\fontencoding global
 \font_roman default
 \font_sans default
 \font_typewriter default
+\font_math auto
 \font_default_family default
+\use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
-
 \graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
 \paperfontsize default
 \spacing single
 \use_hyperref true
@@ -30,11 +38,29 @@
 \pdf_pdfusetitle true
 \papersize default
 \use_geometry true
-\use_amsmath 1
-\use_esint 1
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
 \cite_engine basic
+\cite_engine_type default
+\biblio_style plain
 \use_bibtopic false
+\use_indices false
 \paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
 \leftmargin 1in
 \topmargin 1in
 \rightmargin 1in
@@ -42,47 +68,33 @@
 \secnumdepth 3
 \tocdepth 1
 \paragraph_separation indent
-\defskip medskip
+\paragraph_indentation default
 \quotes_language english
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
 \tracking_changes false
 \output_changes false
-\author "" 
-\author "" 
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
 \end_header
 
 \begin_body
 
 \begin_layout Title
-Foundations of Computer Science: notes for UIC qual
+Foundations of Computer Science
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-This work is licensed under a 
-\bar under
-
-\begin_inset CommandInset href
-LatexCommand href
-name "Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License"
-target "http://creativecommons.org/licenses/by-nc-sa/3.0"
-
-\end_inset
-
-
-\bar default
-.
+This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
+ike 3.0 Unported License.
 \end_layout
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Author
-Gugo
 \end_layout
 
 \begin_layout Subsection*
@@ -1234,8 +1246,10 @@ s)
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-n(n-1)\dots(n-k)=\frac{n!}{(n-k)!}\]
+\begin_inset Formula 
+\[
+n(n-1)\dots(n-k)=\frac{n!}{(n-k)!}
+\]
 
 \end_inset
 
@@ -1255,8 +1269,10 @@ s)
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-\frac{n!}{0!}=n!=k!\]
+\begin_inset Formula 
+\[
+\frac{n!}{0!}=n!=k!
+\]
 
 \end_inset
 
@@ -1272,8 +1288,10 @@ permutation
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-(n-1)!\]
+\begin_inset Formula 
+\[
+(n-1)!
+\]
 
 \end_inset
 
@@ -1301,8 +1319,10 @@ combinations
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-\frac{n!}{k!(n-k)!}=\left({n\atop k}\right)=\left({n\atop n-k}\right)\]
+\begin_inset Formula 
+\[
+\frac{n!}{k!(n-k)!}=\left({n\atop k}\right)=\left({n\atop n-k}\right)
+\]
 
 \end_inset
 
@@ -1392,8 +1412,10 @@ multisets
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-n^{k}\]
+\begin_inset Formula 
+\[
+n^{k}
+\]
 
 \end_inset
 
@@ -1455,8 +1477,10 @@ multisets
 
  types, how many different ways do I have to put them in non considering
  permutations?)
-\begin_inset Formula \[
-\left({n+k-1\atop n-1}\right)=\left({n+k-1\atop k}\right)=\left(\left({n\atop k}\right)\right)\]
+\begin_inset Formula 
+\[
+\left({n+k-1\atop n-1}\right)=\left({n+k-1\atop k}\right)=\left(\left({n\atop k}\right)\right)
+\]
 
 \end_inset
 
@@ -1482,8 +1506,10 @@ Given
 
  bins) the number of different ways to distribute them so that there is
  at least one in each bin is 
-\begin_inset Formula \[
-\left({k-1\atop n-1}\right)\]
+\begin_inset Formula 
+\[
+\left({k-1\atop n-1}\right)
+\]
 
 \end_inset
 
@@ -1520,8 +1546,10 @@ How many multisets of cardinality
 multiset permutation
 \emph default
 ) 
-\begin_inset Formula \[
-\frac{n!}{k_{1}!k_{2!}\dots k_{m}!}=\left({n\atop k_{1},k_{2}\dots,k_{m}}\right)\]
+\begin_inset Formula 
+\[
+\frac{n!}{k_{1}!k_{2!}\dots k_{m}!}=\left({n\atop k_{1},k_{2}\dots,k_{m}}\right)
+\]
 
 \end_inset
 
@@ -1606,8 +1634,10 @@ In it's simplest version (for two sets) it states that if
 \end_inset
 
  are two sets, then 
-\begin_inset Formula \[
-|A\cup B|=|A|+|B|-|A\cap B|\]
+\begin_inset Formula 
+\[
+|A\cup B|=|A|+|B|-|A\cap B|
+\]
 
 \end_inset
 
@@ -1648,8 +1678,10 @@ Recursive formula for binomial coefficients
 
 \begin_layout Standard
 Binomial coefficients can be recursively defined as
-\begin_inset Formula \[
-\left({n\atop k}\right)=\left({n-1\atop k-1}\right)+\left({n-1\atop k}\right)\]
+\begin_inset Formula 
+\[
+\left({n\atop k}\right)=\left({n-1\atop k-1}\right)+\left({n-1\atop k}\right)
+\]
 
 \end_inset
 
@@ -1658,9 +1690,11 @@ Binomial coefficients can be recursively defined as
 
 \begin_layout Standard
 with, as initial value
-\begin_inset Formula \begin{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
 \left({n\atop 0}\right)=1 &  & \forall n\in\mathbb{N}\\
-\left({0\atop k}\right)=0 &  & \forall k>0\end{eqnarray*}
+\left({0\atop k}\right)=0 &  & \forall k>0
+\end{eqnarray*}
 
 \end_inset
 
@@ -1673,8 +1707,10 @@ Generating function for binomial coefficients (binomial expansion)
 
 \begin_layout Standard
 The generating function can be written as
-\begin_inset Formula \[
-(x+y)^{n}=\underset{k=0}{\overset{n}{\sum}}\left({n\atop k}\right)x^{k}y^{n-k}\]
+\begin_inset Formula 
+\[
+(x+y)^{n}=\underset{k=0}{\overset{n}{\sum}}\left({n\atop k}\right)x^{k}y^{n-k}
+\]
 
 \end_inset
 
@@ -1687,8 +1723,10 @@ and, substituting
 \end_inset
 
  we obtain
-\begin_inset Formula \[
-(1+x)^{n}=\underset{k=0}{\overset{n}{\sum}}\left({n\atop k}\right)x^{k}\]
+\begin_inset Formula 
+\[
+(1+x)^{n}=\underset{k=0}{\overset{n}{\sum}}\left({n\atop k}\right)x^{k}
+\]
 
 \end_inset
 
@@ -1701,8 +1739,10 @@ and, in it's most particular case, substituting
 \end_inset
 
 
-\begin_inset Formula \[
-2^{n}=\underset{k=0}{\overset{n}{\sum}}\left({n\atop k}\right)\]
+\begin_inset Formula 
+\[
+2^{n}=\underset{k=0}{\overset{n}{\sum}}\left({n\atop k}\right)
+\]
 
 \end_inset
 
@@ -2159,7 +2199,7 @@ expression e has the same number of left and right parentheses
 ".
 \end_layout
 
-\begin_layout List
+\begin_layout Labeling
 \labelwidthstring 00.00.0000
 Base
 \begin_inset space ~
@@ -2179,7 +2219,7 @@ case:
 no parentheses.
 \end_layout
 
-\begin_layout List
+\begin_layout Labeling
 \labelwidthstring 00.00.0000
 Inductive
 \begin_inset space ~
@@ -2348,8 +2388,10 @@ Linearity
 
 \begin_layout Standard
 All finite series are linear, which means 
-\begin_inset Formula \[
-\underset{k=1}{\overset{n}{\sum}}(ca_{k}+b_{k})=c\underset{k=1}{\overset{n}{\sum}}a_{k}+\underset{k=1}{\overset{n}{\sum}}b_{k}\]
+\begin_inset Formula 
+\[
+\underset{k=1}{\overset{n}{\sum}}(ca_{k}+b_{k})=c\underset{k=1}{\overset{n}{\sum}}a_{k}+\underset{k=1}{\overset{n}{\sum}}b_{k}
+\]
 
 \end_inset
 
@@ -2375,8 +2417,10 @@ Products
 \begin_layout Standard
 We can convert a formula with a product to a formula with a summation using
  the identity
-\begin_inset Formula \[
-\lg\left(\underset{k=1}{\overset{n}{\prod}}a_{k}\right)=\underset{k=1}{\overset{n}{\sum}}\lg a_{k}\]
+\begin_inset Formula 
+\[
+\lg\left(\underset{k=1}{\overset{n}{\prod}}a_{k}\right)=\underset{k=1}{\overset{n}{\sum}}\lg a_{k}
+\]
 
 \end_inset
 
@@ -2396,8 +2440,10 @@ Arithmetic series
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-\overset{n}{\underset{k=0}{\sum}}k=\frac{n(n+1)}{2}\]
+\begin_inset Formula 
+\[
+\overset{n}{\underset{k=0}{\sum}}k=\frac{n(n+1)}{2}
+\]
 
 \end_inset
 
@@ -2405,8 +2451,10 @@ Arithmetic series
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-\overset{n}{\underset{k=0}{\sum}}k^{2}=\frac{n(n+1)(2n+1)}{6}\]
+\begin_inset Formula 
+\[
+\overset{n}{\underset{k=0}{\sum}}k^{2}=\frac{n(n+1)(2n+1)}{6}
+\]
 
 \end_inset
 
@@ -2414,8 +2462,10 @@ Arithmetic series
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-\overset{n}{\underset{k=0}{\sum}}k^{3}=\frac{n^{2}(n+1)^{2}}{4}\]
+\begin_inset Formula 
+\[
+\overset{n}{\underset{k=0}{\sum}}k^{3}=\frac{n^{2}(n+1)^{2}}{4}
+\]
 
 \end_inset
 
@@ -2442,8 +2492,10 @@ For real
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-\overset{n}{\underset{k=0}{\sum}}x^{k}=\frac{x^{n+1}-1}{x-1}\]
+\begin_inset Formula 
+\[
+\overset{n}{\underset{k=0}{\sum}}x^{k}=\frac{x^{n+1}-1}{x-1}
+\]
 
 \end_inset
 
@@ -2471,8 +2523,10 @@ When the summation is infinite and
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-\overset{\infty}{\underset{k=0}{\sum}}x^{k}=\frac{1}{1-x}\]
+\begin_inset Formula 
+\[
+\overset{\infty}{\underset{k=0}{\sum}}x^{k}=\frac{1}{1-x}
+\]
 
 \end_inset
 
@@ -2509,8 +2563,10 @@ For positive integers
 
 \emph default
 th harmonic number is 
-\begin_inset Formula \[
-H_{n}=1+\frac{1}{2}+\frac{1}{3}+\dots+\frac{1}{n}=\underset{k=1}{\overset{n}{\sum}}\frac{1}{k}=\ln n+O(1)\]
+\begin_inset Formula 
+\[
+H_{n}=1+\frac{1}{2}+\frac{1}{3}+\dots+\frac{1}{n}=\underset{k=1}{\overset{n}{\sum}}\frac{1}{k}=\ln n+O(1)
+\]
 
 \end_inset
 
@@ -2530,8 +2586,10 @@ Telescoping series
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-\underset{k=1}{\overset{n}{\sum}}(a_{k}-a_{k-1})=a_{n}-a_{0}\]
+\begin_inset Formula 
+\[
+\underset{k=1}{\overset{n}{\sum}}(a_{k}-a_{k-1})=a_{n}-a_{0}
+\]
 
 \end_inset
 
@@ -2539,8 +2597,10 @@ Telescoping series
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-\underset{k=0}{\overset{n-1}{\sum}}(a_{k}-a_{k+1})=a_{0}-a_{n}\]
+\begin_inset Formula 
+\[
+\underset{k=0}{\overset{n-1}{\sum}}(a_{k}-a_{k+1})=a_{0}-a_{n}
+\]
 
 \end_inset
 
@@ -2562,8 +2622,10 @@ Other common series
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-\underset{k=0}{\overset{n}{\sum}}1=n\]
+\begin_inset Formula 
+\[
+\underset{k=0}{\overset{n}{\sum}}1=n
+\]
 
 \end_inset
 
@@ -2580,8 +2642,10 @@ An example application of the previous is this is the series
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-\underset{k=1}{\overset{n}{\sum}}\lg n=\lg n\cdot\underset{k=1}{\overset{n}{\sum}}1=n\lg n\]
+\begin_inset Formula 
+\[
+\underset{k=1}{\overset{n}{\sum}}\lg n=\lg n\cdot\underset{k=1}{\overset{n}{\sum}}1=n\lg n
+\]
 
 \end_inset
 
@@ -2798,10 +2862,10 @@ We define
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="3">
-<features>
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
@@ -2999,16 +3063,16 @@ inverse.
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="9">
-<features>
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
@@ -3490,11 +3554,11 @@ double implication
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="4">
-<features>
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
@@ -4001,7 +4065,8 @@ As long as quantifiers are not involved the same rules of predicate logic
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \]
 
 \end_inset
@@ -4250,8 +4315,10 @@ Binomial
 
 \begin_layout Standard
 The probability mass function (p.m.f.) is:
-\begin_inset Formula \[
-P(K=k)=\left({n\atop k}\right)p^{k}(1-p)^{n-k}\]
+\begin_inset Formula 
+\[
+P(K=k)=\left({n\atop k}\right)p^{k}(1-p)^{n-k}
+\]
 
 \end_inset
 
@@ -4281,8 +4348,10 @@ Represents the number of Bernoulli trials before a success.
 
 \begin_layout Standard
 The probability mass function is:
-\begin_inset Formula \[
-P(K=k)=p(1-p)^{k-1}\]
+\begin_inset Formula 
+\[
+P(K=k)=p(1-p)^{k-1}
+\]
 
 \end_inset
 
@@ -4319,8 +4388,10 @@ The probability mass function is:
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-P(K=k)=\frac{\lambda^{k}}{k!}\cdot e^{-\lambda}\]
+\begin_inset Formula 
+\[
+P(K=k)=\frac{\lambda^{k}}{k!}\cdot e^{-\lambda}
+\]
 
 \end_inset
 
@@ -4370,8 +4441,10 @@ The probability mass function is:
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-P(K=k)=\frac{\left({m\atop k}\right)\left({N-m\atop n-k}\right)}{\left({N\atop m}\right)}\]
+\begin_inset Formula 
+\[
+P(K=k)=\frac{\left({m\atop k}\right)\left({N-m\atop n-k}\right)}{\left({N\atop m}\right)}
+\]
 
 \end_inset
 
