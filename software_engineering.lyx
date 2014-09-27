@@ -138,7 +138,7 @@ LatexCommand tableofcontents
 \end_layout
 
 \begin_layout Section
-Software lifecycles
+Software lifecycles (academic)
 \end_layout
 
 \begin_layout Subsection
@@ -250,7 +250,8 @@ Agile software development: it is a group of software development methodologies
  based on iterative and incremental development, where requirements and
  solutions evolve through collaboration between self-organizing, cross-functiona
 l teams.
- 
+ e.g.
+ Scrum
 \end_layout
 
 \begin_layout Section
@@ -464,6 +465,29 @@ delegation
  another class) is a preferable mechanism to achieve reuse.
 \end_layout
 
+\begin_layout Subsubsection
+Kent Beck's four rules of simple design
+\end_layout
+
+\begin_layout Itemize
+Runs all the tests.
+\end_layout
+
+\begin_layout Itemize
+Expresses every idea that we need to express.
+ (intent)
+\end_layout
+
+\begin_layout Itemize
+Says everything OnceAndOnlyOnce.
+ (no duplication)
+\end_layout
+
+\begin_layout Itemize
+Has no superfluous parts.
+ (minimize classes/methods)
+\end_layout
+
 \begin_layout Subsection
 Architectural styles
 \end_layout
@@ -554,8 +578,11 @@ Builder
 
 \begin_layout Itemize
 
+\series bold
 \emph on
-Factory method
+Factory
+\series default
+ method
 \emph default
  creates objects without specifying the exact class to create.
  
@@ -572,8 +599,10 @@ Prototype
 
 \begin_layout Itemize
 
+\series bold
 \emph on
 Singleton
+\series default
 \emph default
  restricts object creation for a class to only one instance.
  
@@ -592,8 +621,10 @@ These concern class and object composition.
 
 \begin_layout Itemize
 
+\series bold
 \emph on
 Adapter
+\series default
 \emph default
  allows classes with incompatible interfaces to work together by wrapping
  its own interface around that of an already existing class.
@@ -631,8 +662,10 @@ Decorator
 
 \begin_layout Itemize
 
+\series bold
 \emph on
 Facade
+\series default
 \emph default
  provides a simplified interface to a large body of code.
  
@@ -679,8 +712,10 @@ Chain of responsibility
 
 \begin_layout Itemize
 
+\series bold
 \emph on
 Command
+\series default
 \emph default
  creates objects which encapsulate actions and parameters.
  
@@ -697,8 +732,10 @@ Interpreter
 
 \begin_layout Itemize
 
+\series bold
 \emph on
 Iterator
+\series default
 \emph default
  accesses the elements of an object sequentially without exposing its underlying
  representation.
@@ -726,8 +763,10 @@ Memento
 
 \begin_layout Itemize
 
+\series bold
 \emph on
 Observer
+\series default
 \emph default
  is a publish/subscribe pattern which allows a number of observer objects
  to see an event.
@@ -772,14 +811,441 @@ Visitor
 \end_layout
 
 \begin_layout Section
-Testing
+Object Oriented Design
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Aggregation
+\emph default
+ (vs 
+\emph on
+composition
+\emph default
+): 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+In aggregation, A uses B.
+ B exists independelty of A.
+ 
+\end_layout
+
+\begin_layout Itemize
+In composition A owns B.
+ B has no meaninig without A (i.e.
+ B is a component of A).
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\emph on
+Class (vs object)
+\emph default
+: A class is a written piece of code that defines the behavior of a given
+ class.
+ An object is an instance of a class obtained through a process of instantiation.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Class / static initializer
+\emph default
+: block of code that is used to initialize static members.
+ Similar to a 
+\begin_inset Quotes eld
+\end_inset
+
+constructor for class/static methods/attributes
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Class / static method
+\emph default
+/attribute: methods that don't belong to any object (i.e.
+ instance) but to the class itself.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Constructor
+\emph default
+: block of code that is used to inizialize new objects (i.e.
+ class instances).
+ It's executed every time a new instance is created.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Delegation / forwarding
+\emph default
+: is a design pattern where an object, instead of performing one of its
+ stated tasks, delegates that task to an associated helper object.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Dependency Injection (DI)
+\emph default
+: A desingn pattern that removes hard-coded dependencies (i.e.
+ services) from dependent objects (i.e.
+ clients).
+ The service is made part of the client's state.
+ Passing the service to the client, rather than allowing a client to build
+ or find the service.
+ There are three main ways of injecting dependencies:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+constructor injection: the dependencies are provided through a class constructor.
+ 
+\end_layout
+
+\begin_layout Itemize
+setter injection: the client exposes a setter method that the injector uses
+ to inject the dependency.
+ 
+\end_layout
+
+\begin_layout Itemize
+interface injection: the dependency provides an injector method that will
+ inject the dependency into any client passed to it.
+ Clients must implement an interface that exposes a setter method that accepts
+ the dependency.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\emph on
+Dependency Inversion
+\emph default
+ 
+\emph on
+Principle (DIP)
+\emph default
+: tells us how to achieve decoupling in software.
+ The principle states:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+High-level modules (i.e.
+ Client) should not depend on low-level modules (i.e.
+ dependencies).
+ Both should depend on abstractions.
+ 
+\end_layout
+
+\begin_layout Itemize
+Abstractions should not depend on details.
+ Details should depend on abstractions
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\emph on
+Destructor / finalizer
+\emph default
+: a block of code that is executed every time an object is destroyed / deallocat
+ed.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Encapsulation
+\emph default
+: boundling data and the functions operating on such data for the purpose
+ of restricting access to some data or code (data hiding)
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Inheritance
+\emph default
+: A mechanism for code reuse to allow extension of the original software.
+ Not to be confused with subtyping (Subtyping is described by Is-a relationship,
+ while inheritance is pure code reuse).
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Instantiation
+\emph default
+: The process of creating an object from a class.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Interface / protocol (vs abstract class)
+\emph default
+: both can't be instantiated but interfaces only specify which methods need
+ to be implemented without any implementation while abstract classes provide
+ some implementation and attributes.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Interface Segregation Principle
+\emph default
+: no client should be forced to depend on methods it does not use.
+ Once this principle is applied interfaces which are very large are split
+ into smaller and more specific ones so that clients will only have to know
+ about the methods that are of interest to them.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Inversion of Control
+\emph default
+ 
+\emph on
+(IoC)
+\emph default
+: An implementation of the dependency inversion principle.
+ IoC achieves DIP by putting interfaces to low level modules inside high
+ level modules.
+ Low level code implements these interfaces.
+ This 
+\begin_inset Quotes eld
+\end_inset
+
+inverts
+\begin_inset Quotes erd
+\end_inset
+
+ the traditional pyramid of OO where a dependency sits 
+\begin_inset Quotes eld
+\end_inset
+
+inside
+\begin_inset Quotes erd
+\end_inset
+
+ the client.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Is-a relationship
+\emph default
+ 
+\emph on
+(vs has-a relationship)
+\emph default
+: is-a relationships are usually described by inheritance, has-a relationships
+ are usually described by composition
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Liskov Substitution Principle
+\emph default
+: if S is a subtype of T, then objects of type T may be replaced with objects
+ of type S (i.e., objects of type S may substitute objects of type T) without
+ altering any of the desirable properties of that program (correctness,
+ task performed, etc.).
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Method (vs function)
+\emph default
+: methods
+\emph on
+ 
+\emph default
+have access to class attributes because the object is implicity passed to
+ the method.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Multiple inheritance
+\emph default
+: whenever a class is allowed to inherit from more than one class.
+ This can generate problems like diamond inheritance.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Open-Closed Principle
+\emph default
+: software entities (classes, modules, functions, etc.) should be open for
+ extension, but closed for modification; that is, such an entity can allow
+ its behavior to be modified without altering its source code.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Overloading (vs overriding)
+\emph default
+: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+overloading is when you define two methods with the same name, in the same
+ class, distinguished by their parameter list.
+\end_layout
+
+\begin_layout Itemize
+overriding is when you re-implement a method of the superclass in the subclass.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\emph on
+Polymorphism
+\emph default
+: providing a single interface to different types.
+ Several ways of achieving it: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+function overloading (or 
+\emph on
+adhoc
+\emph default
+ polymorphism)
+\end_layout
+
+\begin_layout Itemize
+generics (or 
+\emph on
+parametric
+\emph default
+ polymorphism)
+\end_layout
+
+\begin_layout Itemize
+subtyping (
+\emph on
+inclusion
+\emph default
+ polymorphism)
+\end_layout
+
+\begin_layout Itemize
+duck typing (whenever the language is dynamically typed)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\emph on
+Single Responsibility Principle
+\emph default
+: every context (class, function, variable, etc.) should have a single responsibi
+lity, and that responsibility should be entirely encapsulated by the context.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+SOLID principles
+\emph default
+: first five principles of OO Design: Single Responsibility Principle, Open-Clos
+ed Principle, Liskov-Substitution Principle, Interface Segregation Principle,
+ Dependency Inversion
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Superclass or base class
+\emph default
+ 
+\emph on
+(vs subclass or derived class)
+\emph default
+: a subclass inherits from a superclass
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Virtual method
+\emph default
+ (pure virtual): a pure virtual function or pure virtual method is a virtual
+ function that is required to be implemented by a derived class if that
+ class is not abstract.
+\end_layout
+
+\begin_layout Section
+Verification and Validation (V&V)
+\end_layout
+
+\begin_layout Description
+Verification: (
+\emph on
+Are we building the product right?
+\emph default
+) The process of evaluating software to determine whether the products of
+ a given development phase satisfy the conditions imposed at the start of
+ that phase.
+ Often an internal process, static (doesn't require the code to execute),
+ involves humans checking the code, the documents, the files (code inspection).
+\end_layout
+
+\begin_layout Description
+Validation: (
+\emph on
+Are we building the right product?
+\emph default
+) The process of evaluating software during or at the end of the development
+ process to determine whether it satisfies specified requirements.
+ Often a process that involves users (or automated tests), dynamic (requires
+ the code to execute).
 \end_layout
 
 \begin_layout Subsection
-Testing concepts
+Component inspection (Verification)
 \end_layout
 
 \begin_layout Standard
+The purpose of component inspection is to find faults in a component by
+ reviewing its source code in a formal meeting.
+ It is very time consuming but generally more effective than testing in
+ uncovering faults.
+ It is used as a complement to testing in safety-critical projects.
+ 
+\end_layout
+
+\begin_layout Section
+Testing
+\end_layout
+
+\begin_layout Itemize
 A 
 \emph on
 fault
@@ -795,17 +1261,7 @@ defect
 ) is a design or coding mistake that may cause abnormal component behavior.
 \end_layout
 
-\begin_layout Standard
-An 
-\emph on
-erroneous state
-\emph default
- is the manifestation of a fault during the execution of the system.
- An erroneous state is caused by one or more faults and can trigger a failure.
- 
-\end_layout
-
-\begin_layout Standard
+\begin_layout Itemize
 A 
 \emph on
 failure
@@ -815,7 +1271,7 @@ failure
  Note that not all erroneous states trigger a failure!
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 A 
 \emph on
 test
@@ -828,54 +1284,42 @@ case
  the purpose of causing failures and detecting faults.
 \end_layout
 
-\begin_layout Subsubsection
-Verification and Validation (V&V)
-\end_layout
-
-\begin_layout Description
-Verification: The process of evaluating software to determine whether the
- products of a given development phase satisfy the conditions imposed at
- the start of that phase.
- Synthesized by the phrase: 
-\begin_inset Quotes eld
-\end_inset
-
-Have we made what we were trying to make?
-\begin_inset Quotes erd
-\end_inset
-
-.
- Often an internal process.
-\end_layout
-
-\begin_layout Description
-Validation: The process of evaluating software during or at the end of the
- development process to determine whether it satisfies specified requirements.
- Synthesized by the phrase: 
-\begin_inset Quotes eld
-\end_inset
-
-Are we trying to make the right thing?
-\begin_inset Quotes erd
-\end_inset
-
- Often a process that involves users.
-\end_layout
-
 \begin_layout Subsection
-Component inspection
+Types of testing
 \end_layout
 
-\begin_layout Standard
-The purpose of component inspection is to find faults in a component by
- reviewing its source code in a formal meeting.
- It is very time consuming but generally more effective than testing in
- uncovering faults.
- It is used as a complement to testing in safety-critical projects.
+\begin_layout Itemize
+
+\emph on
+Black box testing
+\emph default
+: tests the functionality of the system without knowing the internal structure
  
 \end_layout
 
+\begin_layout Itemize
+
+\emph on
+White box testing
+\emph default
+: a complete knowledge of the internal structure of the system is used during
+ the testing process
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Gray box testing
+\emph default
+: some knowledge of the internal structure of the system is used to write
+ better test cases but then the system is tested as a black box
+\end_layout
+
 \begin_layout Subsection
+Types of testing examples (more specific)
+\end_layout
+
+\begin_layout Subsubsection
 Unit testing
 \end_layout
 
@@ -885,6 +1329,59 @@ Unit testing focuses on the building blocks of the software system, that
  There are three motivations behind focusing on these building blocks: it
  reduces complexity of overall test activities, it makes easier to the pinpoint
  and correct faults and allows parallelism of testing activities.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Test case 
+\emph default
+is a set of conditions or variables under which a tester will determine
+ whether an application, software system or one of its features is working
+ as it was originally established for it to do.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Test suite
+\emph default
+ is a collection of test cases.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Test fixture
+\emph default
+ is a fixed state of the software under test used as a baseline for running
+ tests (i.e.
+ all the things that must be in place in order to run a test and expect
+ a particular outcome).
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Stub
+\emph default
+ is a piece of code used to stand in for some other programming functionality.
+ A stub may simulate the behavior of existing code (such as a procedure
+ on a remote machine) or be a temporary substitute for yet-to-be-developed
+ code.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Mock objects
+\emph default
+ are simulated objects that mimic the behavior of real objects in controlled
+ ways.
+ A programmer typically creates a mock object to test the behavior of some
+ other object, in much the same way that a car designer uses a crash test
+ dummy to simulate the dynamic behavior of a human in vehicle impacts.
 \end_layout
 
 \begin_layout Subsubsection
@@ -926,6 +1423,30 @@ This white box technique identifies faults in the implementation of a component.
  The identification of paths requires knowledge of the source code and data
  structures.
  
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Statement Coverage criteria
+\emph default
+: all lines of code are executed.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Decision Coverage criteria
+\emph default
+: all branch statements must be executed (both conditions).
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Condition Coverage criteria
+\emph default
+: all conditions (in branch statements, loops,...) must be executed.
 \end_layout
 
 \begin_layout Paragraph
@@ -1095,6 +1616,18 @@ Functional testing
 \begin_layout Itemize
 
 \emph on
+Smoke testing
+\emph default
+ consists of preliminary testing to reveal simple failures severe enough
+ to reject a prospective software release.
+ A subset of test cases that cover the most important functionality of a
+ component or system is selected and run, to ascertain if the most crucial
+ functions of a program work correctly.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
 Performance testing
 \emph default
  finds differences between the design goals selected during system design
@@ -1125,73 +1658,6 @@ acceptance testing
  After acceptance testing, the client reports to the project manager which
  requirements are not satisfied.
  
-\end_layout
-
-\begin_layout Subsection
-Types of testing
-\end_layout
-
-\begin_layout Itemize
-
-\emph on
-Black box testing
-\emph default
-: tests the functionality of the system without knowing the internal structure
- 
-\end_layout
-
-\begin_layout Itemize
-
-\emph on
-White box testing
-\emph default
-: a complete knowledge of the internal structure of the system is used during
- the testing process
-\end_layout
-
-\begin_layout Itemize
-
-\emph on
-Gray box testing
-\emph default
-: some knowledge of the internal structure of the system is used to write
- better test cases but then the system is tested as a black box
-\end_layout
-
-\begin_layout Subsection
-White testing examples
-\end_layout
-
-\begin_layout Itemize
-
-\emph on
-Statement Coverage criteria
-\emph default
-: all lines of code are executed.
-\end_layout
-
-\begin_layout Itemize
-
-\emph on
-Decision Coverage criteria
-\emph default
-: all branch statements must be executed (both conditions).
-\end_layout
-
-\begin_layout Itemize
-
-\emph on
-Condition Coverage criteria
-\emph default
-: all conditions (in branch statements, loops,...) must be executed.
-\end_layout
-
-\begin_layout Section
-Formal methods
-\end_layout
-
-\begin_layout Standard
-TODO
 \end_layout
 
 \end_body
