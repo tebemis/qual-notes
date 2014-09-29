@@ -5,6 +5,12 @@
 \textclass article
 \begin_preamble
 \usepackage{clrscode3e}
+\usepackage{listings}
+\lstset{
+language=Java,
+frame=single,
+tabsize=2
+}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -748,6 +754,19 @@ The relation
 
 \begin_layout Standard
 if the limit exists.
+\end_layout
+
+\begin_layout Subsubsection
+Amortized analysis
+\end_layout
+
+\begin_layout Standard
+Amortized analysis considers the entire sequence of operations of the program.
+ It is based on the idea that, while certain operations may be extremely
+ costly in resources, they cannot occur at a high enough frequency to weigh
+ down the entire program because the number of less costly operations will
+ far outnumber the costly ones in the long run, "paying back" the program
+ over a number of iterations.
 \end_layout
 
 \begin_layout Subsection
@@ -1663,7 +1682,7 @@ Cost
 \begin_inset Text
 
 \begin_layout Plain Layout
-Access
+Access (indexing)
 \end_layout
 
 \end_inset
@@ -1686,7 +1705,7 @@ Access
 \begin_inset Text
 
 \begin_layout Plain Layout
-Insert
+Insert / Delete at end
 \end_layout
 
 \end_inset
@@ -1695,7 +1714,7 @@ Insert
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $O(n)$
+\begin_inset Formula $O(1)$
 \end_inset
 
 
@@ -1709,7 +1728,9 @@ Insert
 \begin_inset Text
 
 \begin_layout Plain Layout
-Delete
+Insert / Delete at 
+\emph on
+i
 \end_layout
 
 \end_inset
@@ -1718,7 +1739,7 @@ Delete
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $O(n)$
+\begin_inset Formula $O(n-i)$
 \end_inset
 
 
@@ -1753,19 +1774,29 @@ Operations cost in array based implementation
 
 \begin_layout Standard
 Note that whenever we use an array implementation for lists we need to know
- the maximum size of the list a priori.
+ the maximum size of the list a priori, unless we use 
+\family typewriter
+ArrayLists
+\family default
+ (i.e.
+ dynamic arrays) which combine benefits of the operation costs of arrays
+ (although amortized) with flexible size of linked lists.
+ ArrayLists implementations typically double in size when full.
 \end_layout
 
 \begin_layout Standard
-Note that access takes constant time because we assume that the index of
- the element we are trying to access is known.
+Note that access (indexing) takes constant time because we assume that the
+ index of the element we are trying to access is known.
  
 \end_layout
 
 \begin_layout Standard
-Note that every time we insert/delete a value from a sorted array we need
- to shift all the other elements in order to restore the order; which is
- why insert and delete take 
+Note that every time we insert/delete a value from a sorted 
+\emph on
+array
+\emph default
+ we need to shift all the other elements in order to restore the order;
+ which is why insert and delete take 
 \begin_inset Formula $O(n)$
 \end_inset
 
@@ -1810,7 +1841,7 @@ Cost
 \begin_inset Text
 
 \begin_layout Plain Layout
-Access
+Access (indexing)
 \end_layout
 
 \end_inset
@@ -1819,7 +1850,7 @@ Access
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $O(1)$
+\begin_inset Formula $O(i)$
 \end_inset
 
 
@@ -1833,7 +1864,7 @@ Access
 \begin_inset Text
 
 \begin_layout Plain Layout
-Insert
+Insert / Delete at end
 \end_layout
 
 \end_inset
@@ -1856,7 +1887,9 @@ Insert
 \begin_inset Text
 
 \begin_layout Plain Layout
-Delete
+Insert / Delete at 
+\emph on
+i
 \end_layout
 
 \end_inset
@@ -1907,8 +1940,85 @@ Note that all operations have running time
 \begin_inset Formula $O(1)$
 \end_inset
 
- because we assume that the pointer to the previous element is known: therefore
- the only operation that needs to be performed is the update of the pointers.
+ because we assume that the pointer to the previous element is known (doubled
+ linked list): therefore the only operation that needs to be performed is
+ the update of the pointers.
+\end_layout
+
+\begin_layout Subsubsection
+Linked-lists in Java
+\end_layout
+
+\begin_layout Standard
+A note on 
+\family typewriter
+Vector
+\family default
+: it is very similar to ArrayList, but it's thread safe and its size is
+ incremented in chunks.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lstlisting}
+\end_layout
+
+\begin_layout Plain Layout
+
+class Node { 	
+\end_layout
+
+\begin_layout Plain Layout
+
+	int val; 	
+\end_layout
+
+\begin_layout Plain Layout
+
+	Node next = null; 
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	Node(int v) {
+\end_layout
+
+\begin_layout Plain Layout
+
+		val = v;
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lstlisting}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -2237,7 +2347,15 @@ Note that to obtain
 \end_inset
 
  for all operations in the linked list implementation we need to maintain
- two pointers, one to the head and one to the tail of the queue.
+ two pointers, one to the head and one to the tail of the list.
+\end_layout
+
+\begin_layout Section
+Hash Tables
+\end_layout
+
+\begin_layout Standard
+todo
 \end_layout
 
 \begin_layout Section
@@ -5324,6 +5442,20 @@ A red black tree with
 \end_layout
 
 \begin_layout Subsection
+Tries (or Radix trees)
+\end_layout
+
+\begin_layout Standard
+A trie is a variant of an n-ary tree in which characters are stored at each
+ node.
+ Each path down the tree may represent a word.
+ Radix trees are often called “tries,” which comes from the middle letters
+ in the word retrieval.
+ It is good whenever the alphabed is limited and there is a high degree
+ of redundancy in the first portion of the word (sequences share prefixes).
+\end_layout
+
+\begin_layout Subsection
 Union-Find
 \end_layout
 
@@ -6154,7 +6286,7 @@ The following procedure assumes that the subarrays
 
 \begin_layout Standard
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -6897,7 +7029,7 @@ The key to the algorithm is the
 
 \begin_layout Standard
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -7152,6 +7284,524 @@ This means that heap sort and merge sort are
 asymptotically optimal
 \emph default
  comparison sorts.
+\end_layout
+
+\begin_layout Subsection
+Counting sort, radix sort and bucket sort
+\end_layout
+
+\begin_layout Standard
+These sorting algorithms have an average case of 
+\begin_inset Formula $O(n)$
+\end_inset
+
+.
+ They are faster than comparison sort algorithms because they assume something
+ about the input.
+\end_layout
+
+\begin_layout Standard
+Counting sort assumes that each of the 
+\begin_inset Formula $n$
+\end_inset
+
+ input elements is an 
+\emph on
+integer
+\emph default
+ in the range 
+\emph on
+0
+\emph default
+ to 
+\emph on
+k
+\emph default
+, for some integer 
+\emph on
+k
+\emph default
+.
+ When 
+\begin_inset Formula $k=O(n)$
+\end_inset
+
+, the sort runs in 
+\begin_inset Formula $\Theta(n)$
+\end_inset
+
+ time.
+ Counting sort determines, for each input element 
+\emph on
+x
+\emph default
+, the number of elements less than 
+\emph on
+x
+\emph default
+.
+ It uses this information to place element 
+\emph on
+x
+\emph default
+ directly into its position in the output array.
+ Care must be placed to handle duplicate entries.
+ In the code for counting sort, we assume that the input is an array 
+\begin_inset Formula $A[1\twodots\, n]$
+\end_inset
+
+, and thus 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+$
+\backslash
+attrib{A}{length} 
+\backslash
+gets n$
+\end_layout
+
+\end_inset
+
+.
+ We require two other arrays: the array 
+\begin_inset Formula $B[1\twodots\, n]$
+\end_inset
+
+ holds the sorted output, and the array 
+\begin_inset Formula $C[0\twodots\, k]$
+\end_inset
+
+ provides temporary working storage.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{codebox}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procname{$
+\backslash
+proc{Counting-Sort}(A,B,k)$}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li let $C[0
+\backslash
+twodots k]$ be a new array
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+For $i=0$ 
+\backslash
+To $k$
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li $C[i]=0$
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+For $j=1$ 
+\backslash
+To 
+\backslash
+attrib{A}{length} 
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li $C[A[j]]=C[A[j]]+1$	
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+Comment $C[i]$ now contains the number of elements equal to $i$.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+For $i=1$ 
+\backslash
+To $k$
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li $C[i]=C[i]+C[i-1]$
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+Comment $C[i]$ now contains the number of elements less than or equal to
+ $i$.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+For $j=$
+\backslash
+attrib{A}{length} 
+\backslash
+Downto 1
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li $B[C[A[j]]]=A[j]$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li $C[A[j]]=C[A[j]]-1$
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{codebox}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Bucket sort assumes that the input is generated by a random process that
+ distributes elements uniformly and independently over the interval 
+\begin_inset Formula $[0,1)$
+\end_inset
+
+.
+ Bucket sort divides the interval 
+\begin_inset Formula $[0,1)$
+\end_inset
+
+ into 
+\emph on
+n
+\emph default
+ equal-sized subintervals, or buckets, and then distributes the 
+\emph on
+n
+\emph default
+ input numbers into the buckets.
+ Since the inputs are uniformly and independently distributed over 
+\begin_inset Formula $[0,1)$
+\end_inset
+
+, we do not expect many numbers to fall into each bucket.
+ To produce the output, we simply sort the numbers in each bucket and then
+ go through the buckets in order, listing the elements in each.
+ Code for bucket sort assumes that the input is an 
+\emph on
+n
+\emph default
+-element array 
+\emph on
+A
+\emph default
+ and that each element 
+\begin_inset Formula $A[i]$
+\end_inset
+
+ in the array satisfies 
+\begin_inset Formula $0\le A[i]<1$
+\end_inset
+
+.
+ The code requires an auxiliary array 
+\begin_inset Formula $B[0\twodots1]$
+\end_inset
+
+ of linked lists (buckets) and assumes that there is a mechanism for maintaining
+ such lists.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{codebox}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procname{$
+\backslash
+proc{Bucket-Sort}(A)$}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li let $B[0
+\backslash
+twodots n-1]$ be a new array
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li $n=
+\backslash
+attrib{A}{length}$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+For $i=0$ 
+\backslash
+To $n-1$
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li make $B[i]$ an empty list
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+For $i=1$ 
+\backslash
+To $n$
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li inser $A[i]$ into list $B[
+\backslash
+lfloor nA[i]
+\backslash
+rfloor ]$	
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li 
+\backslash
+For $i=0$ 
+\backslash
+To $n-1$
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+Do
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li sort list $B[i]$ with $
+\backslash
+proc{Insertion-Sort}$
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+End
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+li concatenate the lists $B[0],B[1],
+\backslash
+dots ,B[n-1]$ together in order
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{codebox}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Binary search
+\end_layout
+
+\begin_layout Standard
+See page 
+\begin_inset CommandInset ref
+LatexCommand pageref
+reference "bin-search"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -7524,21 +8174,6 @@ The expected running time of
 
  works only on one side of the partition.
  (the one containing the i-th element)
-\end_layout
-
-\begin_layout Subsection
-Binary search
-\end_layout
-
-\begin_layout Standard
-See page 
-\begin_inset CommandInset ref
-LatexCommand pageref
-reference "bin-search"
-
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Section
