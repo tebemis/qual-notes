@@ -1653,7 +1653,7 @@ status collapsed
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="2">
+<lyxtabular version="3" rows="5" columns="2">
 <features rotate="0" tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -1692,6 +1692,29 @@ Access (indexing)
 
 \begin_layout Plain Layout
 \begin_inset Formula $O(1)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Search
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $O(n)$
 \end_inset
 
 
@@ -1776,12 +1799,16 @@ Operations cost in array based implementation
 Note that whenever we use an array implementation for lists we need to know
  the maximum size of the list a priori, unless we use 
 \family typewriter
-ArrayLists
+ArrayList
 \family default
  (i.e.
  dynamic arrays) which combine benefits of the operation costs of arrays
  (although amortized) with flexible size of linked lists.
- ArrayLists implementations typically double in size when full.
+ 
+\family typewriter
+ArrayList
+\family default
+ implementations typically double in size when full.
 \end_layout
 
 \begin_layout Standard
@@ -1812,7 +1839,7 @@ status collapsed
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="2">
+<lyxtabular version="3" rows="5" columns="2">
 <features rotate="0" tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -1851,6 +1878,29 @@ Access (indexing)
 
 \begin_layout Plain Layout
 \begin_inset Formula $O(i)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Search
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $O(n)$
 \end_inset
 
 
@@ -1936,7 +1986,7 @@ Operations cost in linked list based implementation
 \end_layout
 
 \begin_layout Standard
-Note that all operations have running time 
+Note that insert operations have running time 
 \begin_inset Formula $O(1)$
 \end_inset
 
