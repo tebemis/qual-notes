@@ -2352,10 +2352,62 @@ Note that to obtain
 
 \begin_layout Section
 Hash Tables
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Chapter 11
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-todo
+A hash table generalizes the simpler notion of an ordinary array.
+ Directly addressing into an ordinary array makes effective use of our ability
+ to examine an arbitrary position in an array in 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ time.
+ Hash tables typically use an array of size proportional to the number of
+ keys actually stored.
+ Instead of using the key as an array index directly, the array index is
+ computed from the key using a 
+\emph on
+hash function
+\emph default
+.
+ We can deal with collisions using chaining.
+ Storage can be reduced to 
+\begin_inset Formula $\Theta(n)$
+\end_inset
+
+, where is 
+\emph on
+n
+\emph default
+ is the cardinality of the keys set of keys 
+\emph on
+K
+\emph default
+.
+ Searching for an element is 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ on average (compared to 
+\begin_inset Formula $O(1)$
+\end_inset
+
+ worst case for direct addressing).
+ Worst case time serach for Hash Table is 
+\begin_inset Formula $O(n)$
+\end_inset
+
+ when all the keys collide and are stored in a single linked list.
 \end_layout
 
 \begin_layout Section
@@ -16032,6 +16084,16 @@ n/a
 d
 \shape default
  means that it depends, look at bottom of each table for explanation.
+ In addition to these tables check out 
+\begin_inset CommandInset href
+LatexCommand href
+name "http://bigocheatsheet.com/"
+target "http://bigocheatsheet.com/"
+
+\end_inset
+
+ for an excellent summary of complexities of basic data structures and algorithm
+s.
 \end_layout
 
 \begin_layout Subsubsection
