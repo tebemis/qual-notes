@@ -98,21 +98,11 @@ Algorithms and Data Structures
 status collapsed
 
 \begin_layout Plain Layout
-This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
-ike 3.0 Unported License
-\end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
+\series bold
 Disclaimer
-\end_layout
-
-\begin_layout Standard
-These notes have been prepared with the 
+\series default
+: These notes have been prepared with the 
 \series bold
 only
 \series default
@@ -136,6 +126,13 @@ no responsibility
 not mine
 \series default
  but I've just aggregated information scattered all over the internet.
+ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareA
+like 3.0 Unported License.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection*
@@ -16134,7 +16131,11 @@ n/a
 d
 \shape default
  means that it depends, look at bottom of each table for explanation.
- In addition to these tables check out 
+ 
+\end_layout
+
+\begin_layout Standard
+In addition to these tables check out 
 \begin_inset CommandInset href
 LatexCommand href
 name "http://bigocheatsheet.com/"
