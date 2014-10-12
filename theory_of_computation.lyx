@@ -135,13 +135,9 @@ Strongly suggested book
 \begin_layout Standard
 Before you even start reading these notes, do yourself a favor and go buy
  Michael Sipser's book 
-\begin_inset Quotes eld
-\end_inset
-
-Introduction to Theory of Computation
-\begin_inset Quotes erd
-\end_inset
-
+\emph on
+Introduction to Theory of Computation, Third Edition
+\emph default
 .
  (
 \begin_inset CommandInset href

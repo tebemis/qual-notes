@@ -91,21 +91,11 @@ Compilers
 status collapsed
 
 \begin_layout Plain Layout
-This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
-ike 3.0 Unported License 
-\end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
+\series bold
 Disclaimer
-\end_layout
-
-\begin_layout Standard
-These notes have been prepared with the 
+\series default
+: These notes have been prepared with the 
 \series bold
 only
 \series default
@@ -129,6 +119,13 @@ no responsibility
 not mine
 \series default
  but I've just aggregated information scattered all over the internet.
+ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareA
+like 3.0 Unported License.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection*
@@ -138,13 +135,9 @@ Strongly suggested book
 \begin_layout Standard
 Before you even start reading this notes, do yourself a favor and go buy
  the 
-\begin_inset Quotes eld
-\end_inset
-
+\emph on
 Dragon Book
-\begin_inset Quotes erd
-\end_inset
-
+\emph default
 .
  
 \begin_inset Newline newline
@@ -166,8 +159,7 @@ bible
 \begin_inset Quotes erd
 \end_inset
 
- of compilation and covers all the topics you need to know to pass the qualifier
- very deeply and extensively.
+ of compilation and covers a lot of topics very deeply and extensively.
 \end_layout
 
 \begin_layout Standard
